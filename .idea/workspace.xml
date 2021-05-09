@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1c004755-d32d-4237-af34-c57661ad780f" name="Default Changelist" comment="Test commit n°4" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="1c990623-f817-441f-8444-4bdd056a324f" />
+        <option name="url" value="https://github.com/Thebault7/POEC-Cybersecurity.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="ProjectId" id="1sLpmNy281rsXYu2cTRMgMWR5oN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="All in acme" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="acme" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.All in acme" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1c004755-d32d-4237-af34-c57661ad780f" name="Default Changelist" comment="" />
+      <created>1620661882513</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1620661882513</updated>
+      <workItem from="1620661884167" duration="954000" />
+      <workItem from="1620662858489" duration="816000" />
+      <workItem from="1620715045258" duration="345000" />
+      <workItem from="1620800336887" duration="1050000" />
+    </task>
+    <task id="LOCAL-00001" summary="Test commit">
+      <created>1620663052276</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1620663052277</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Test commit">
+      <created>1620663145752</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1620663145752</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Test commit n°2">
+      <created>1620663277199</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1620663277199</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Test commit n°2">
+      <created>1620663458369</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1620663458369</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Test commit n°3">
+      <created>1620668534183</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1620668534183</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Test commit n°3">
+      <created>1620715054808</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1620715054808</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Test commit n°4">
+      <created>1620800356162</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1620800356162</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Test commit" />
+    <MESSAGE value="Test commit n°2" />
+    <MESSAGE value="Test commit n°3" />
+    <MESSAGE value="Test commit n°4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Test commit n°4" />
+  </component>
+</project>

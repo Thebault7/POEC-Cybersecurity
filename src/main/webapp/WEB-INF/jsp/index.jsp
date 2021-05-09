@@ -6,9 +6,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page d'accueil</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Page d'accueil</title>
+</head>
 <body>
 	<h1>TEST d'affichage</h1>
 </body>
