@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class TestController {
+public class WelcomePageController {
 	
 		@RequestMapping(method = RequestMethod.GET, path = {"/index"})
 		public void goToIndexPage(ModelMap modelMap) {
