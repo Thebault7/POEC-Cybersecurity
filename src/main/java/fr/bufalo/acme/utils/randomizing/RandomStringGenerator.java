@@ -1,6 +1,5 @@
 package fr.bufalo.acme.utils.randomizing;
 
-import java.nio.charset.Charset;
 import java.util.Random;
 
 import fr.bufalo.acme.exception.NegativeValueException;
@@ -26,9 +25,17 @@ public class RandomStringGenerator implements RandomStringGeneratorInterface {
 			throw new NegativeValueException();
 		}
 		
-		// Generates an array, fills it with characters, then return it as a string
-		byte[] charTab = new byte[nbOfCharacters];
-		new Random().nextBytes(charTab);
-		return new String(charTab, Charset.forName("UTF-8"));
+		int leftLimit = 97; // letter 'a'
+	    int rightLimit = 122; // letter 'z'
+	    Random random = new Random();
+	    StringBuilder sb = new StringBuilder(nbOfCharacters);
+	    
+	    // A random number between 0 and 0.99999.... is generated, then converted between 97 and 122,
+	    // converted into a letter, then added to a string using a StringBuilder
+	    for (int i = 0; i < nbOfCharacters; i++) {
+	        int randomLimitedInt = leftLimit + (int)(random.nextFloat() * (rightLimit - leftLimit + 1));
+	        sb.append((char) randomLimitedInt);
+	    }
+	    return sb.toString();
 	}
 }

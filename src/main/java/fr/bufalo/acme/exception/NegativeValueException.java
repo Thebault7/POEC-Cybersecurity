@@ -2,7 +2,7 @@ package fr.bufalo.acme.exception;
 
 
 /**
-* Throws an exception when a number value is negative but shouldn't
+* Throws an exception when a number value is negative, but shouldn't be
 */
 public class NegativeValueException extends Exception {
 
