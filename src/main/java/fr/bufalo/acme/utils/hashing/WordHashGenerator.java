@@ -5,10 +5,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created 11/05/2021
- * 
+ * @date Created 11/05/2021
  * @author Frederic Thebault
- *
+ * @version 1.0
+ * 
  */
 public class WordHashGenerator implements WordHashGeneratorInterface {
 

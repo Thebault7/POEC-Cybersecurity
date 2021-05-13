@@ -5,9 +5,9 @@ import java.util.Random;
 import fr.bufalo.acme.exception.NegativeValueException;
 
 /**
- * Created 11/05/2021
- * 
+ * @date Created 11/05/2021
  * @author Frederic Thebault
+ * @version 1.0
  *
  */
 public class RandomStringGenerator implements RandomStringGeneratorInterface {
