@@ -17,13 +17,26 @@ import org.springframework.stereotype.Repository;
 
 import fr.bufalo.acme.bo.Employee;
 
+/**
+ * @date created 13/05/2021
+ * @author Frederic Thebault
+ * @version 1.0
+ *
+ */
 @Repository(value="employeeDaoImpl")
 public class EmployeeDaoImpl implements JpaRepository<Employee, Integer> {
 	
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu-bufalo");
 	private EntityManager em = emf.createEntityManager();
 	
+	
+	
 	public EmployeeDaoImpl() {
+	}
+	
+	public Optional<Employee> findByEmail(String email) {
+		// TODO 
+		return null;
 	}
 
 	@Override
@@ -32,16 +45,32 @@ public class EmployeeDaoImpl implements JpaRepository<Employee, Integer> {
 		return null;
 	}
 
+	/**
+	 * Persists an employee in the database. If an exception is raised,
+	 * a rollback is done, and the returning Employee will have 0 as id.
+	 * @param Employee to be persisted
+	 * @return Employee persisted
+	 */
 	@Override
 	public <S extends Employee> S save(S entity) {
 		EntityTransaction transaction = em.getTransaction();
-		transaction.begin();
-		em.persist(entity);
-		transaction.commit();
-		em.close();
-		return entity;
+		try {
+			transaction.begin();
+			em.persist(entity);
+			transaction.commit();
+			em.close();
+			return entity;
+		} catch(Exception e) {
+			transaction.rollback();
+			entity.setId(0);
+			return entity;
+		}
 	}
 
+	/**
+	 * @param Integer id of the employee in the database
+	 * @return Optional<Employee>
+	 */
 	@Override
 	public Optional<Employee> findById(Integer id) {
 		return Optional.of(em.find(Employee.class, id));

@@ -38,33 +38,34 @@ public class Employee implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "first_name", length = 50, nullable = false)
+	@Column(name = "first_name", length = 50)
 	private String firstName;
 	
-//	@Column(name = "last_name", length = 50, nullable = false)
-//	private String lastName;
-//	
-//	@Column(name = "email", length = 100)
-//	private String email;
-//	
-//	@Column(name = "password", length = 128, nullable = false)
-//	private String password;
-//	
-//	@Column(name = "reference", length = 12)
-//	private String reference;
-//	
+	@Column(name = "last_name", length = 50)
+	private String lastName;
+	
+	@Column(name = "email", length = 100)
+	private String email;
+	
+	@Column(name = "password", length = 128)
+	private String password;
+	
+	@Column(name = "reference", length = 12)
+	private String reference;
+	
 //	@Column(name = "is_active")
 //	private boolean isActive;
-//	
-//	@Column(name = "password_salt")
-//	private String passwordSalt;
-//	
+	
+	@Column(name = "password_salt", length = 10)
+	private String passwordSalt;
+	
 	// TODO
 //	@ManyToMany
 //	@JoinTable
 //	private List<Customer> listCustomer;
 //	
 	public Employee() {
+		super();
 	}
 
 //	public Employee(String firstName, String lastName, String email, String password, String reference,
@@ -78,7 +79,7 @@ public class Employee implements Serializable {
 //		this.isActive = isActive;
 //		this.passwordSalt = passwordSalt;
 //	}
-//
+
 //	public Employee(int id, String firstName, String lastName, String email, String password, String reference,
 //			boolean isActive, String passwordSalt, List<Customer> listCustomer) {
 //		super();

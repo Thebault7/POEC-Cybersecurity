@@ -11,6 +11,6 @@
 	<title>Statistics</title>
 </head>
 <body>
-
+	<h1>StatPage</h1>
 </body>
 </html>

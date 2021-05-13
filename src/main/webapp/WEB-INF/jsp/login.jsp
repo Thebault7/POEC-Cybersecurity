@@ -7,17 +7,27 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Login page</title>
+	<title>Acme login page</title>
 </head>
 <body>
-	<h1>TEST</h1>
+	<h1>LOGIN</h1>
+	<div>
+		<form:form action="app/checkLogin" method="POST" modelAttribute="Employee">
+			<div>
+				<form:label path="email">Employee email : </form:label>
+				<form:input path="email" placeholder="abc@acme.fr" />
+			</div>
+			<div>
+				<form:label path="password">Employee password : </form:label>
+				<form:input path="password" placeholder="*******" />
+			</div>
+			<button type="submit">Login</button>
+		</form:form>
+	</div>
 	
-	<form:form action="app/checkLogin" method="POST" modelAttribute="Employee">
-		<form:label path="firstName">Employee name : </form:label>
-		<form:input path="firstName" />
-		<button type="submit">Send name</button>
-	</form:form>
-	<h1>Saved employee name : ${ SavedEmployee.firstName }</h1>
-	<h1>Saved employee id : ${ SavedEmployee.id }</h1>
+	<div>
+		<a href=#>Forgot password ?</a>
+	</div>
+
 </body>
 </html>
