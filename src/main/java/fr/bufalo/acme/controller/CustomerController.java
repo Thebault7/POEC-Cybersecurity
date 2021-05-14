@@ -9,6 +9,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import fr.bufalo.acme.bo.Customer;
 import fr.bufalo.acme.service.CustomerManager;
@@ -42,8 +44,17 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(path = "/checkAddCustomer", method = RequestMethod.POST)
-	public void checkAddCustomer(ModelMap modelMap) {
-		// TODO vérifications sur les données fournies puis sauvegarde en base de données
-		
+	public RedirectView checkAddCustomer(Customer customer, RedirectAttributes redirectAttribute) {
+		// TODO vérifications sur les données fournies puis faire la sauvegarde en base de données
+		redirectAttribute.addFlashAttribute("customer", customer);
+		return new RedirectView("manageCustomers");
+	}
+	
+	@RequestMapping(path = "/searchCustomer", method = RequestMethod.GET)
+	public ModelAndView goToSearchCustomers(ModelMap modelMap, int customerId) {
+		//TODO aller chercher en base de données le client qui correspond à customerId
+		ModelAndView mav = new ModelAndView("editCustomer", "customer", cm.findById(customerId));
+		System.out.println(cm.findById(customerId) + "   <-----------------------------");
+		return mav;
 	}
 }

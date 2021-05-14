@@ -18,7 +18,8 @@
 	<div>
 		<h2>List of customers you are (or have been) following</h2>
 		<jsp:include page="searchBar.jsp" />
-		<a href="addCustomer"><img src="<%=request.getContextPath()%>/icon/plus.png" /></a>
+		<a href="addCustomer"><img
+			src="<%=request.getContextPath()%>/icon/plus.png" /></a>
 		<table>
 			<tr>
 				<th>Name</th>
@@ -29,11 +30,11 @@
 			</tr>
 			<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
 				<tr>
-					<td>${c.firstName}${c.lastName}</td>
+					<td>${c.firstName} ${c.lastName} ${c.id}</td>
 					<td>${c.email}</td>
-					<td>${c.addressLine1}<br>${c.addressLine2}<br>${addressLine3}</td>
+					<td>${c.addressLine1}<br>${c.addressLine2}<br>${c.addressLine3}</td>
 					<td>${c.reference}</td>
-					<td><a href=#><img
+					<td><a href="searchCustomer?customerId=${c.id}"><img
 							src="<%=request.getContextPath()%>/icon/search.png" /></a> <a href=#><img
 							src="<%=request.getContextPath()%>/icon/update.png" /></a> <a href=#><img
 							src="<%=request.getContextPath()%>/icon/delete.png" /></a></td>
