@@ -12,8 +12,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
 import lombok.Data;
 
 
@@ -26,7 +24,6 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "employee")
-@Component
 public class Employee implements Serializable {
 
 	/**
@@ -59,11 +56,9 @@ public class Employee implements Serializable {
 	@Column(name = "password_salt", length = 10)
 	private String passwordSalt;
 	
-	// TODO
-//	@ManyToMany
-//	@JoinTable
-//	private List<Customer> listCustomer;
-//	
+	@ManyToMany(mappedBy = "listEmployee")
+	private List<Customer> listCustomer;
+	
 	public Employee() {
 		super();
 	}

@@ -1,10 +1,13 @@
 package fr.bufalo.acme.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import fr.bufalo.acme.service.CustomerManager;
 
 /**
  * @date Created 13/05/2021
@@ -15,8 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Component
 @Controller
 public class CustomerController {
+	
+	@Autowired
+	private CustomerManager cm;
 
 	@RequestMapping(path = "/manageCustomers", method = RequestMethod.GET)
 	public void goToManageCustomers(ModelMap modelMap) {
+		
 	}
 }

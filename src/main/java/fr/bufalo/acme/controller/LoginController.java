@@ -32,7 +32,8 @@ public class LoginController {
 
 	@RequestMapping(path = "/checkLogin", method = RequestMethod.POST)
 	public ModelAndView checkUserPassword(Employee employee) {
-		/* TODO 1) aller chercher en base de données un employé dont l'email correspond à celui fournit
+		/* TODO 0) vérifier les données fournies par l'utilisateur
+		 * 		1) aller chercher en base de données un employé dont l'email correspond à celui fournit
 		 * 		2) hasher le mot de passe combiné au sel récupéré
 		 * 		3) comparer le mot de passe hashé avec celui que l'on a extrait de la base de données
 		 * 		4) si le mot de passe correspond, on passe à la page suivante.
