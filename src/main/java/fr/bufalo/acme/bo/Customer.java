@@ -50,6 +50,9 @@ public class Customer implements Serializable {
 	@Column(name = "address_line_3", length = 100)
 	private String addressLine3;
 	
+	@Column(name = "email", length = 100)
+	private String email;
+	
 	@Column(name = "phone_number", length = 15)
 	private String phoneNumber;
 	
