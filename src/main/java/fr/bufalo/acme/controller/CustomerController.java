@@ -33,4 +33,17 @@ public class CustomerController {
 		List<Customer> listCust = cm.findAllByEmployee(employeeId);
 		return new ModelAndView("manageCustomers", "listCustomers", listCust);
 	}
+	
+	@RequestMapping(path = "/addCustomer", method = RequestMethod.GET)
+	public ModelAndView goToAddCustomers(ModelMap modelMap) {
+		Customer customer = new Customer();
+		ModelAndView mav = new ModelAndView("addCustomer", "customer", customer);
+		return mav;
+	}
+	
+	@RequestMapping(path = "/checkAddCustomer", method = RequestMethod.POST)
+	public void checkAddCustomer(ModelMap modelMap) {
+		// TODO vérifications sur les données fournies puis sauvegarde en base de données
+		
+	}
 }

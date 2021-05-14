@@ -13,12 +13,12 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<h1>Manage customers</h1>
 	<jsp:include page="menu.jsp" />
+	<h1>Manage customers</h1>
 	<div>
 		<h2>List of customers you are (or have been) following</h2>
 		<jsp:include page="searchBar.jsp" />
-		<a href="#"><img src="<%=request.getContextPath()%>/icon/plus.png" /></a>
+		<a href="addCustomer"><img src="<%=request.getContextPath()%>/icon/plus.png" /></a>
 		<table>
 			<tr>
 				<th>Name</th>
