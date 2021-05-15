@@ -7,7 +7,7 @@
 	<display-name>Bufalo</display-name>
   
 	<welcome-file-list>
-    	<welcome-file>app/index</welcome-file>
+    	<welcome-file>app/login</welcome-file>
 	</welcome-file-list>
 	
 	<servlet>
