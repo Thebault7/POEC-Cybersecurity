@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -70,9 +71,10 @@ public class Customer implements Serializable {
 //	
 //	@Column(name = "birthdate")
 //	private LocalDate birthdate;
-//	
-//	@Column(name = "postal_code")
-//	private PostalCode postalCode;
+	
+	@ManyToOne
+	@JoinColumn(name = "postal_code_id")
+	private PostalCode postalCode;
 	
 	@ManyToMany
 	@JoinTable(name = "customer_has_employee",

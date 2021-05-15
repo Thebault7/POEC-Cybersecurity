@@ -23,7 +23,7 @@
 	<h2>birthdate : ///////// (not implemented yet)</h2>
 	<h2>
 		Address : ${customer.addressLine1}<br> ${customer.addressLine2}<br>${customer.addressLine3}</h2>
-	<h2>Postal code : ///////// (not implemented yet)</h2>
+	<h2>Postal code : ${customer.postalCode}</h2>
 	<h2>Country : ///////// (not implemented yet)</h2>
 	<h2>Employees in charge : ///////// (not implemented yet)</h2>
 	<a href=#><img src="<%=request.getContextPath()%>/icon/update.png" />Modify

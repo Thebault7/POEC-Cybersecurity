@@ -8,9 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,8 +21,8 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name="postal_code")
-public class PostalCode implements Serializable {
+@Table(name="country")
+public class Country implements Serializable {
 	
 	/**
 	 * 
@@ -36,18 +33,15 @@ public class PostalCode implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "number", length = 10)
-	private String number;
+	@Column(name = "name", length = 50)
+	private String name;
 	
-	@ManyToMany
-	@JoinTable(name = "postal_code_has_city",
-		joinColumns = @JoinColumn(name = "id_city", referencedColumnName = "id"),
-		inverseJoinColumns = @JoinColumn(name = "id_postal_code", referencedColumnName = "id"))
+	@Column(name = "country_code", length = 3)
+	private String countryCode;
+	
+	@OneToMany(mappedBy = "country")
 	private List<City> listCities;
 	
-	@OneToMany(mappedBy = "postalCode")
-	private List<Customer> listCustomers;
-	
-	public PostalCode() {
+	public Country() {
 	}
 }
