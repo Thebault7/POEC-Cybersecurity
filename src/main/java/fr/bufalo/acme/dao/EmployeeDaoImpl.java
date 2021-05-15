@@ -24,7 +24,7 @@ import fr.bufalo.acme.bo.Employee;
  *
  */
 @Repository(value="employeeDaoImpl")
-public class EmployeeDaoImpl implements JpaRepository<Employee, Integer> {
+public class EmployeeDaoImpl implements EmployeeDaoInterface {
 	
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu-bufalo");
 	private EntityManager em = emf.createEntityManager();
