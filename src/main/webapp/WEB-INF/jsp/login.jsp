@@ -20,20 +20,19 @@
 					action="app/checkLogin" method="POST" modelAttribute="Employee">
 					<span class="login100-form-title p-b-26"> Welcome </span>
 					<span class="login100-form-title p-b-48"> <img
-						src="<%=request.getContextPath()%>/img/Logo_BuFaLo.png" /> <i
-						class="zmdi zmdi-font"></i>
+						src="<%=request.getContextPath()%>/img/Logo_BuFaLo.png" />
 					</span>
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Valid email is: a@b.c">
 						<form:input class="input100" type="text" path="email" />
-						<span class="focus-input100" id="email-text" data-placeholder="Email"></span>
+						<span class="focus-input100" id="email-text"
+							data-placeholder="Email"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Enter password">
-						<span class="btn-show-pass"> <i class="zmdi zmdi-eye"></i>
-						</span>
+						<span class="btn-show-pass"> </span>
 						<form:input class="input100" type="password" path="password" />
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
@@ -57,7 +56,6 @@
 		function hideMovingText(id) {
 			let textZone = document.getElementById(id);
 			console.log(textZone);
-			
 		}
 		hideMovingText("email-text");
 	</script>

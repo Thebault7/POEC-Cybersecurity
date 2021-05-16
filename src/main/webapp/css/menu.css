@@ -1,0 +1,24 @@
+nav {
+	background-color: #f1f1f1;
+	border: 1px dotted black;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+button {
+	box-shadow: 10px 5px 5px #999999;
+}
+
+.contain-nav {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.form-menu {
+	text-align: center;
+}
+
+.icon-exit {
+	margin-top: 15px;
+}

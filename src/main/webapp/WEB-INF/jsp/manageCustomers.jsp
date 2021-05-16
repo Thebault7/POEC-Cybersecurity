@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Manage customers</title>
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 <body>
 	<jsp:include page="menu.jsp" />
@@ -30,7 +30,7 @@
 			</tr>
 			<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
 				<tr>
-					<td>${c.firstName} ${c.lastName} ${c.id}</td>
+					<td>${c.firstName}${c.lastName}${c.id}</td>
 					<td>${c.email}</td>
 					<td>${c.addressLine1}<br>${c.addressLine2}<br>${c.addressLine3}</td>
 					<td>${c.reference}</td>
