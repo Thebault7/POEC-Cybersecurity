@@ -25,7 +25,7 @@
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Valid email is: a@b.c">
-						<form:input class="input100" type="text" path="email" />
+						<form:input class="input100" id="email-input" type="text" path="email" onfocusout="verifyIfEmpty('email')" />
 						<span class="focus-input100" id="email-text"
 							data-placeholder="Email"></span>
 					</div>
@@ -33,8 +33,8 @@
 					<div class="wrap-input100 validate-input"
 						data-validate="Enter password">
 						<span class="btn-show-pass"> </span>
-						<form:input class="input100" type="password" path="password" />
-						<span class="focus-input100" data-placeholder="Password"></span>
+						<form:input class="input100" id="password-input" type="password" path="password" onfocusout="verifyIfEmpty('password')" />
+						<span class="focus-input100" id="password-text" data-placeholder="Password"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
@@ -53,11 +53,15 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-		function hideMovingText(id) {
-			let textZone = document.getElementById(id);
-			console.log(textZone);
+		function verifyIfEmpty(id) {
+			let inputZone = document.getElementById(id + "-input");
+			let textZone = document.getElementById(id + "-text");
+			if (!(inputZone.value.length == 0)) {
+				textZone.style.display = "none";
+			} else {
+				textZone.style.display = "block";
+			}
 		}
-		hideMovingText("email-text");
 	</script>
 </body>
 </html>
