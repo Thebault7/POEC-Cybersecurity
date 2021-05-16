@@ -171,4 +171,28 @@ public class PostalCodeDaoImpl implements PostalCodeDaoInterface {
 		return false;
 	}
 
+	@Override
+	public <S extends PostalCode> List<S> saveAllAndFlush(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteAllInBatch(Iterable<PostalCode> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAllByIdInBatch(Iterable<Integer> ids) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public PostalCode getById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -167,4 +167,28 @@ public class CustomerDaoImpl implements CustomerDaoInterface {
 		return false;
 	}
 
+	@Override
+	public <S extends Customer> List<S> saveAllAndFlush(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteAllInBatch(Iterable<Customer> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAllByIdInBatch(Iterable<Integer> ids) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Customer getById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

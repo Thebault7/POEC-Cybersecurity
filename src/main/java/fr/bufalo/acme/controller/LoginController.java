@@ -29,7 +29,7 @@ import fr.bufalo.acme.service.EmployeeManager;
 @Controller
 public class LoginController {
 
-	@Autowired(required = false)
+	@Autowired
 	private EmployeeManager em;
 	
 	@RequestMapping(path = "/login", method = RequestMethod.GET)

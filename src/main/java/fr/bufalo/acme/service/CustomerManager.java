@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import fr.bufalo.acme.bo.Customer;
 import fr.bufalo.acme.dao.CustomerDaoImpl;
+import fr.bufalo.acme.dao.CustomerDaoInterface;
 
 /**
  * @date Created 14/05/2021
@@ -19,7 +20,7 @@ import fr.bufalo.acme.dao.CustomerDaoImpl;
 public class CustomerManager {
 
 	@Autowired
-	private CustomerDaoImpl cdi;
+	private CustomerDaoInterface cdi;
 	
 	public Customer save(Customer customer) {
 		return cdi.save(customer);

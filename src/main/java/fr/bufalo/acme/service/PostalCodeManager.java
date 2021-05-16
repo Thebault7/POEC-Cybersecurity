@@ -3,7 +3,7 @@ package fr.bufalo.acme.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.bufalo.acme.dao.PostalCodeDaoImpl;
+import fr.bufalo.acme.dao.PostalCodeDaoInterface;
 
 /**
  * @date Created 15/05/2021
@@ -15,6 +15,5 @@ import fr.bufalo.acme.dao.PostalCodeDaoImpl;
 public class PostalCodeManager {
 
 	@Autowired
-	private PostalCodeDaoImpl pcdi;
-	
+	private PostalCodeDaoInterface pcdi;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.dao.EmployeeDaoImpl;
+import fr.bufalo.acme.dao.EmployeeDaoInterface;
 
 /**
  * @date Created 12/05/2021
@@ -19,8 +20,8 @@ import fr.bufalo.acme.dao.EmployeeDaoImpl;
 @Service(value = "employeeManager")
 public class EmployeeManager {
 	
-	@Autowired(required = false)
-	private EmployeeDaoImpl edi;
+	@Autowired
+	private EmployeeDaoInterface edi;
 	
 	public Employee addEmployee(Employee employee) {
 		return edi.save(employee);

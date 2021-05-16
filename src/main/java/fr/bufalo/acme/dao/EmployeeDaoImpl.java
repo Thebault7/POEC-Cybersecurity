@@ -202,4 +202,28 @@ public class EmployeeDaoImpl implements EmployeeDaoInterface {
 		return null;
 	}
 
+	@Override
+	public <S extends Employee> List<S> saveAllAndFlush(Iterable<S> entities) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteAllInBatch(Iterable<Employee> entities) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAllByIdInBatch(Iterable<Integer> ids) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Employee getById(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
