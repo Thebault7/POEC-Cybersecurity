@@ -22,3 +22,11 @@ button {
 .icon-exit {
 	margin-top: 15px;
 }
+
+.img-bufalo {
+	height: 60px;
+}
+
+.contain-img-bufalo, .icon-exit {
+	text-align: center;
+}

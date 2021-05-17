@@ -1,5 +1,7 @@
 <div class="row contain-nav">
-	<div class="col-2"></div>
+	<div class="col-2 contain-img-bufalo">
+		<img class="img-bufalo" src="<%=request.getContextPath()%>/img/Logo_BuFaLo.png" />
+	</div>
 	<div class="col-8">
 		<nav>
 			<div class="row">
@@ -31,8 +33,7 @@
 			</div>
 		</nav>
 	</div>
-	<div class="col-1"></div>
-	<div class="col-1">
+	<div class="col-2">
 		<div class="icon-exit">
 			<a href="login"><img
 				src="<%=request.getContextPath()%>/icon/exit.png"
@@ -40,8 +41,6 @@
 		</div>
 	</div>
 </div>
-
-
 
 
 

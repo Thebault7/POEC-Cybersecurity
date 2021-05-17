@@ -9,8 +9,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Acme login page</title>
-<link rel="stylesheet" type="text/css" href="css/login.css">
-
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css">
 </head>
 <body>
 	<div class="limiter">
@@ -25,7 +24,8 @@
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Valid email is: a@b.c">
-						<form:input class="input100" id="email-input" type="text" path="email" onfocusout="verifyIfEmpty('email')" />
+						<form:input class="input100" id="email-input" type="text"
+							path="email" onfocusout="verifyIfEmpty('email')" />
 						<span class="focus-input100" id="email-text"
 							data-placeholder="Email"></span>
 					</div>
@@ -33,8 +33,10 @@
 					<div class="wrap-input100 validate-input"
 						data-validate="Enter password">
 						<span class="btn-show-pass"> </span>
-						<form:input class="input100" id="password-input" type="password" path="password" onfocusout="verifyIfEmpty('password')" />
-						<span class="focus-input100" id="password-text" data-placeholder="Password"></span>
+						<form:input class="input100" id="password-input" type="password"
+							path="password" onfocusout="verifyIfEmpty('password')" />
+						<span class="focus-input100" id="password-text"
+							data-placeholder="Password"></span>
 					</div>
 
 					<div class="container-login100-form-btn">
@@ -52,16 +54,5 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function verifyIfEmpty(id) {
-			let inputZone = document.getElementById(id + "-input");
-			let textZone = document.getElementById(id + "-text");
-			if (!(inputZone.value.length == 0)) {
-				textZone.style.display = "none";
-			} else {
-				textZone.style.display = "block";
-			}
-		}
-	</script>
 </body>
 </html>
