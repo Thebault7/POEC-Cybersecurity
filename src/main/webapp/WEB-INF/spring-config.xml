@@ -34,17 +34,51 @@
 		<property name="defaultLocale" value="fr"/>
 	</bean>
 	
-	<!-- 
+	
+	
+<!--  	
+	<jpa:repositories base-package="fr.bufalo.acme.dao"
+						entity-manager-factory-ref="emf"/>
+	
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="/WEB-INF/datasource.properties"></property>
 	</bean>
 	
 	<bean id="datasource" class="org.apache.commons.dbcp2.BasicDataSource" 
 		destroy-method="close">
-			<property name="driverClassName" value="${driver}"/>
-			<property name="url" value="${url}"/>
-			<property name="username" value= "${username}"/>
-			<property name="password" value= "${password}"/>
+			<property name="driverClassName" value="org.mysql.jdbc.Driver"/>
+			<property name="url" value="jdbc:mysql://localhost:3306/bufalo?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
+			<property name="username" value= "root"/>
+			<property name="password" value= "root"/>
 	</bean>
-	-->
+	
+	<bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="datasource"/>
+		
+		<property name="packagesToScan">
+			<list>
+				<value>fr.bufalo.acme.bo</value>
+			</list>
+		</property>
+		
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true"/>
+				<property name="database" value="MYSQL" />
+			</bean>
+		</property>
+		
+		<property name="jpaProperties">
+			<props>
+  				<prop key="hibernate.hbm2ddl.auto">update</prop> 
+				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
+			</props>
+		</property>
+ 	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>-->
 </beans>
