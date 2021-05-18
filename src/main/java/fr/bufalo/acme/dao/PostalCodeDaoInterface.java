@@ -12,6 +12,6 @@ import fr.bufalo.acme.bo.PostalCode;
  *
  */
 @Repository(value="postalCodeDaoInterface")
-public interface PostalCodeDaoInterface extends JpaRepository<PostalCode, Integer> {
+public interface PostalCodeDaoInterface extends JpaRepository<PostalCode, Long> {
 
 }

@@ -25,9 +25,9 @@
 					<div class="wrap-input100 validate-input"
 						data-validate="Valid email is: a@b.c">
 						<form:input class="input100" id="email-input" type="text"
-							path="email" onfocusout="verifyIfEmpty('email')" />
+							path="reference" onfocusout="verifyIfEmpty('email')" />
 						<span class="focus-input100" id="email-text"
-							data-placeholder="Email"></span>
+							data-placeholder="Identifiant"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input"
@@ -54,5 +54,6 @@
 			</div>
 		</div>
 	</div>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/login.js"></script>
 </body>
 </html>
