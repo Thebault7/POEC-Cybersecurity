@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.bufalo.acme.bo.Customer;
-import fr.bufalo.acme.dao.CustomerDaoImpl;
 import fr.bufalo.acme.dao.CustomerDaoInterface;
 
 /**

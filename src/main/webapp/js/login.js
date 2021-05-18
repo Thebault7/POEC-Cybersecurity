@@ -8,4 +8,6 @@ function verifyIfEmpty(id) {
 			} else {
 				textZone.style.display = "block";
 			}
-		}
+		};
+
+verifyIfEmpty("email");

@@ -1,6 +1,6 @@
 package fr.bufalo.acme.dao;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,5 +16,5 @@ import fr.bufalo.acme.bo.Employee;
 @Repository(value="employeeDaoInterface")
 public interface EmployeeDaoInterface extends JpaRepository<Employee, Integer> {
 
-	public Optional<Employee> findByEmail(String email);
+	List<Employee> findAllByReference(String reference);
 }
