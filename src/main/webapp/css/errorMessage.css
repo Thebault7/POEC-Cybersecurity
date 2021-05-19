@@ -1,0 +1,7 @@
+.errorMessage {
+	font-weight: bold;
+	color: purple !important;
+	text-decoration: underline;
+	margin-bottom: 30px;
+	text-align: center;
+}

@@ -32,7 +32,7 @@ public class CustomerController {
 	public ModelAndView goToManageCustomers(ModelMap modelMap) {
 		//TODO extraire l'id de l'employé de la session
 		int employeeId = 1;
-		List<Customer> listCust = cm.findAllByEmployee(employeeId);
+		List<Customer> listCust = cm.findAllByEmployeeId(employeeId);
 		return new ModelAndView("manageCustomers", "listCustomers", listCust);
 	}
 	

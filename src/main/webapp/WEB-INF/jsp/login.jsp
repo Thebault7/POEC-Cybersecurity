@@ -10,6 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Acme login page</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/errorMessage.css">
 </head>
 <body>
 	<div class="limiter">
@@ -17,10 +18,14 @@
 			<div class="wrap-login100">
 				<form:form class="login100-form validate-form"
 					action="app/checkLogin" method="POST" modelAttribute="Employee">
-					<span class="login100-form-title p-b-26"> Welcome </span>
-					<span class="login100-form-title p-b-48"> <img
+					<span class="login100-form-title p-b-20"> Welcome </span>
+					<span class="login100-form-title p-b-30"> <img
 						src="<%=request.getContextPath()%>/img/Logo_BuFaLo.png" />
 					</span>
+					
+					<div class="errorMessage">
+						<p>${errorMessage}</p>
+					</div>
 
 					<div class="wrap-input100 validate-input"
 						data-validate="Valid email is: a@b.c">
@@ -46,7 +51,7 @@
 						</div>
 					</div>
 
-					<div class="text-center p-t-115">
+					<div class="text-center p-t-100">
 						<span class="txt1"> Forgot password ? </span> <a class="txt2"
 							href="#"> Click here </a>
 					</div>
