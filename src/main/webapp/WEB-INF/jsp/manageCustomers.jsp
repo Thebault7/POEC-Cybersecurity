@@ -28,9 +28,9 @@
 				<th>Reference</th>
 				<th></th>
 			</tr>
-			<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
+	 		<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
 				<tr>
-					<td>${c.firstName}${c.lastName}${c.id}</td>
+					<td>${c.firstName} ${c.lastName}</td>
 					<td>${c.email}</td>
 					<td>${c.addressLine1}<br>${c.addressLine2}<br>${c.addressLine3}</td>
 					<td>${c.reference}</td>
@@ -39,7 +39,7 @@
 							src="<%=request.getContextPath()%>/icon/update.png" /></a> <a href=#><img
 							src="<%=request.getContextPath()%>/icon/delete.png" /></a></td>
 				</tr>
-			</c:forEach>
+			</c:forEach>	
 		</table>
 	</div>
 </body>

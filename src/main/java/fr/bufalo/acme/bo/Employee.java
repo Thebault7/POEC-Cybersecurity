@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import lombok.Data;
 
 
@@ -62,7 +64,7 @@ public class Employee implements Serializable {
 	public Employee() {
 		super();
 	}
-
+	
 //	public Employee(String firstName, String lastName, String email, String password, String reference,
 //			boolean isActive, String passwordSalt) {
 //		super();
