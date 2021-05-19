@@ -3,6 +3,7 @@ package fr.bufalo.acme.bo;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="country")
+@Cacheable
 public class Country implements Serializable {
 	
 	/**

@@ -65,11 +65,6 @@ public class Employee implements Serializable {
 		super();
 	}
 	
-	@ModelAttribute("sessionEmployee")
-	public Employee sessionEmployee() {
-		return new Employee();
-	}
-
 //	public Employee(String firstName, String lastName, String email, String password, String reference,
 //			boolean isActive, String passwordSalt) {
 //		super();

@@ -3,15 +3,16 @@ package fr.bufalo.acme.controller;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.service.EmployeeManager;
@@ -28,7 +29,6 @@ import fr.bufalo.acme.utils.validation.ValidationType;
  * 
  */
 @Controller
-@SessionAttributes("sessionEmployee")
 public class LoginController {
 
 	@Autowired
@@ -36,23 +36,18 @@ public class LoginController {
 
 	private static final String HASH_METHOD = "SHA512";
 
-	@ModelAttribute("sessionEmployee")
-	public Employee sessionEmployee() {
-		Employee emp = new Employee();
-		return emp;
-	}
-
 	@RequestMapping(path = "/login", method = RequestMethod.GET)
-	public ModelAndView goToLoginPage(ModelMap modelMap, Model model,
-			@ModelAttribute("sessionEmployee") Employee employee) {
-		ModelAndView mav = new ModelAndView("login", "Employee", employee);
+	public ModelAndView goToLoginPage(ModelMap modelMap) {
+		ModelAndView mav = new ModelAndView("login", "Employee", new Employee());
 		return mav;
 	}
 
 	@RequestMapping(path = "/checkLogin", method = RequestMethod.POST)
-	public ModelAndView checkUserPassword(Employee employee, Model model) {
+	public ModelAndView checkUserPassword(Employee employee, RedirectAttributes redirectAttributes,
+			HttpServletRequest request) {
 		String errorMessage = "";
 		ModelAndView mav = new ModelAndView("login");
+		HttpSession session = request.getSession();
 
 		/*
 		 * The reference and password given by the user are validated. If one or the
@@ -89,7 +84,7 @@ public class LoginController {
 			try {
 				String hashedPassword = whgi.generateHash(saltedPassword, HASH_METHOD);
 				if (hashedPassword.equals(listEmployees.get(i).getPassword())) {
-					model.addAttribute("sessionEmployee", employee);
+					session.setAttribute("sessionEmployee", listEmployees.get(i));
 					return new ModelAndView("statPage");
 				}
 			} catch (NoSuchAlgorithmException e) {
