@@ -29,6 +29,8 @@ import fr.bufalo.acme.service.CustomerManager;
 @Controller
 public class CustomerController {
 
+
+
 	@Autowired
 	private CustomerManager cm;
 
