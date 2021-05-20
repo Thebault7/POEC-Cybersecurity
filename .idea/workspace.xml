@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1c004755-d32d-4237-af34-c57661ad780f" name="Default Changelist" comment="Test commit n°4" />
+    <list default="true" id="1c004755-d32d-4237-af34-c57661ad780f" name="Default Changelist" comment="Test commit n°4">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,6 +25,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1sLpmNy281rsXYu2cTRMgMWR5oN" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -32,6 +36,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunManager">
     <configuration name="All in acme" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
@@ -60,6 +65,7 @@
       <workItem from="1620662858489" duration="816000" />
       <workItem from="1620715045258" duration="345000" />
       <workItem from="1620800336887" duration="1050000" />
+      <workItem from="1621504075724" duration="989000" />
     </task>
     <task id="LOCAL-00001" summary="Test commit">
       <created>1620663052276</created>
