@@ -34,7 +34,7 @@ public class LoginController {
 	@Autowired
 	private EmployeeManager em;
 
-	private static final String HASH_METHOD = "SHA512";
+	private static final String HASH_METHOD = "SHA-512";
 
 	@RequestMapping(path = "/login", method = RequestMethod.GET)
 	public ModelAndView goToLoginPage(ModelMap modelMap) {

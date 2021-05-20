@@ -17,7 +17,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100">
 				<form:form class="login100-form validate-form"
-					action="app/checkLogin" method="POST" modelAttribute="Employee">
+					action="checkLogin" method="POST" modelAttribute="Employee">
 					<span class="login100-form-title p-b-20"> Welcome </span>
 					<span class="login100-form-title p-b-30"> <img
 						src="<%=request.getContextPath()%>/img/Logo_BuFaLo.png" />
