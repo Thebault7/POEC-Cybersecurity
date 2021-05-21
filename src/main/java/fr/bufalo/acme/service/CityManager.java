@@ -3,7 +3,7 @@ package fr.bufalo.acme.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.bufalo.acme.dao.CityDaoInterface;
+import fr.bufalo.acme.repository.CityRepositoryInterface;
 
 /**
  * @date Created 18/05/2021
@@ -15,5 +15,5 @@ import fr.bufalo.acme.dao.CityDaoInterface;
 public class CityManager {
 
 	@Autowired
-	private CityDaoInterface cdi;
+	private CityRepositoryInterface cdi;
 }

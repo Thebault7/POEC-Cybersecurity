@@ -1,4 +1,4 @@
-package fr.bufalo.acme.dao;
+package fr.bufalo.acme.repository;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import fr.bufalo.acme.bo.Employee;
  *
  */
 @Repository(value="employeeDaoInterface")
-public interface EmployeeDaoInterface extends JpaRepository<Employee, Integer> {
+public interface EmployeeRepositoryInterface extends JpaRepository<Employee, Integer> {
 
 	List<Employee> findAllByReference(String reference);
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.bufalo.acme.bo.Customer;
-import fr.bufalo.acme.dao.CustomerDaoInterface;
+import fr.bufalo.acme.repository.CustomerRepositoryInterface;
 
 /**
  * @date Created 14/05/2021
@@ -18,7 +18,7 @@ import fr.bufalo.acme.dao.CustomerDaoInterface;
 public class CustomerManager {
 
 	@Autowired
-	private CustomerDaoInterface cdi;
+	private CustomerRepositoryInterface cdi;
 	
 	public Customer findById(int id) {
 		return cdi.findById(id).get();

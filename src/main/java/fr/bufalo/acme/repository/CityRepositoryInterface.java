@@ -1,4 +1,4 @@
-package fr.bufalo.acme.dao;
+package fr.bufalo.acme.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,6 +12,6 @@ import fr.bufalo.acme.bo.City;
  *
  */
 @Repository(value = "cityDaoInterface")
-public interface CityDaoInterface extends JpaRepository<City, Integer> {
+public interface CityRepositoryInterface extends JpaRepository<City, Integer> {
 
 }

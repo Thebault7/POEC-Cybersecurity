@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import fr.bufalo.acme.bo.Employee;
-import fr.bufalo.acme.dao.EmployeeDaoInterface;
+import fr.bufalo.acme.repository.EmployeeRepositoryInterface;
 
 /**
  * @date Created 12/05/2021
@@ -20,7 +20,7 @@ import fr.bufalo.acme.dao.EmployeeDaoInterface;
 public class EmployeeManager {
 	
 	@Autowired
-	private EmployeeDaoInterface edi;
+	private EmployeeRepositoryInterface edi;
 	
 	public List<Employee> findAllByReference(String reference) {
 		return edi.findAllByReference(reference);
