@@ -8,9 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -38,13 +36,38 @@ public class City implements Serializable {
 	@Column(name = "name", length = 100)
 	private String name;
 	
-	@ManyToOne
-	@JoinColumn(name = "country_id")
-	private Country country;
+//	@ManyToOne
+//	@JoinColumn(name = "country_id")
+//	private Country country;
+	
+	@Column(name = "country", length = 3)
+	private CountryEnum countryEnum;
 	
 	@ManyToMany(mappedBy = "listCities")
 	private List<PostalCode> listPostalCodes;
 	
 	public City() {
+		super();
+	}
+
+	public City(String name, CountryEnum countryEnum, List<PostalCode> listPostalCodes) {
+		super();
+		this.name = name;
+		this.countryEnum = countryEnum;
+		this.listPostalCodes = listPostalCodes;
+	}
+
+	public City(int id, String name, CountryEnum countryEnum, List<PostalCode> listPostalCodes) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.countryEnum = countryEnum;
+		this.listPostalCodes = listPostalCodes;
+	}
+
+	@Override
+	public String toString() {
+		return "City [id=" + id + ", name=" + name + ", countryEnum=" + countryEnum + ", listPostalCodes="
+				+ listPostalCodes + "]";
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fr.bufalo.acme.bo.CountryEnum;
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.service.EmployeeManager;
 import fr.bufalo.acme.utils.hashing.WordHashGenerator;
@@ -83,7 +84,6 @@ public class LoginController {
 					NullifyListInterface nli = new NullifyListImpl();
 					employee = nli.nullifyEmployerListWithinEachCustomer(listEmployees.get(i));
 					session.setAttribute("sessionEmployee", employee);
-					System.out.println(employee);
 					return new ModelAndView("statPage");
 				}
 			} catch (NoSuchAlgorithmException e) {
