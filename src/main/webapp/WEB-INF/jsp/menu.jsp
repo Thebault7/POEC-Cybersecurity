@@ -6,8 +6,7 @@
 		<nav>
 			<div class="row">
 				<div class="col-3 contain-form-menu">
-					<form class="form-menu" method="get" action="statPage"
-						style="display: bloc; margin-left: auto; margin-right: auto">
+					<form class="form-menu" method="get" action="statPage">
 						<button class="btn btn-primary" type="submit">Statistic
 							page</button>
 					</form>

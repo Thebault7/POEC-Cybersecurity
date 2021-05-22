@@ -18,6 +18,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import fr.bufalo.acme.bo.Customer;
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.service.CustomerManager;
+import fr.bufalo.acme.utils.nullifylist.NullifyListImpl;
+import fr.bufalo.acme.utils.nullifylist.NullifyListInterface;
 
 /**
  * @date Created 13/05/2021
@@ -62,7 +64,22 @@ public class CustomerController {
 	@RequestMapping(path = "/searchCustomer", method = RequestMethod.GET)
 	public ModelAndView goToSearchCustomers(ModelMap modelMap, int customerId) {
 		// TODO aller chercher en base de données le client qui correspond à customerId
-		ModelAndView mav = new ModelAndView("editCustomer", "customer", cm.findById(customerId));
+		// TODO problem of StackOverflowError to solve
+//		ModelAndView mav = new ModelAndView("editCustomer", "customer", cm.findById(customerId));
+		ModelAndView mav = new ModelAndView("editCustomer", "customer", new Customer());
+		return mav;
+	}
+	
+	@RequestMapping(path = "/modifyCustomer", method = RequestMethod.GET)
+	public ModelAndView goToModifyCustomer(ModelMap modelMap, int customerId) {
+		Customer customer = cm.findById(customerId);
+		NullifyListInterface nli = new NullifyListImpl();
+		// TODO problem of StackOverflowError to solve
+		Customer clearedCustomer = nli.nullifyCustomerListWithinEachEmployee(customer);
+		clearedCustomer.setPostalCode(nli.nullifyPostalCodeListWithinEachCity(clearedCustomer.getPostalCode()));
+		clearedCustomer.setPostalCode(nli.nullifyPostalCodeListWithinEachCustomer(clearedCustomer.getPostalCode()));
+//		ModelAndView mav = new ModelAndView("modifyCustomer", "customer", clearedCustomer);
+		ModelAndView mav = new ModelAndView("modifyCustomer", "customer", new Customer());
 		return mav;
 	}
 }

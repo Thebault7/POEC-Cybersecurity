@@ -28,18 +28,19 @@
 				<th>Reference</th>
 				<th></th>
 			</tr>
-	 		<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
+			<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
 				<tr>
 					<td>${c.firstName} ${c.lastName}</td>
 					<td>${c.email}</td>
 					<td>${c.addressLine1}<br>${c.addressLine2}<br>${c.addressLine3}</td>
 					<td>${c.reference}</td>
 					<td><a href="searchCustomer?customerId=${c.id}"><img
-							src="<%=request.getContextPath()%>/icon/search.png" /></a> <a href=#><img
+							src="<%=request.getContextPath()%>/icon/search.png" /></a> <a
+						href="modifyCustomer?customerId=${c.id}"><img
 							src="<%=request.getContextPath()%>/icon/update.png" /></a> <a href=#><img
 							src="<%=request.getContextPath()%>/icon/delete.png" /></a></td>
 				</tr>
-			</c:forEach>	
+			</c:forEach>
 		</table>
 	</div>
 </body>

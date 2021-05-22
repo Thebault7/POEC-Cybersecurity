@@ -64,10 +64,4 @@ public class City implements Serializable {
 		this.countryEnum = countryEnum;
 		this.listPostalCodes = listPostalCodes;
 	}
-
-	@Override
-	public String toString() {
-		return "City [id=" + id + ", name=" + name + ", countryEnum=" + countryEnum + ", listPostalCodes="
-				+ listPostalCodes + "]";
-	}
 }

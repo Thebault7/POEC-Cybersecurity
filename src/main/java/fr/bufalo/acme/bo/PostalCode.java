@@ -66,10 +66,4 @@ public class PostalCode implements Serializable {
 		this.listCities = listCities;
 		this.listCustomers = listCustomers;
 	}
-
-	@Override
-	public String toString() {
-		return "PostalCode [id=" + id + ", number=" + number + ", listCities=" + listCities + ", listCustomers="
-				+ listCustomers + "]";
-	}
 }
