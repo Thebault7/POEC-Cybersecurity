@@ -1,6 +1,7 @@
 package fr.bufalo.acme.bo;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -66,11 +67,11 @@ public class Customer implements Serializable {
 	@Column(name = "reference", length = 12)
 	private String reference;
 	
-//	@Column(name = "is_active")
-//	private boolean isActive;
-//	
-//	@Column(name = "birthdate")
-//	private LocalDate birthdate;
+	@Column(name = "is_active", nullable = false)
+	private boolean isActive;
+	
+	@Column(name = "birthdate")
+	private LocalDate birthdate;
 	
 	@ManyToOne
 	@JoinColumn(name = "postal_code_id")
@@ -85,5 +86,57 @@ public class Customer implements Serializable {
 	
 	public Customer() {
 		super();
+	}
+
+
+	public Customer(String firstName, String lastName, String addressLine1, String addressLine2, String addressLine3,
+			String email, String phoneNumber, String password, String passwordSalt, String reference, boolean isActive,
+			LocalDate birthdate, PostalCode postalCode) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.addressLine3 = addressLine3;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.passwordSalt = passwordSalt;
+		this.reference = reference;
+		this.isActive = isActive;
+		this.birthdate = birthdate;
+		this.postalCode = postalCode;
+	}
+
+
+	public Customer(int id, String firstName, String lastName, String addressLine1, String addressLine2,
+			String addressLine3, String email, String phoneNumber, String password, String passwordSalt,
+			String reference, boolean isActive, LocalDate birthdate, PostalCode postalCode,
+			List<Employee> listEmployee) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.addressLine3 = addressLine3;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.passwordSalt = passwordSalt;
+		this.reference = reference;
+		this.isActive = isActive;
+		this.birthdate = birthdate;
+		this.postalCode = postalCode;
+		this.listEmployee = listEmployee;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", addressLine1="
+				+ addressLine1 + ", addressLine2=" + addressLine2 + ", addressLine3=" + addressLine3 + ", email="
+				+ email + ", phoneNumber=" + phoneNumber + ", password=" + password + ", passwordSalt=" + passwordSalt
+				+ ", reference=" + reference + ", isActive=" + isActive + ", birthdate=" + birthdate + ", postalCode="
+				+ postalCode + ", listEmployee=" + listEmployee + "]";
 	}
 }

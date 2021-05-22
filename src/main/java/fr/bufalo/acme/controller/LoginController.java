@@ -37,6 +37,8 @@ public class LoginController {
 	private EmployeeManager em;
 
 	private static final String HASH_METHOD = "SHA-512";
+	private static final String MESSAGE_INVALID_CONNECTION = "Identifier or password invalid";
+	private static final String MESSAGE_INVALID_HASHING = "Error in the hashing configuration";
 
 	@RequestMapping(path = "/login", method = RequestMethod.GET)
 	public ModelAndView goToLoginPage(ModelMap modelMap) {
@@ -52,21 +54,13 @@ public class LoginController {
 		HttpSession session = request.getSession();
 
 		/*
-		 * The reference and password given by the user are validated. If one or the
-		 * other fail the validation, an error message is showed.
+		 * The reference and password given by the user are checked for validity. If one
+		 * or the other fail the validation, an error message is showed.
 		 */
-		boolean isNotValid = false;
 		StringValidationInterface svi = new StringValidationImpl();
-		if (!svi.validationString(employee.getReference(), ValidationType.REFERENCE)) {
-			errorMessage += "- The reference only contains alphanumerical characters.<br>";
-			isNotValid = true;
-		}
-		if (!svi.validationString(employee.getPassword(), ValidationType.PASSWORD)) {
-			errorMessage += "- Password must be at least 8 characters long, with alphanumerical characters or punctuation";
-			isNotValid = true;
-		}
-		if (isNotValid) {
-			mav.addObject("errorMessage", errorMessage);
+		if (!svi.validationString(employee.getReference(), ValidationType.REFERENCE)
+				|| !svi.validationString(employee.getPassword(), ValidationType.PASSWORD)) {
+			mav.addObject("errorMessage", MESSAGE_INVALID_CONNECTION);
 			employee.setPassword(""); // password is cleared before sending back the employee.
 										// The reference is still there.
 			mav.addObject("Employee", employee);
@@ -94,7 +88,7 @@ public class LoginController {
 				}
 			} catch (NoSuchAlgorithmException e) {
 				// error message if HASH_METHOD does not correspond to any hashing method
-				errorMessage += "Error in the hashing configuration";
+				errorMessage += MESSAGE_INVALID_HASHING;
 				mav.addObject("errorMessage", errorMessage);
 				employee.setPassword("");
 				mav.addObject("Employee", employee);
@@ -109,7 +103,7 @@ public class LoginController {
 		 */
 		employee.setPassword("");
 		mav.addObject("Employee", employee);
-		errorMessage += "No account was found";
+		errorMessage += MESSAGE_INVALID_CONNECTION;
 		mav.addObject("errorMessage", errorMessage);
 		return mav;
 	}

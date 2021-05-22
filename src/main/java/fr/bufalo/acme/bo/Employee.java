@@ -52,8 +52,8 @@ public class Employee implements Serializable {
 	@Column(name = "reference", length = 12)
 	private String reference;
 	
-//	@Column(name = "is_active")
-//	private boolean isActive;
+	@Column(name = "is_active", nullable = false)
+	private boolean isActive;
 	
 	@Column(name = "password_salt", length = 10)
 	private String passwordSalt;
@@ -65,36 +65,36 @@ public class Employee implements Serializable {
 		super();
 	}
 	
-//	public Employee(String firstName, String lastName, String email, String password, String reference,
-//			boolean isActive, String passwordSalt) {
-//		super();
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.email = email;
-//		this.password = password;
-//		this.reference = reference;
-//		this.isActive = isActive;
-//		this.passwordSalt = passwordSalt;
-//	}
+	public Employee(String firstName, String lastName, String email, String password, String reference,
+			boolean isActive, String passwordSalt) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.reference = reference;
+		this.isActive = isActive;
+		this.passwordSalt = passwordSalt;
+	}
 
-//	public Employee(int id, String firstName, String lastName, String email, String password, String reference,
-//			boolean isActive, String passwordSalt, List<Customer> listCustomer) {
-//		super();
-//		this.id = id;
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.email = email;
-//		this.password = password;
-//		this.reference = reference;
-//		this.isActive = isActive;
-//		this.passwordSalt = passwordSalt;
-//		this.listCustomer = listCustomer;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-//				+ ", password=" + password + ", reference=" + reference + ", isActive=" + isActive + ", passwordSalt="
-//				+ passwordSalt + ", listCustomer=" + listCustomer + "]";
-//	}
+	public Employee(int id, String firstName, String lastName, String email, String password, String reference,
+			boolean isActive, String passwordSalt, List<Customer> listCustomer) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.reference = reference;
+		this.isActive = isActive;
+		this.passwordSalt = passwordSalt;
+		this.listCustomer = listCustomer;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", password=" + password + ", reference=" + reference + ", isActive=" + isActive + ", passwordSalt="
+				+ passwordSalt + ", listCustomer=" + listCustomer + "]";
+	}
 }
