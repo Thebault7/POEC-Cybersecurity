@@ -23,9 +23,17 @@
 	<h2>birthdate : ///////// (not implemented yet)</h2>
 	<h2>
 		Address : ${customer.addressLine1}<br> ${customer.addressLine2}<br>${customer.addressLine3}</h2>
-	<h2>Postal code : ${customer.postalCode}</h2>
-	<h2>Country : ///////// (not implemented yet)</h2>
-	<h2>Employees in charge : ///////// (not implemented yet)</h2>
+	<h2>Postal code : ${customer.postalCode.number}</h2>
+	<h2>Country : ${customer.postalCode.listCities.get(0).countryEnum}</h2>
+	<h2>Employees in charge :</h2>
+	<c:if test="${empty customer.listEmployee} || ${customer.listEmployee == null}">
+		<h2>No employee attributed to this customer yet.</h2>
+	</c:if>
+	
+	
+	<c:forEach items="${customer.listEmployee}" var="c" varStatus="cStatus">
+		<h2>- employee reference ${c.reference}, name ${c.firstName} ${lastName}</h2>
+	</c:forEach>
 	<a href=#><img src="<%=request.getContextPath()%>/icon/update.png" />Modify
 		customer</a>
 	<a href=#><img src="<%=request.getContextPath()%>/icon/delete.png" />Delete customer</a>

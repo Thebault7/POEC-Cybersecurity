@@ -11,15 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 /**
  * @date Created 15/05/2021
  * @author Frederic Thebault
  * @version v1.0
  *
  */
-@Data
 @Entity
 @Table(name="city")
 public class City implements Serializable {
@@ -63,5 +60,41 @@ public class City implements Serializable {
 		this.name = name;
 		this.countryEnum = countryEnum;
 		this.listPostalCodes = listPostalCodes;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public CountryEnum getCountryEnum() {
+		return countryEnum;
+	}
+
+	public void setCountryEnum(CountryEnum countryEnum) {
+		this.countryEnum = countryEnum;
+	}
+
+	public List<PostalCode> getListPostalCodes() {
+		return listPostalCodes;
+	}
+
+	public void setListPostalCodes(List<PostalCode> listPostalCodes) {
+		this.listPostalCodes = listPostalCodes;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

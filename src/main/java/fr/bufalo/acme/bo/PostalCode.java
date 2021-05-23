@@ -14,16 +14,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 /**
  * @date Created 15/05/2021
  * @author Frederic Thebault
  * @version v1.0
  *
  */
-
-@Data
 @Entity
 @Table(name="postal_code")
 public class PostalCode implements Serializable {
@@ -65,5 +61,41 @@ public class PostalCode implements Serializable {
 		this.number = number;
 		this.listCities = listCities;
 		this.listCustomers = listCustomers;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public List<City> getListCities() {
+		return listCities;
+	}
+
+	public void setListCities(List<City> listCities) {
+		this.listCities = listCities;
+	}
+
+	public List<Customer> getListCustomers() {
+		return listCustomers;
+	}
+
+	public void setListCustomers(List<Customer> listCustomers) {
+		this.listCustomers = listCustomers;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

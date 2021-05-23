@@ -1,7 +1,5 @@
 package fr.bufalo.acme.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,8 +16,6 @@ import org.springframework.web.servlet.view.RedirectView;
 import fr.bufalo.acme.bo.Customer;
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.service.CustomerManager;
-import fr.bufalo.acme.utils.nullifylist.NullifyListImpl;
-import fr.bufalo.acme.utils.nullifylist.NullifyListInterface;
 
 /**
  * @date Created 13/05/2021
@@ -33,17 +29,12 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerManager cm;
-
+	
 	@RequestMapping(path = "/manageCustomers", method = RequestMethod.GET)
 	public ModelAndView goToManageCustomers(ModelMap modelMap, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Employee employee = (Employee)session.getAttribute("sessionEmployee");
-		List<Customer> listCustomers = employee.getListCustomer();
-		// To avoid an infinite loop in the jsp page, employee list for each customer is disabled
-		for (int i = 0; i < listCustomers.size(); i++) {
-			listCustomers.get(i).setListEmployee(null);
-		}
-		return new ModelAndView("manageCustomers", "listCustomers", listCustomers);
+		return new ModelAndView("manageCustomers", "listCustomers", employee.getListCustomer());
 	}
 
 	@RequestMapping(path = "/addCustomer", method = RequestMethod.GET)
@@ -62,24 +53,15 @@ public class CustomerController {
 	}
 
 	@RequestMapping(path = "/searchCustomer", method = RequestMethod.GET)
-	public ModelAndView goToSearchCustomers(ModelMap modelMap, int customerId) {
-		// TODO aller chercher en base de données le client qui correspond à customerId
-		// TODO problem of StackOverflowError to solve
-//		ModelAndView mav = new ModelAndView("editCustomer", "customer", cm.findById(customerId));
-		ModelAndView mav = new ModelAndView("editCustomer", "customer", new Customer());
+	public ModelAndView goToSearchCustomers(ModelMap modelMap, int customerId, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("editCustomer", "customer", cm.findById(customerId));
 		return mav;
 	}
 	
 	@RequestMapping(path = "/modifyCustomer", method = RequestMethod.GET)
 	public ModelAndView goToModifyCustomer(ModelMap modelMap, int customerId) {
 		Customer customer = cm.findById(customerId);
-		NullifyListInterface nli = new NullifyListImpl();
-		// TODO problem of StackOverflowError to solve
-		Customer clearedCustomer = nli.nullifyCustomerListWithinEachEmployee(customer);
-		clearedCustomer.setPostalCode(nli.nullifyPostalCodeListWithinEachCity(clearedCustomer.getPostalCode()));
-		clearedCustomer.setPostalCode(nli.nullifyPostalCodeListWithinEachCustomer(clearedCustomer.getPostalCode()));
-//		ModelAndView mav = new ModelAndView("modifyCustomer", "customer", clearedCustomer);
-		ModelAndView mav = new ModelAndView("modifyCustomer", "customer", new Customer());
+		ModelAndView mav = new ModelAndView("modifyCustomer", "customer", customer);
 		return mav;
 	}
 }

@@ -15,15 +15,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 /**
  * @date Created 14/05/2021
  * @author Frederic Thebault
  * @version v1.0
  *
  */
-@Data
 @Entity
 @Table(name="customer")
 public class Customer implements Serializable {
@@ -131,12 +128,160 @@ public class Customer implements Serializable {
 		this.listEmployee = listEmployee;
 	}
 
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", addressLine1="
-				+ addressLine1 + ", addressLine2=" + addressLine2 + ", addressLine3=" + addressLine3 + ", email="
-				+ email + ", phoneNumber=" + phoneNumber + ", password=" + password + ", passwordSalt=" + passwordSalt
-				+ ", reference=" + reference + ", isActive=" + isActive + ", birthdate=" + birthdate + ", postalCode="
-				+ postalCode + ", listEmployee=" + listEmployee + "]";
+
+	public int getId() {
+		return id;
 	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+
+	public String getLastName() {
+		return lastName;
+	}
+
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+
+	public String getAddressLine1() {
+		return addressLine1;
+	}
+
+
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+
+
+	public String getAddressLine2() {
+		return addressLine2;
+	}
+
+
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+
+
+	public String getAddressLine3() {
+		return addressLine3;
+	}
+
+
+	public void setAddressLine3(String addressLine3) {
+		this.addressLine3 = addressLine3;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+	public String getPasswordSalt() {
+		return passwordSalt;
+	}
+
+
+	public void setPasswordSalt(String passwordSalt) {
+		this.passwordSalt = passwordSalt;
+	}
+
+
+	public String getReference() {
+		return reference;
+	}
+
+
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
+
+	public LocalDate getBirthdate() {
+		return birthdate;
+	}
+
+
+	public void setBirthdate(LocalDate birthdate) {
+		this.birthdate = birthdate;
+	}
+
+
+	public PostalCode getPostalCode() {
+		return postalCode;
+	}
+
+
+	public void setPostalCode(PostalCode postalCode) {
+		this.postalCode = postalCode;
+	}
+
+
+	public List<Employee> getListEmployee() {
+		return listEmployee;
+	}
+
+
+	public void setListEmployee(List<Employee> listEmployee) {
+		this.listEmployee = listEmployee;
+	}
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
 }

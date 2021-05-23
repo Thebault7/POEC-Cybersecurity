@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import fr.bufalo.acme.bo.CountryEnum;
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.service.EmployeeManager;
 import fr.bufalo.acme.utils.hashing.WordHashGenerator;
 import fr.bufalo.acme.utils.hashing.WordHashGeneratorInterface;
-import fr.bufalo.acme.utils.nullifylist.NullifyListImpl;
-import fr.bufalo.acme.utils.nullifylist.NullifyListInterface;
 import fr.bufalo.acme.utils.validation.StringValidationImpl;
 import fr.bufalo.acme.utils.validation.StringValidationInterface;
 import fr.bufalo.acme.utils.validation.ValidationType;
@@ -33,7 +30,7 @@ import fr.bufalo.acme.utils.validation.ValidationType;
  */
 @Controller
 public class LoginController {
-
+	
 	@Autowired
 	private EmployeeManager em;
 
@@ -81,9 +78,10 @@ public class LoginController {
 			try {
 				String hashedPassword = whgi.generateHash(saltedPassword, HASH_METHOD);
 				if (hashedPassword.equals(listEmployees.get(i).getPassword())) {
-					NullifyListInterface nli = new NullifyListImpl();
-					employee = nli.nullifyEmployerListWithinEachCustomer(listEmployees.get(i));
-					session.setAttribute("sessionEmployee", employee);
+					// next line forces to get the customer list from the database.
+					// The lazy loading doesn't do it otherwise and the list is left empty
+					listEmployees.get(i).getListCustomer().get(0);
+					session.setAttribute("sessionEmployee", listEmployees.get(i));
 					return new ModelAndView("statPage");
 				}
 			} catch (NoSuchAlgorithmException e) {
