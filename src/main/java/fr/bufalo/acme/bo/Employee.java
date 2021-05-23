@@ -3,8 +3,10 @@ package fr.bufalo.acme.bo;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,7 +54,7 @@ public class Employee implements Serializable {
 	@Column(name = "password_salt", length = 10)
 	private String passwordSalt;
 	
-	@ManyToMany(mappedBy = "listEmployee")
+	@ManyToMany(mappedBy = "listEmployee", cascade= CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Customer> listCustomer;
 	
 	public Employee() {

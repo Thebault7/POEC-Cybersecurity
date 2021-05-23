@@ -1,6 +1,7 @@
 package fr.bufalo.acme.controller;
 
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,9 +79,6 @@ public class LoginController {
 			try {
 				String hashedPassword = whgi.generateHash(saltedPassword, HASH_METHOD);
 				if (hashedPassword.equals(listEmployees.get(i).getPassword())) {
-					// next line forces to get the customer list from the database.
-					// The lazy loading doesn't do it otherwise and the list is left empty
-					listEmployees.get(i).getListCustomer().get(0);
 					session.setAttribute("sessionEmployee", listEmployees.get(i));
 					return new ModelAndView("statPage");
 				}
