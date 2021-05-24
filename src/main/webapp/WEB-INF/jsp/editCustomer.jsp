@@ -20,7 +20,7 @@
 	<h2>First name : ${customer.firstName}</h2>
 	<h2>Last name : ${customer.lastName}</h2>
 	<h2>Phone number : ${customer.phoneNumber}</h2>
-	<h2>birthdate : ///////// (not implemented yet)</h2>
+	<h2>birthdate : ${customer.birthdate}</h2>
 	<h2>
 		Address : ${customer.addressLine1}<br> ${customer.addressLine2}<br>${customer.addressLine3}</h2>
 	<h2>Postal code : ${customer.postalCode.number}</h2>

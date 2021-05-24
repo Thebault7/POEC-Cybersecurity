@@ -1,7 +1,6 @@
 package fr.bufalo.acme.controller;
 
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;

@@ -9,5 +9,10 @@ package fr.bufalo.acme.utils.validation;
 public enum ValidationType {
 	EMAIL,
 	REFERENCE,
-	PASSWORD
+	PASSWORD,
+	PHONE_NUMBER,
+	NAME,
+	ADDRESS,
+	POSTAL_CODE,
+	DATE
 }

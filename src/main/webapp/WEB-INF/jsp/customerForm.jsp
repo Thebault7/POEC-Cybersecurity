@@ -36,20 +36,20 @@
 		<div>
 			<form:label path="addressLine3">address complement : </form:label>
 			<form:input path="addressLine3" />
-		</div>
-		<div>
+		</div> 
+<%--  		<div>
 			<form:label path="postalCode">Customer postal code : </form:label>
 			<form:input path="postalCode" />
-		</div>
+		</div>	--%>
 		<div>
 			<form:label path="email">Customer email : </form:label>
 			<form:input path="email" />
-		</div>
+		</div>	
 		<div>
 			<form:label path="phoneNumber">Customer phone number : </form:label>
 			<form:input path="phoneNumber" />
 		</div>
-		<div>
+  		<div>
 			Customer birthdate: <select id="selectedMonth" name="month">
 				<option value="Jan">January</option>
 				<option value="Feb">February</option>
@@ -129,6 +129,9 @@
 			}
 			if (month == "December") {
 				month = "12";
+			}
+			if (day.length == 1) {
+				day = "0" + day;
 			}
 			document.getElementById('birthdateText').value = year + "-" + month + "-" + day;
 		}
