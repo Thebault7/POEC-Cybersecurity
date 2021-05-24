@@ -18,7 +18,7 @@ public class StringValidationImpl implements StringValidationInterface {
 	private static final String NAME = "^[a-zA-Zאגהיטךכןמפצשûüח]+(([',. -][a-zA-Zאגהיטךכןמפצשûüח ])?[a-zA-Zאגהיטךכןמפצשûüח]*)*$";
 	private static final String ADDRESS = "^[0-9]{0,3}(([,. ]?){1}[a-zA-Zאגהיטךכןמפצשûüח'-]+)*$";
 	private static final String POSTAL_CODE = "^[0-9]{5,7}$";
-	private static final String DATE = "^[0-3]{1}[0-9]{1}[-\\/][0-1]{1}[0-9]{1}[-\\/][1-2]{1}[0-9]{3}$";
+	private static final String DATE = "^[1-2]{1}[0-9]{3}[-\\/][0-1]{1}[0-9]{1}[-\\/][0-3]{1}[0-9]{1}$";
 	
 	/**
 	 * Method the checks if a given string is valid according to a regex.
