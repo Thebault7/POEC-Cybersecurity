@@ -4,16 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @date Created 14/05/2021
@@ -71,8 +62,11 @@ public class Customer implements Serializable {
 	private LocalDate birthdate;
 	
 	@ManyToOne
-	@JoinColumn(name = "postal_code_id")
+	@JoinColumn(name = "id_postal_code")
 	private PostalCode postalCode;
+
+	@OneToMany(mappedBy = "customer")
+	private List<Order> listOrders;
 	
 	@ManyToMany
 	@JoinTable(name = "customer_has_employee",
@@ -248,6 +242,13 @@ public class Customer implements Serializable {
 		this.isActive = isActive;
 	}
 
+	public List<Order> getListOrders() {
+		return listOrders;
+	}
+
+	public void setListOrders(List<Order> listOrders) {
+		this.listOrders = listOrders;
+	}
 
 	public LocalDate getBirthdate() {
 		return birthdate;
