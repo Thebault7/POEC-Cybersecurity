@@ -1,10 +1,9 @@
 package fr.bufalo.acme.bo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -15,10 +14,10 @@ import java.util.List;
  *
  */
 
-// TODO ajouter la taille des données + nullable pour chaque attribut
-// TODO gérer les contructeurs
+// TODO comment générer les références automatiquement ?
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "product")
@@ -32,30 +31,32 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "label")
-    private String label;
-
-    @Column(name = "reference")
+    @NonNull
+    @Column(name = "reference", nullable = false, length = 12)
     private String reference;
 
-    @Column(name = "description")
+    @NonNull
+    @Column(name = "label", length = 255)
+    private String label;
+
+    @Column(name = "description", length = 3000)
     private String description;
 
-    @Column(name = "picture")
+    @Column(name = "picture", length = 100)
     private String picture;
 
-    @Column(name = "price")
-    private float price;
+    @Column(name = "price", length = 1000000)
+    private double price;
 
-    @Column(name = "stock")
+    @Column(name = "stock", length = 1000000)
     private double stock;
 
     @ManyToOne
-    @JoinColumn(name = "id_status")
+    @JoinColumn(name = "id_status", nullable = false)
     private Status status;
 
     @ManyToOne
-    @JoinColumn(name = "id_vat")
+    @JoinColumn(name = "id_vat", nullable = false)
     private Vat vat;
 
     @ManyToMany
@@ -66,7 +67,19 @@ public class Product implements Serializable {
     )
     private List<Category> categories;
 
-    // uncomment when implementing SoldProduct class
+    public Product(@NonNull String reference, String label, String description, String picture, float price,
+                   double stock, Status status, Vat vat, List<Category> categories) {
+        this.reference = reference;
+        this.label = label;
+        this.description = description;
+        this.picture = picture;
+        this.price = price;
+        this.stock = stock;
+        this.status = status;
+        this.vat = vat;
+        this.categories = categories;
+    }
+
     @OneToMany (mappedBy = "product")
     private List<SoldProduct> soldProducts;
 

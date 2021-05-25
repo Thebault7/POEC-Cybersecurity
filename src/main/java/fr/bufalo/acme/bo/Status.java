@@ -1,8 +1,6 @@
 package fr.bufalo.acme.bo;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,10 +13,10 @@ import java.util.List;
  *
  */
 
-// TODO ajouter la taille des données + nullable pour chaque attribut
-// TODO gérer les contructeurs
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "status")
 public class Status implements Serializable {

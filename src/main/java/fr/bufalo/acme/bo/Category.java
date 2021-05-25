@@ -1,7 +1,6 @@
 package fr.bufalo.acme.bo;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,10 +13,10 @@ import java.util.List;
  *
  */
 
-// TODO ajouter la taille des données + nullable pour chaque attribut
-// TODO gérer les contructeurs
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "category")
 public class Category implements Serializable {
@@ -30,7 +29,8 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "label")
+    @NonNull
+    @Column(name = "label", nullable = false, length = 255)
     private String label;
 
     @ManyToMany(mappedBy = "categories")

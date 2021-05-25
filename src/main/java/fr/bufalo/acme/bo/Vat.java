@@ -1,7 +1,6 @@
 package fr.bufalo.acme.bo;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,23 +13,24 @@ import java.util.List;
  *
  */
 
-// TODO ajouter la taille des données + nullable pour chaque attribut
-// TODO gérer les contructeurs
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "vat")
 public class Vat implements Serializable {
 
     /**
-     *
+     * value added tax on product
      */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "percentage")
+    @NonNull
+    @Column(name = "percentage", nullable = false, length = 100)
     private float percentage;
 
     @OneToMany(mappedBy = "vat")
