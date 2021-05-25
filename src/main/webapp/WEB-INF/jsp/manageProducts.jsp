@@ -13,6 +13,42 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp" />
-	<h1>Manage products page</h1>
+	<h1>Manage products</h1>
+	<div>
+		<h2>List of products</h2>
+		<jsp:include page="searchBar.jsp" />
+		<a href="addProduct"><img src="<%=request.getContextPath()%>/icon/plus.png" /></a>
+		<table>
+			<tr>
+				<td>Reference</td>
+				<td>Picture</td>
+				<td>Label</td>
+				<td>Description</td>
+				<td>Price</td>
+				<td>Stock</td>
+			</tr>
+			<c:forEach items="${listProducts}" var="row">
+				<tr>
+					<td>${row.reference}</td>
+					<td>${row.picture}</td>
+					<td>${row.label}</td>
+					<td>${row.description}</td>
+					<td>${row.price}</td>
+					<td>${row.stock}</td>
+					<td>
+						<a href="viewProduct?productId=${row.id}">
+							<img src="<%=request.getContextPath()%>/icon/search.png"  alt="search icon"/>
+						</a>
+						<a href="modifyProduct?productId=${row.id}">
+							<img src="<%=request.getContextPath()%>/icon/update.png"  alt="update icon"/>
+						</a>
+						<a href=#>
+							<img src="<%=request.getContextPath()%>/icon/delete.png"  alt="delete icon"/>
+						</a>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 </body>
 </html>
