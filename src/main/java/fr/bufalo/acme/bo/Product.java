@@ -3,7 +3,6 @@ package fr.bufalo.acme.bo;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -67,6 +66,9 @@ public class Product implements Serializable {
     )
     private List<Category> categories;
 
+    @OneToMany (mappedBy = "product")
+    private List<SoldProduct> soldProducts;
+
     public Product(@NonNull String reference, String label, String description, String picture, float price,
                    double stock, Status status, Vat vat, List<Category> categories) {
         this.reference = reference;
@@ -79,10 +81,6 @@ public class Product implements Serializable {
         this.vat = vat;
         this.categories = categories;
     }
-
-    @OneToMany (mappedBy = "product")
-    private List<SoldProduct> soldProducts;
-
 
 
 }
