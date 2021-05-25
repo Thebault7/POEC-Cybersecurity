@@ -67,8 +67,8 @@ public class Product implements Serializable {
     private List<Category> categories;
 
     // uncomment when implementing SoldProduct class
-//    @OneToMany (mappedBy = "product")
-//    private List<SoldProduct> soldProducts;
+    @OneToMany (mappedBy = "product")
+    private List<SoldProduct> soldProducts;
 
 
 
