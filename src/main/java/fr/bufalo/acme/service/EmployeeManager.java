@@ -25,4 +25,8 @@ public class EmployeeManager {
 	public List<Employee> findAllByReference(String reference) {
 		return edi.findAllByReference(reference);
 	}
+	
+	public Employee findOneByReference(String reference) {
+		return edi.findOneByReference(reference);
+	}
 }

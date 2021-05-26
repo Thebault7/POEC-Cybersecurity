@@ -17,4 +17,5 @@ import fr.bufalo.acme.bo.Employee;
 public interface EmployeeRepositoryInterface extends JpaRepository<Employee, Integer> {
 
 	List<Employee> findAllByReference(String reference);
+	Employee findOneByReference(String reference);
 }

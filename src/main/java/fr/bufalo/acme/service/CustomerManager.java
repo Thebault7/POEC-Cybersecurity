@@ -1,7 +1,5 @@
 package fr.bufalo.acme.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +22,7 @@ public class CustomerManager {
 		return cdi.findById(id).get();
 	}
 	
-	public List<Customer> findAllByEmployeeId(int id) {
-		
-		return null;
+	public int findHighestIdValue() {
+		return cdi.findHighestIdValue();
 	}
 }

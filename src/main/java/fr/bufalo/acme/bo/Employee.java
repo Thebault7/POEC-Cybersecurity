@@ -45,7 +45,7 @@ public class Employee implements Serializable {
 	@Column(name = "password", length = 128)
 	private String password;
 	
-	@Column(name = "reference", length = 12)
+	@Column(name = "reference", length = 12, nullable = false, unique = true)
 	private String reference;
 	
 	@Column(name = "is_active", nullable = false)

@@ -1,6 +1,7 @@
 package fr.bufalo.acme.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import fr.bufalo.acme.bo.Customer;
@@ -14,5 +15,7 @@ import fr.bufalo.acme.bo.Customer;
 @Repository(value="customerDaoInterface")
 public interface CustomerRepositoryInterface extends JpaRepository<Customer, Integer> {
 
+	@Query("SELECT MAX(c.id) FROM Customer c")
+	public int findHighestIdValue();
 	
 }

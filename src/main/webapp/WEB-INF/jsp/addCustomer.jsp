@@ -17,7 +17,6 @@
 	<h1>Add new customers</h1>
 	<h2 class="errorMessage">${errorMessage}</h2>
 	<form:form id="formAddCustomer" action="checkAddCustomer" method="POST" modelAttribute="customer">
-<%-- 		<jsp:include page="customerForm.jsp" />	--%>
 		<%@ include file="/WEB-INF/jsp/customerForm.jsp"%>
 	</form:form>
 </body>

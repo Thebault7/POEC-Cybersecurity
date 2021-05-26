@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class StringValidationImpl implements StringValidationInterface {
 	
 	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-	private static final String REFERENCE = "^[a-zA-Z0-9]{1,12}$";
+	private static final String REFERENCE = "^[a-zA-Z0-9-]{1,12}$";
 	private static final String PASSWORD = "^[a-zA-Z0-9,?;.:/!]{8,}$";
 	private static final String PHONE_NUMBER = "^(?:(?:\\+|00)33[\\s.-]{0,3}(?:\\(0\\)[\\s.-]{0,3})?|0)[1-9](?:(?:[\\s.-]?\\d{2}){4}|\\d{2}(?:[\\s.-]?\\d{3}){2})$";
 	private static final String NAME = "^[a-zA-Zאגהיטךכןמפצשûüח]+(([',. -][a-zA-Zאגהיטךכןמפצשûüח ])?[a-zA-Zאגהיטךכןמפצשûüח]*)*$";

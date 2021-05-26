@@ -30,7 +30,7 @@ import fr.bufalo.acme.utils.validation.ValidationType;
  */
 @Controller
 public class LoginController {
-	
+
 	@Autowired
 	private EmployeeManager em;
 
@@ -70,26 +70,23 @@ public class LoginController {
 		 * the database. Prior the password also needs to be salted and hashed. First,
 		 * the salt is retrieved from the database.
 		 */
-		List<Employee> listEmployees = em.findAllByReference(employee.getReference());
-
-		for (int i = 0; i < listEmployees.size(); i++) {
-			String saltedPassword = listEmployees.get(i).getPasswordSalt() + employee.getPassword();
-			WordHashGeneratorInterface whgi = new WordHashGenerator();
-			try {
-				String hashedPassword = whgi.generateHash(saltedPassword, HASH_METHOD);
-				if (hashedPassword.equals(listEmployees.get(i).getPassword())) {
-					session.setAttribute("sessionEmployee", listEmployees.get(i));
-					return new ModelAndView("statPage");
-				}
-			} catch (NoSuchAlgorithmException e) {
-				// error message if HASH_METHOD does not correspond to any hashing method
-				errorMessage += MESSAGE_INVALID_HASHING;
-				mav.addObject("errorMessage", errorMessage);
-				employee.setPassword("");
-				mav.addObject("Employee", employee);
-				e.printStackTrace();
-				return mav;
+		Employee employeeFromDB = em.findOneByReference(employee.getReference());
+		String saltedPassword = employeeFromDB.getPasswordSalt() + employee.getPassword();
+		WordHashGeneratorInterface whgi = new WordHashGenerator();
+		try {
+			String hashedPassword = whgi.generateHash(saltedPassword, HASH_METHOD);
+			if (hashedPassword.equals(employeeFromDB.getPassword())) {
+				session.setAttribute("sessionEmployee", employeeFromDB);
+				return new ModelAndView("statPage");
 			}
+		} catch (NoSuchAlgorithmException e) {
+			// error message if HASH_METHOD does not correspond to any hashing method
+			errorMessage += MESSAGE_INVALID_HASHING;
+			mav.addObject("errorMessage", errorMessage);
+			employee.setPassword("");
+			mav.addObject("Employee", employee);
+			e.printStackTrace();
+			return mav;
 		}
 
 		/*

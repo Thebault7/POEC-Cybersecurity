@@ -52,7 +52,7 @@ public class Customer implements Serializable {
 	@Column(name = "password_salt", length = 10)
 	private String passwordSalt;
 	
-	@Column(name = "reference", length = 12)
+	@Column(name = "reference", length = 12, nullable = false, unique = true)
 	private String reference;
 	
 	@Column(name = "is_active", nullable = false)
@@ -65,7 +65,7 @@ public class Customer implements Serializable {
 	@JoinColumn(name = "id_postal_code")
 	private PostalCode postalCode;
 
-	@OneToMany(mappedBy = "customer")
+	@OneToMany(mappedBy = "customer", cascade= CascadeType.PERSIST, fetch=FetchType.EAGER)
 	private List<Order> listOrders;
 	
 	@ManyToMany

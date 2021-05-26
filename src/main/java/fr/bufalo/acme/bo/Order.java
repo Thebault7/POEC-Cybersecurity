@@ -1,12 +1,23 @@
 package fr.bufalo.acme.bo;
 
 
-import lombok.Data;
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import lombok.Data;
 
 /**
  * @date Created 22/05/2021
@@ -17,10 +28,15 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 public class Order implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
@@ -37,8 +53,8 @@ public class Order implements Serializable {
     @JoinColumn(name = "id_customer")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
-    private List<SoldProduct> ListSoldProduct;
+    @OneToMany(mappedBy = "order", cascade= CascadeType.PERSIST, fetch=FetchType.EAGER)
+    private List<SoldProduct> listSoldProduct;
 
     public Order() {
     }
@@ -49,7 +65,7 @@ public class Order implements Serializable {
         this.validationDate = validationDate;
         this.reference = reference;
         this.customer = customer;
-        ListSoldProduct = listSoldProduct;
+        this.listSoldProduct = listSoldProduct;
     }
 
     @Override
@@ -60,7 +76,7 @@ public class Order implements Serializable {
                 ", validationDate=" + validationDate +
                 ", reference='" + reference + '\'' +
                 ", customer=" + customer +
-                ", ListSoldProduct=" + ListSoldProduct +
+                ", ListSoldProduct=" + listSoldProduct +
                 '}';
     }
 }
