@@ -1,6 +1,5 @@
 package fr.bufalo.acme.controller;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @version 1.0
  *
  */
-@Component
 @Controller
 public class StatisticController {
+	
+	private static final String STAT_PAGE = "statPage";
 
-	@RequestMapping(path = "/statPage", method = RequestMethod.GET)
+	@RequestMapping(path = "/" + STAT_PAGE, method = RequestMethod.GET)
 	public void goToStatPage(ModelMap modelMap) {
 	}
 }

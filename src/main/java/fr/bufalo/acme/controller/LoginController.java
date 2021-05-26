@@ -1,7 +1,6 @@
 package fr.bufalo.acme.controller;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.bufalo.acme.bo.Employee;
+import fr.bufalo.acme.constant.ErrorConstant;
+import fr.bufalo.acme.constant.ParameterConstant;
 import fr.bufalo.acme.service.EmployeeManager;
 import fr.bufalo.acme.utils.hashing.WordHashGenerator;
 import fr.bufalo.acme.utils.hashing.WordHashGeneratorInterface;
@@ -33,35 +34,39 @@ public class LoginController {
 
 	@Autowired
 	private EmployeeManager em;
+	
+	private static final String MESSAGE_INVALID_CONNECTION_ERROR = ErrorConstant.INVALID_CONNECTION.getErrorMessage();
+	private static final String MESSAGE_INVALID_HASHING_ERROR = ErrorConstant.INVALID_HASHING.getErrorMessage();
 
 	private static final String HASH_METHOD = "SHA-512";
-	private static final String MESSAGE_INVALID_CONNECTION = "Identifier or password invalid";
-	private static final String MESSAGE_INVALID_HASHING = "Error in the hashing configuration";
+	private static final String LOGIN = "login";
+	private static final String CHECK_LOGIN = "checkLogin";
+	private static final String EMPLOYEE = ParameterConstant.EMPLOYEE.getParameterName();
+	private static final String ERROR_MESSAGE = ParameterConstant.ERROR_MESSAGE.getParameterName();
+	private static final String SESSION_EMPLOYEE = ParameterConstant.SESSION_EMPLOYEE.getParameterName();
+	private static final String STAT_PAGE = ParameterConstant.STAT_PAGE.getParameterName();
 
-	@RequestMapping(path = "/login", method = RequestMethod.GET)
+	@RequestMapping(path = "/" + LOGIN, method = RequestMethod.GET)
 	public ModelAndView goToLoginPage(ModelMap modelMap) {
-		ModelAndView mav = new ModelAndView("login", "Employee", new Employee());
+		ModelAndView mav = new ModelAndView(LOGIN, EMPLOYEE, new Employee());
 		return mav;
 	}
 
-	@RequestMapping(path = "/checkLogin", method = RequestMethod.POST)
+	@RequestMapping(path = "/" + CHECK_LOGIN, method = RequestMethod.POST)
 	public ModelAndView checkUserPassword(Employee employee, RedirectAttributes redirectAttributes,
 			HttpServletRequest request) {
-		String errorMessage = "";
-		ModelAndView mav = new ModelAndView("login");
-		HttpSession session = request.getSession();
-
 		/*
 		 * The reference and password given by the user are checked for validity. If one
 		 * or the other fail the validation, an error message is showed.
 		 */
+		ModelAndView mav = new ModelAndView(LOGIN);
 		StringValidationInterface svi = new StringValidationImpl();
 		if (!svi.validationString(employee.getReference(), ValidationType.REFERENCE)
 				|| !svi.validationString(employee.getPassword(), ValidationType.PASSWORD)) {
-			mav.addObject("errorMessage", MESSAGE_INVALID_CONNECTION);
+			mav.addObject(ERROR_MESSAGE, MESSAGE_INVALID_CONNECTION_ERROR);
 			employee.setPassword(""); // password is cleared before sending back the employee.
 										// The reference is still there.
-			mav.addObject("Employee", employee);
+			mav.addObject(EMPLOYEE, employee);
 			return mav;
 		}
 
@@ -72,19 +77,21 @@ public class LoginController {
 		 */
 		Employee employeeFromDB = em.findOneByReference(employee.getReference());
 		String saltedPassword = employeeFromDB.getPasswordSalt() + employee.getPassword();
+		String errorMessage = "";
 		WordHashGeneratorInterface whgi = new WordHashGenerator();
 		try {
 			String hashedPassword = whgi.generateHash(saltedPassword, HASH_METHOD);
 			if (hashedPassword.equals(employeeFromDB.getPassword())) {
-				session.setAttribute("sessionEmployee", employeeFromDB);
-				return new ModelAndView("statPage");
+				HttpSession session = request.getSession();
+				session.setAttribute(SESSION_EMPLOYEE, employeeFromDB);
+				return new ModelAndView(STAT_PAGE);
 			}
 		} catch (NoSuchAlgorithmException e) {
 			// error message if HASH_METHOD does not correspond to any hashing method
-			errorMessage += MESSAGE_INVALID_HASHING;
-			mav.addObject("errorMessage", errorMessage);
+			errorMessage += MESSAGE_INVALID_HASHING_ERROR;
+			mav.addObject(ERROR_MESSAGE, errorMessage);
 			employee.setPassword("");
-			mav.addObject("Employee", employee);
+			mav.addObject(EMPLOYEE, employee);
 			e.printStackTrace();
 			return mav;
 		}
@@ -94,9 +101,9 @@ public class LoginController {
 		 * the database.
 		 */
 		employee.setPassword("");
-		mav.addObject("Employee", employee);
-		errorMessage += MESSAGE_INVALID_CONNECTION;
-		mav.addObject("errorMessage", errorMessage);
+		mav.addObject(EMPLOYEE, employee);
+		errorMessage += MESSAGE_INVALID_CONNECTION_ERROR;
+		mav.addObject(ERROR_MESSAGE, errorMessage);
 		return mav;
 	}
 }

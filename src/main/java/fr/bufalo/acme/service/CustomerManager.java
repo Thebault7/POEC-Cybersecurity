@@ -25,4 +25,8 @@ public class CustomerManager {
 	public int findHighestIdValue() {
 		return cdi.findHighestIdValue();
 	}
+	
+	public Customer saveNewCustomer(Customer customer) {
+		return cdi.save(customer);
+	}
 }
