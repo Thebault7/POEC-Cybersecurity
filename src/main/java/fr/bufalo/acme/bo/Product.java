@@ -13,7 +13,6 @@ import java.util.List;
  *
  */
 
-// TODO comment générer les références automatiquement ?
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -31,7 +30,7 @@ public class Product implements Serializable {
     private int id;
 
     @NonNull
-    @Column(name = "reference", nullable = false, length = 12)
+    @Column(name = "reference", nullable = false, unique = true, length = 12)
     private String reference;
 
     @NonNull
@@ -45,10 +44,10 @@ public class Product implements Serializable {
     private String picture;
 
     @Column(name = "price", length = 1000000)
-    private double price;
+    private float price;
 
     @Column(name = "stock", length = 1000000)
-    private double stock;
+    private Long stock;
 
     @ManyToOne
     @JoinColumn(name = "id_status", nullable = false)
@@ -70,7 +69,7 @@ public class Product implements Serializable {
     private List<SoldProduct> soldProducts;
 
     public Product(@NonNull String reference, String label, String description, String picture, float price,
-                   double stock, Status status, Vat vat, List<Category> categories) {
+                   Long stock, Status status, Vat vat, List<Category> categories) {
         this.reference = reference;
         this.label = label;
         this.description = description;
