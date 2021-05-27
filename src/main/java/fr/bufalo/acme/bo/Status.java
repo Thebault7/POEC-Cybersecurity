@@ -36,4 +36,11 @@ public class Status implements Serializable {
     @OneToMany(mappedBy = "status")
     private List<Product> products;
 
+    @Override
+    public String toString() {
+        return "Status{" +
+                "id=" + id +
+                ", label='" + label + '\'' +
+                '}';
+    }
 }

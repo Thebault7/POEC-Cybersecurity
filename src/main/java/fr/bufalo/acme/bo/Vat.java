@@ -36,4 +36,11 @@ public class Vat implements Serializable {
     @OneToMany(mappedBy = "vat")
     private List<Product> products;
 
+    @Override
+    public String toString() {
+        return "Vat{" +
+                "id=" + id +
+                ", percentage=" + percentage +
+                '}';
+    }
 }

@@ -36,4 +36,11 @@ public class Category implements Serializable {
     @ManyToMany(mappedBy = "categories")
     private List<Product> products;
 
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", label='" + label + '\'' +
+                '}';
+    }
 }
