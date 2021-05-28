@@ -14,7 +14,7 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp" />
-	<h1>Customer refernce ${customer.reference}</h1>
+	<h1>Customer reference ${customer.reference}</h1>
 	<h2>Customer reference : ${customer.reference}</h2>
 	<h2>Email : ${customer.email}</h2>
 	<h2>First name : ${customer.firstName}</h2>

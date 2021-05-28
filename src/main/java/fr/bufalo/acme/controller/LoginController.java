@@ -34,7 +34,7 @@ public class LoginController {
 
 	@Autowired
 	private EmployeeManager em;
-	
+
 	private static final String MESSAGE_INVALID_CONNECTION_ERROR = ErrorConstant.INVALID_CONNECTION.getErrorMessage();
 	private static final String MESSAGE_INVALID_HASHING_ERROR = ErrorConstant.INVALID_HASHING.getErrorMessage();
 
@@ -53,8 +53,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(path = "/" + CHECK_LOGIN, method = RequestMethod.POST)
-	public ModelAndView checkUserPassword(Employee employee, RedirectAttributes redirectAttributes,
-			HttpServletRequest request) {
+	public ModelAndView checkUserPassword(Employee employee, HttpServletRequest request) {
 		/*
 		 * The reference and password given by the user are checked for validity. If one
 		 * or the other fail the validation, an error message is showed.

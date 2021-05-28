@@ -14,10 +14,6 @@
 <body>
 	<div>
 		<div>
-			<form:label path="reference">Customer reference : </form:label>
-			<form:input path="reference" disabled="true"/>
-		</div>
-		<div>
 			<form:label path="firstName">Customer firstname : </form:label>
 			<form:input path="firstName" />
 		</div>

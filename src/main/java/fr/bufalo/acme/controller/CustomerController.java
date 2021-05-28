@@ -12,12 +12,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.bufalo.acme.bo.Customer;
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.constant.ErrorConstant;
+import fr.bufalo.acme.constant.ParameterConstant;
 import fr.bufalo.acme.service.CustomerManager;
+import fr.bufalo.acme.service.EmployeeManager;
+import fr.bufalo.acme.utils.reference.ReferenceGeneratorImpl;
 import fr.bufalo.acme.utils.reference.ReferenceGeneratorInterface;
 import fr.bufalo.acme.utils.reference.ReferenceType;
 import fr.bufalo.acme.utils.validation.StringValidationImpl;
@@ -35,27 +37,36 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerManager cm;
+	
+	@Autowired
+	private EmployeeManager em;
+
 	@Autowired
 	private ReferenceGeneratorInterface rgi;
-	
+
 	private static final String INEXISTING_DATE_ERROR = ErrorConstant.INEXISTING_DATE.getErrorMessage();
-	private static final String INVALID_CHARACTER_IN_ADDRESS_ERROR = ErrorConstant.INVALID_CHARACTER_IN_ADDRESS.getErrorMessage();
+	private static final String INVALID_CHARACTER_IN_ADDRESS_ERROR = ErrorConstant.INVALID_CHARACTER_IN_ADDRESS
+			.getErrorMessage();
 	private static final String INVALID_EMAIL_ERROR = ErrorConstant.INVALID_EMAIL.getErrorMessage();
-	private static final String INVALID_CHARACTER_IN_FIRSTNAME_ERROR = ErrorConstant.INVALID_CHARACTER_IN_FIRSTNAME.getErrorMessage();
-	private static final String INVALID_CHARACTER_IN_LASTNAME_ERROR = ErrorConstant.INVALID_CHARACTER_IN_LASTNAME.getErrorMessage();
+	private static final String INVALID_CHARACTER_IN_FIRSTNAME_ERROR = ErrorConstant.INVALID_CHARACTER_IN_FIRSTNAME
+			.getErrorMessage();
+	private static final String INVALID_CHARACTER_IN_LASTNAME_ERROR = ErrorConstant.INVALID_CHARACTER_IN_LASTNAME
+			.getErrorMessage();
 	private static final String EMPTY_NAMES_ERROR = ErrorConstant.EMPTY_NAMES.getErrorMessage();
 	private static final String INVALID_PHONE_NUMBER_ERROR = ErrorConstant.INVALID_PHONE_NUMBER.getErrorMessage();
 	private static final String INVALID_BIRTHDATE_ERROR = ErrorConstant.INVALID_BIRTHDATE.getErrorMessage();
 	private static final String BIRTHDATE_IN_FUTURE_ERROR = ErrorConstant.BIRTHDATE_IN_FUTURE.getErrorMessage();
-	private static final String BIRTHDATE_TOO_FAR_IN_PAST_ERROR = ErrorConstant.BIRTHDATE_TOO_FAR_IN_PAST.getErrorMessage();
-	
-	private static final String SESSION_EMPLOYEE = "sessionEmployee";
+	private static final String BIRTHDATE_TOO_FAR_IN_PAST_ERROR = ErrorConstant.BIRTHDATE_TOO_FAR_IN_PAST
+			.getErrorMessage();
+	private static final String SAVE_IN_DATABASE_FAIL_ERROR = ErrorConstant.SAVE_IN_DATABASE_FAIL.getErrorMessage();
+
+	private static final String SESSION_EMPLOYEE = ParameterConstant.SESSION_EMPLOYEE.getParameterName();
 	private static final String MANAGE_CUSTOMERS = "manageCustomers";
-	private static final String LIST_CUSTOMERS = "listCustomers";
+	private static final String LIST_CUSTOMERS = ParameterConstant.LIST_CUSTOMERS.getParameterName();
 	private static final String ADD_CUSTOMER = "addCustomer";
-	private static final String CUSTOMER = "customer";
-	private static final String ERROR_MESSAGE = "errorMessage";
-	private static final String EDIT_CUSTOMER = "editCustomer";
+	private static final String CUSTOMER = ParameterConstant.CUSTOMER.getParameterName();
+	private static final String ERROR_MESSAGE = ParameterConstant.ERROR_MESSAGE.getParameterName();
+	private static final String EDIT_CUSTOMER = ParameterConstant.EDIT_CUSTOMER.getParameterName();
 	private static final String MODIFY_CUSTOMER = "modifyCustomer";
 	private static final String SEARCH_CUSTOMER = "searchCustomer";
 	private static final String CHECK_ADD_CUSTOMER = "checkAddCustomer";
@@ -69,16 +80,14 @@ public class CustomerController {
 
 	@RequestMapping(path = "/" + ADD_CUSTOMER, method = RequestMethod.GET)
 	public ModelAndView goToAddCustomers(ModelMap modelMap) {
-		Customer customer = new Customer();
-		customer.setReference(rgi.generateReference(ReferenceType.CUSTOMER));
-		ModelAndView mav = new ModelAndView(ADD_CUSTOMER, CUSTOMER, customer);
+		ModelAndView mav = new ModelAndView(ADD_CUSTOMER, CUSTOMER, new Customer());
 		mav.addObject(ERROR_MESSAGE, "");
 		return mav;
 	}
 
 	@RequestMapping(path = "/" + CHECK_ADD_CUSTOMER, method = RequestMethod.POST)
 	public ModelAndView checkAddCustomer(Customer customer, String birthdateValue,
-			RedirectAttributes redirectAttribute) {
+			HttpServletRequest request) {
 		/*
 		 * Problem of mismatch between the birthdate in the jsp and the Customer bean.
 		 * To solve it, the birthdate is sent separately in the url and then rejoined
@@ -98,14 +107,20 @@ public class CustomerController {
 		 */
 		boolean isValid = true;
 		StringValidationInterface svi = new StringValidationImpl();
-		if (!svi.validationString(customer.getAddressLine1(), ValidationType.ADDRESS)) {
-			isValid = false;
-			errorMessage += INVALID_CHARACTER_IN_ADDRESS_ERROR;
+		if (customer.getAddressLine1() != null) {
+			if (!svi.validationString(customer.getAddressLine1(), ValidationType.ADDRESS)) {
+				isValid = false;
+				errorMessage += INVALID_CHARACTER_IN_ADDRESS_ERROR;
+			}
 		}
-		if (!svi.validationString(customer.getEmail(), ValidationType.EMAIL)) {
-			isValid = false;
-			errorMessage += INVALID_EMAIL_ERROR;
+		
+		if (customer.getEmail() != null) {
+			if (!svi.validationString(customer.getEmail(), ValidationType.EMAIL)) {
+				isValid = false;
+				errorMessage += INVALID_EMAIL_ERROR;
+			}
 		}
+		
 		if (customer.getFirstName() != null && customer.getLastName() != null) {
 			if (!svi.validationString(customer.getFirstName(), ValidationType.NAME)) {
 				isValid = false;
@@ -116,15 +131,18 @@ public class CustomerController {
 				errorMessage += INVALID_CHARACTER_IN_LASTNAME_ERROR;
 			}
 		} else {
+			// firstname and lastname cannot be null in database
 			isValid = false;
 			errorMessage += EMPTY_NAMES_ERROR;
 		}
+		
 		if (customer.getPhoneNumber() != null) {
 			if (!svi.validationString(customer.getPhoneNumber(), ValidationType.PHONE_NUMBER)) {
 				isValid = false;
 				errorMessage += INVALID_PHONE_NUMBER_ERROR;
 			}
 		}
+		
 		if (customer.getBirthdate() != null) {
 			if (!svi.validationString(customer.getBirthdate().toString(), ValidationType.DATE)) {
 				isValid = false;
@@ -139,16 +157,28 @@ public class CustomerController {
 				errorMessage += BIRTHDATE_TOO_FAR_IN_PAST_ERROR;
 			}
 		}
+		
 		if (!isValid) {
 			ModelAndView mav = new ModelAndView(ADD_CUSTOMER, ERROR_MESSAGE, errorMessage);
 			mav.addObject(CUSTOMER, customer);
 			return mav;
 		}
+		
 		/*
 		 * Second step consists in persisting the new customer into the database.
+		 * If the save fails, it returns to the addCustomer page with an error message
+		 * about the failure. If the save succeeds, it shows the newly added customer.
 		 */
-		// TODO
-		return new ModelAndView("redirect:/" + MANAGE_CUSTOMERS);
+		customer.setActive(true);
+		try {
+			customer.setReference(rgi.generateReference(ReferenceType.CUSTOMER));
+			Customer savedCustomer = cm.saveNewCustomer(customer);
+			return new ModelAndView(EDIT_CUSTOMER, CUSTOMER, savedCustomer);
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView(ADD_CUSTOMER, CUSTOMER, customer);
+			mav.addObject(ERROR_MESSAGE, SAVE_IN_DATABASE_FAIL_ERROR);
+			return mav;
+		}
 	}
 
 	@RequestMapping(path = "/" + SEARCH_CUSTOMER, method = RequestMethod.GET)

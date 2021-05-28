@@ -12,7 +12,15 @@ public enum ParameterConstant {
 	EMPLOYEE ("Employee"),
 	ERROR_MESSAGE ("errorMessage"),
 	SESSION_EMPLOYEE ("sessionEmployee"),
-	STAT_PAGE ("statPage");
+	STAT_PAGE ("statPage"),
+	MANAGE_CUSTOMERS ("manageCustomers"),
+	CUSTOMER ("customer"),
+	EDIT_CUSTOMER ("editCustomer"),
+	LIST_CUSTOMERS ("listCustomers"),
+	ADD_CUSTOMER ("addCustomer"),
+	MODIFY_CUSTOMER ("modifyCustomer"),
+	SEARCH_CUSTOMER ("searchCustomer"),
+	CHECK_ADD_CUSTOMER ("checkAddCustomer");
 
 	private String parameterName;
 	

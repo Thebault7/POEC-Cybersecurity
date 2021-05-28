@@ -18,7 +18,8 @@ public enum ErrorConstant {
 	INVALID_PHONE_NUMBER ("- The phone number is not valid<br>"),
 	INVALID_BIRTHDATE ("- The birthdate is not valid<br>"),
 	BIRTHDATE_IN_FUTURE ("- The birthdate cannot be in the future<br>"),
-	BIRTHDATE_TOO_FAR_IN_PAST ("- The birthdate cannot be more than 130 years in the past<br>");
+	BIRTHDATE_TOO_FAR_IN_PAST ("- The birthdate cannot be more than 130 years in the past<br>"),
+	SAVE_IN_DATABASE_FAIL ("Failed to save the data");
 	
 	private String errorMessage;
 	

@@ -25,10 +25,10 @@ public class Customer implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "first_name", length = 50)
+	@Column(name = "first_name", length = 50, nullable = false)
 	private String firstName;
 	
-	@Column(name = "last_name", length = 50)
+	@Column(name = "last_name", length = 50, nullable = false)
 	private String lastName;
 	
 	@Column(name = "address_line_1", length = 100)
@@ -65,7 +65,7 @@ public class Customer implements Serializable {
 	@JoinColumn(name = "id_postal_code")
 	private PostalCode postalCode;
 
-	@OneToMany(mappedBy = "customer", cascade= CascadeType.PERSIST, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private List<Order> listOrders;
 	
 	@ManyToMany
