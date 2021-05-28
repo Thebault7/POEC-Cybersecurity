@@ -18,13 +18,18 @@ import java.util.List;
 public class ProductManager {
 
     @Autowired
-    private ProductRepositoryInterface pri;
+    private ProductRepositoryInterface pr;
 
     public Product findById(int id) {
-        return pri.findById(id).get();
+        return pr.findById(id).get();
     }
 
     public List<Product> findAll() {
-        return pri.findAll();
+        return pr.findAll();
     }
+
+    public void save(Product product){
+        pr.save(product);
+    }
+
 }
