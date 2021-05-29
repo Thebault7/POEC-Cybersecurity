@@ -22,7 +22,7 @@ public class CustomerManager {
 		return cdi.findById(id).get();
 	}
 	
-	public int findHighestIdValue() {
+	public Integer findHighestIdValue() {
 		return cdi.findHighestIdValue();
 	}
 	

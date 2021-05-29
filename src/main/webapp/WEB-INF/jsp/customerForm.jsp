@@ -33,10 +33,11 @@
 			<form:label path="addressLine3">address complement : </form:label>
 			<form:input path="addressLine3" />
 		</div> 
-<%--  		<div>
+  		<div>
 			<form:label path="postalCode">Customer postal code : </form:label>
-			<form:input path="postalCode" />
-		</div>	--%>
+			<form:input path="postalCode" id="postalCodeID" type="text" />
+		</div>
+		<div id="showListCities"></div>	<%--div used to show the list of cities from the REST API --%>
 		<div>
 			<form:label path="email">Customer email : </form:label>
 			<form:input path="email" />
@@ -71,14 +72,59 @@
 					<option><c:out value="${year}" /></option>
 				</c:forEach>
 			</select>
-			<button type="button" onclick='checkBirthdate()'>Validate</button>
 		</div>
-		<div>
-			<form:label path="birthdate">Customer birthdate : </form:label>
-			<form:input id="birthdateText" path="birthdate" disabled="true" />	
-		</div>
-		<button type="submit">Add customer</button>
+		<button type="submit" onclick='checkBirthdate()'>Add customer</button>
 	</div>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/customerForm.js"></script>
+	
+	
+	
+	
+	<script type="text/javascript">
+		addListenerPostalCode();
+	
+		function addListenerPostalCode() {
+			var postalCodeID = document.getElementById("postalCodeID");
+			postalCodeID.addEventListener("input", function() {
+				var numberEntered = postalCodeID.value;
+				if (numberEntered.length > 2) {
+					loadPostalCodes(numberEntered);
+				}
+			});
+		}
+	
+		function loadPostalCodes(numberEntered) {
+			var url = "http://localhost:8080/searchPostalCodes/" + numberEntered;
+			var cityRequest = new XMLHttpRequest();
+			cityRequest.open('GET', url);
+			cityRequest.onload = function() {
+				if (cityRequest.status >= 200 && cityRequest.status < 400) {
+					var cityData = JSON.parse(cityRequest.responseText);
+					renderHTML(cityData);
+				} else {
+					document.getElementById("showListCities").innerHTML = "<p><strong>No city found</strong></p>";
+				};
+			};
+			cityRequest.onerror = function() {
+				alert("Error, server doesn't answer back");
+			};
+			cityRequest.send(numberEntered);
+		}
+		
+		function renderHTML(data) {
+			var showListCities = document.getElementById("showListCities");
+			if (data["result"] === null) {
+				showListCities.innerHTML = "<p><strong>" + data["message"] + "</strong></p>";
+			}
+			if (data["result"] !== null) {
+				var stringHTMLAddresses = "<ul>";
+				for (i = 0; i < data["result"][0]["listCities"].length; i++) {
+					stringHTMLAddresses += '<li><p><a href="#">' + data["result"][0]["listCities"][i]["name"] + '</a>';
+				}
+				stringHTMLAddresses += "</ul>";
+				showListCities.innerHTML = stringHTMLAddresses;
+			}
+		}
+	</script>
 </body>
 </html>

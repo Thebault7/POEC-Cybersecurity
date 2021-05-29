@@ -15,7 +15,7 @@ public enum ParameterConstant {
 	STAT_PAGE ("statPage"),
 	MANAGE_CUSTOMERS ("manageCustomers"),
 	CUSTOMER ("customer"),
-	EDIT_CUSTOMER ("editCustomer"),
+	VIEW_CUSTOMER ("viewCustomer"),
 	LIST_CUSTOMERS ("listCustomers"),
 	ADD_CUSTOMER ("addCustomer"),
 	MODIFY_CUSTOMER ("modifyCustomer"),

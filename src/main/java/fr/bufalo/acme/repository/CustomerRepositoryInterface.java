@@ -16,6 +16,6 @@ import fr.bufalo.acme.bo.Customer;
 public interface CustomerRepositoryInterface extends JpaRepository<Customer, Integer> {
 
 	@Query("SELECT MAX(c.id) FROM Customer c")
-	public int findHighestIdValue();
+	public Integer findHighestIdValue();
 	
 }

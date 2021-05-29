@@ -50,8 +50,7 @@ function checkBirthdate() {
 	if (day.length == 1) {
 		day = "0" + day;
 	}
-	var birthdateValue = document.getElementById('birthdateText').value = year + "-" + month + "-" + day;
 	
 	var formAddCustomer = document.getElementById("formAddCustomer");
-	formAddCustomer.action = "checkAddCustomer?birthdateValue=" + birthdateValue;
+	formAddCustomer.action = "checkAddCustomer?birthdateValue=" + year + "-" + month + "-" + day;
 }

@@ -3,6 +3,7 @@ package fr.bufalo.acme.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import fr.bufalo.acme.bo.Employee;
@@ -18,4 +19,7 @@ public interface EmployeeRepositoryInterface extends JpaRepository<Employee, Int
 
 	List<Employee> findAllByReference(String reference);
 	Employee findOneByReference(String reference);
+	
+	@Query("SELECT MAX(e.id) FROM Employee e")
+	public Integer findHighestIdValue();
 }

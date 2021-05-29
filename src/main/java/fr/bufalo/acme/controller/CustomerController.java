@@ -19,7 +19,6 @@ import fr.bufalo.acme.constant.ErrorConstant;
 import fr.bufalo.acme.constant.ParameterConstant;
 import fr.bufalo.acme.service.CustomerManager;
 import fr.bufalo.acme.service.EmployeeManager;
-import fr.bufalo.acme.utils.reference.ReferenceGeneratorImpl;
 import fr.bufalo.acme.utils.reference.ReferenceGeneratorInterface;
 import fr.bufalo.acme.utils.reference.ReferenceType;
 import fr.bufalo.acme.utils.validation.StringValidationImpl;
@@ -37,7 +36,7 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerManager cm;
-	
+
 	@Autowired
 	private EmployeeManager em;
 
@@ -66,7 +65,7 @@ public class CustomerController {
 	private static final String ADD_CUSTOMER = "addCustomer";
 	private static final String CUSTOMER = ParameterConstant.CUSTOMER.getParameterName();
 	private static final String ERROR_MESSAGE = ParameterConstant.ERROR_MESSAGE.getParameterName();
-	private static final String EDIT_CUSTOMER = ParameterConstant.EDIT_CUSTOMER.getParameterName();
+	private static final String VIEW_CUSTOMER = ParameterConstant.VIEW_CUSTOMER.getParameterName();
 	private static final String MODIFY_CUSTOMER = "modifyCustomer";
 	private static final String SEARCH_CUSTOMER = "searchCustomer";
 	private static final String CHECK_ADD_CUSTOMER = "checkAddCustomer";
@@ -86,8 +85,7 @@ public class CustomerController {
 	}
 
 	@RequestMapping(path = "/" + CHECK_ADD_CUSTOMER, method = RequestMethod.POST)
-	public ModelAndView checkAddCustomer(Customer customer, String birthdateValue,
-			HttpServletRequest request) {
+	public ModelAndView checkAddCustomer(Customer customer, String birthdateValue, HttpServletRequest request) {
 		/*
 		 * Problem of mismatch between the birthdate in the jsp and the Customer bean.
 		 * To solve it, the birthdate is sent separately in the url and then rejoined
@@ -114,13 +112,27 @@ public class CustomerController {
 			}
 		}
 		
+		if (customer.getAddressLine2() != null) {
+			if (!svi.validationString(customer.getAddressLine2(), ValidationType.ADDRESS)) {
+				isValid = false;
+				errorMessage += INVALID_CHARACTER_IN_ADDRESS_ERROR;
+			}
+		}
+		
+		if (customer.getAddressLine3() != null) {
+			if (!svi.validationString(customer.getAddressLine3(), ValidationType.ADDRESS)) {
+				isValid = false;
+				errorMessage += INVALID_CHARACTER_IN_ADDRESS_ERROR;
+			}
+		}
+
 		if (customer.getEmail() != null) {
 			if (!svi.validationString(customer.getEmail(), ValidationType.EMAIL)) {
 				isValid = false;
 				errorMessage += INVALID_EMAIL_ERROR;
 			}
 		}
-		
+
 		if (customer.getFirstName() != null && customer.getLastName() != null) {
 			if (!svi.validationString(customer.getFirstName(), ValidationType.NAME)) {
 				isValid = false;
@@ -135,14 +147,14 @@ public class CustomerController {
 			isValid = false;
 			errorMessage += EMPTY_NAMES_ERROR;
 		}
-		
+
 		if (customer.getPhoneNumber() != null) {
 			if (!svi.validationString(customer.getPhoneNumber(), ValidationType.PHONE_NUMBER)) {
 				isValid = false;
 				errorMessage += INVALID_PHONE_NUMBER_ERROR;
 			}
 		}
-		
+
 		if (customer.getBirthdate() != null) {
 			if (!svi.validationString(customer.getBirthdate().toString(), ValidationType.DATE)) {
 				isValid = false;
@@ -157,24 +169,25 @@ public class CustomerController {
 				errorMessage += BIRTHDATE_TOO_FAR_IN_PAST_ERROR;
 			}
 		}
-		
+
 		if (!isValid) {
 			ModelAndView mav = new ModelAndView(ADD_CUSTOMER, ERROR_MESSAGE, errorMessage);
 			mav.addObject(CUSTOMER, customer);
 			return mav;
 		}
-		
+
 		/*
-		 * Second step consists in persisting the new customer into the database.
-		 * If the save fails, it returns to the addCustomer page with an error message
-		 * about the failure. If the save succeeds, it shows the newly added customer.
+		 * Second step consists in persisting the new customer into the database. If the
+		 * save fails, it returns to the addCustomer page with an error message about
+		 * the failure. If the save succeeds, it shows the newly added customer.
 		 */
 		customer.setActive(true);
 		try {
 			customer.setReference(rgi.generateReference(ReferenceType.CUSTOMER));
 			Customer savedCustomer = cm.saveNewCustomer(customer);
-			return new ModelAndView(EDIT_CUSTOMER, CUSTOMER, savedCustomer);
+			return new ModelAndView(VIEW_CUSTOMER, CUSTOMER, savedCustomer);
 		} catch (Exception e) {
+			e.printStackTrace();
 			ModelAndView mav = new ModelAndView(ADD_CUSTOMER, CUSTOMER, customer);
 			mav.addObject(ERROR_MESSAGE, SAVE_IN_DATABASE_FAIL_ERROR);
 			return mav;
@@ -183,7 +196,7 @@ public class CustomerController {
 
 	@RequestMapping(path = "/" + SEARCH_CUSTOMER, method = RequestMethod.GET)
 	public ModelAndView goToSearchCustomers(ModelMap modelMap, int customerId, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView(EDIT_CUSTOMER, CUSTOMER, cm.findById(customerId));
+		ModelAndView mav = new ModelAndView(VIEW_CUSTOMER, CUSTOMER, cm.findById(customerId));
 		return mav;
 	}
 

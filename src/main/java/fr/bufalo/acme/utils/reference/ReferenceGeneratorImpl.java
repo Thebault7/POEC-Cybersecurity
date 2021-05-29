@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.bufalo.acme.service.CustomerManager;
+import fr.bufalo.acme.service.EmployeeManager;
+import fr.bufalo.acme.service.OrderManager;
+import fr.bufalo.acme.service.ProductManager;
 
 /**
  * @date Created 25/05/2021
@@ -15,14 +18,42 @@ public class ReferenceGeneratorImpl implements ReferenceGeneratorInterface {
 	
 	@Autowired
 	private CustomerManager cm;
+	@Autowired
+	private EmployeeManager em;
+	@Autowired
+	private ProductManager pm;
+	@Autowired
+	private OrderManager om;
+	
+	private static final String CUSTOMER = "Customer";
+	private static final String EMPLOYEE = "Employee";
+	private static final String PRODUCT = "Product";
+	private static final String ORDER = "Order";
 	
 	@Override
 	public String generateReference(ReferenceType type) {
-		int index = 0;
+		Integer index = 0;
 		switch (type.getClassName()) {
-		case "Customer":
+		case CUSTOMER:
 			index = cm.findHighestIdValue();
+			if (index == null) {
+				index = 0;
+			}
+			index++;
 			break;
+		case EMPLOYEE:
+			index = em.findHighestIdValue();
+			if (index == null) {
+				index = 0;
+			}
+			index++;
+			break;
+//		case PRODUCT:
+//			index = pm.findHighestIdValue() + 1;
+//			break;
+//		case ORDER:
+//			index = om.findHighestIdValue() + 1;
+//			break;
 		}
 		return type.getLetter() + "-" + index;
 	}

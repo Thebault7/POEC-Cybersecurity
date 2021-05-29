@@ -29,4 +29,8 @@ public class EmployeeManager {
 	public Employee findOneByReference(String reference) {
 		return edi.findOneByReference(reference);
 	}
+
+	public Integer findHighestIdValue() {
+		return edi.findHighestIdValue();
+	}
 }
