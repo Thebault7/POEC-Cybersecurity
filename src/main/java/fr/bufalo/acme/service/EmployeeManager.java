@@ -20,17 +20,17 @@ import fr.bufalo.acme.repository.EmployeeRepositoryInterface;
 public class EmployeeManager {
 	
 	@Autowired
-	private EmployeeRepositoryInterface edi;
+	private EmployeeRepositoryInterface eri;
 	
 	public List<Employee> findAllByReference(String reference) {
-		return edi.findAllByReference(reference);
+		return eri.findAllByReference(reference);
 	}
 	
 	public Employee findOneByReference(String reference) {
-		return edi.findOneByReference(reference);
+		return eri.findOneByReference(reference);
 	}
 
 	public Integer findHighestIdValue() {
-		return edi.findHighestIdValue();
+		return eri.findHighestIdValue();
 	}
 }

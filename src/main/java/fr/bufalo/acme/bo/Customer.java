@@ -4,7 +4,22 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @date Created 14/05/2021
@@ -59,6 +74,7 @@ public class Customer implements Serializable {
 	private boolean isActive;
 	
 	@Column(name = "birthdate")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthdate;
 	
 	@ManyToOne
@@ -73,6 +89,17 @@ public class Customer implements Serializable {
 		joinColumns = @JoinColumn(name = "id_customer", referencedColumnName = "id"),
 		inverseJoinColumns = @JoinColumn(name = "id_employee", referencedColumnName = "id"))
 	private List<Employee> listEmployee;
+	
+	@Column(name = "cityId")
+	private int cityId;
+	
+	// Attributes hereafter are used to carry data from jsp to controller. Not to be saved in database.
+	@Transient
+	private int postalCodeId;
+	@Transient
+	private String cityName; // keep city name in addition to city id to avoid reccurent calls to database
+	@Transient
+	private String country;
 	
 	
 	public Customer() {
@@ -284,5 +311,43 @@ public class Customer implements Serializable {
 		return serialVersionUID;
 	}
 	
+
+	public int getCityId() {
+		return cityId;
+	}
+
+
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
+
+	public int getPostalCodeId() {
+		return postalCodeId;
+	}
+
+
+	public void setPostalCodeId(int postalCodeId) {
+		this.postalCodeId = postalCodeId;
+	}
+
 	
+	public String getCityName() {
+		return cityName;
+	}
+
+
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
+
+
+	public String getCountry() {
+		return country;
+	}
+
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
 }

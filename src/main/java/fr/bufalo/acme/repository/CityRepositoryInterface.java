@@ -11,7 +11,8 @@ import fr.bufalo.acme.bo.City;
  * @version v1.0
  *
  */
-@Repository(value = "cityDaoInterface")
+@Repository(value = "cityRepositoryInterface")
 public interface CityRepositoryInterface extends JpaRepository<City, Integer> {
 
+	public City findOneById(int id);
 }

@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -38,29 +37,25 @@ public class PostalCode implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(name = "postal_code_has_city",
-		joinColumns = @JoinColumn(name = "id_city", referencedColumnName = "id"),
-		inverseJoinColumns = @JoinColumn(name = "id_postal_code", referencedColumnName = "id"))
+		joinColumns = @JoinColumn(name = "id_postal_code", referencedColumnName = "id"),
+		inverseJoinColumns = @JoinColumn(name = "id_city", referencedColumnName = "id"))
 	private List<City> listCities;
 	
-	@OneToMany(mappedBy = "postalCode")
-	private List<Customer> listCustomers;
 	
 	public PostalCode() {
 	}
 
-	public PostalCode(String number, List<City> listCities, List<Customer> listCustomers) {
+	public PostalCode(String number, List<City> listCities) {
 		super();
 		this.number = number;
 		this.listCities = listCities;
-		this.listCustomers = listCustomers;
 	}
 
-	public PostalCode(int id, String number, List<City> listCities, List<Customer> listCustomers) {
+	public PostalCode(int id, String number, List<City> listCities) {
 		super();
 		this.id = id;
 		this.number = number;
 		this.listCities = listCities;
-		this.listCustomers = listCustomers;
 	}
 
 	public int getId() {
@@ -85,14 +80,6 @@ public class PostalCode implements Serializable {
 
 	public void setListCities(List<City> listCities) {
 		this.listCities = listCities;
-	}
-
-	public List<Customer> getListCustomers() {
-		return listCustomers;
-	}
-
-	public void setListCustomers(List<Customer> listCustomers) {
-		this.listCustomers = listCustomers;
 	}
 
 	public static long getSerialversionuid() {

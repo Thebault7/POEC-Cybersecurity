@@ -18,13 +18,17 @@ import fr.bufalo.acme.repository.PostalCodeRepositoryInterface;
 public class PostalCodeManager {
 
 	@Autowired
-	private PostalCodeRepositoryInterface pcdi;
+	private PostalCodeRepositoryInterface pcri;
+	
+	public PostalCode findOneById(int id) {
+		return pcri.findOneById(id);
+	}
 	
 	public List<PostalCode> findAllByNumber(String number) {
-		return pcdi.findAllByNumber(number);
+		return pcri.findAllByNumber(number);
 	}
 	
 	public List<PostalCode> findAllByNumberLike(String number) {
-		return pcdi.findAllByNumberLike("%" + number + "%");
+		return pcri.findAllByNumberLike("%" + number + "%");
 	}
 }

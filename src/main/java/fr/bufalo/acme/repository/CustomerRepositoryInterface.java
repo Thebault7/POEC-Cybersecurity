@@ -12,7 +12,7 @@ import fr.bufalo.acme.bo.Customer;
  * @version v1.0
  *
  */
-@Repository(value="customerDaoInterface")
+@Repository(value="customerRepositoryInterface")
 public interface CustomerRepositoryInterface extends JpaRepository<Customer, Integer> {
 
 	@Query("SELECT MAX(c.id) FROM Customer c")

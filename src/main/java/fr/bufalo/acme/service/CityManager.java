@@ -3,6 +3,7 @@ package fr.bufalo.acme.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.bufalo.acme.bo.City;
 import fr.bufalo.acme.repository.CityRepositoryInterface;
 
 /**
@@ -15,5 +16,9 @@ import fr.bufalo.acme.repository.CityRepositoryInterface;
 public class CityManager {
 
 	@Autowired
-	private CityRepositoryInterface cdi;
+	private CityRepositoryInterface cri;
+	
+	public City findOneById(int id) {
+		return cri.findOneById(id);
+	}
 }

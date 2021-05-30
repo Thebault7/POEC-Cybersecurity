@@ -2,6 +2,8 @@ package fr.bufalo.acme.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,10 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import fr.bufalo.acme.bo.Customer;
 import fr.bufalo.acme.bo.Employee;
+import fr.bufalo.acme.bo.PostalCode;
 import fr.bufalo.acme.constant.ErrorConstant;
 import fr.bufalo.acme.constant.ParameterConstant;
+import fr.bufalo.acme.service.CityManager;
 import fr.bufalo.acme.service.CustomerManager;
-import fr.bufalo.acme.service.EmployeeManager;
+import fr.bufalo.acme.service.PostalCodeManager;
 import fr.bufalo.acme.utils.reference.ReferenceGeneratorInterface;
 import fr.bufalo.acme.utils.reference.ReferenceType;
 import fr.bufalo.acme.utils.validation.StringValidationImpl;
@@ -36,9 +40,12 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerManager cm;
-
+	
 	@Autowired
-	private EmployeeManager em;
+	private PostalCodeManager pcm;
+	
+	@Autowired
+	private CityManager cityM;
 
 	@Autowired
 	private ReferenceGeneratorInterface rgi;
@@ -69,6 +76,7 @@ public class CustomerController {
 	private static final String MODIFY_CUSTOMER = "modifyCustomer";
 	private static final String SEARCH_CUSTOMER = "searchCustomer";
 	private static final String CHECK_ADD_CUSTOMER = "checkAddCustomer";
+	private static final String CITY_NAME = ParameterConstant.CITY_NAME.getParameterName();
 
 	@RequestMapping(path = "/" + MANAGE_CUSTOMERS, method = RequestMethod.GET)
 	public ModelAndView goToManageCustomers(ModelMap modelMap, HttpServletRequest request) {
@@ -85,16 +93,15 @@ public class CustomerController {
 	}
 
 	@RequestMapping(path = "/" + CHECK_ADD_CUSTOMER, method = RequestMethod.POST)
-	public ModelAndView checkAddCustomer(Customer customer, String birthdateValue, HttpServletRequest request) {
+	public ModelAndView checkAddCustomer(Customer customer, HttpServletRequest request) {
 		/*
 		 * Problem of mismatch between the birthdate in the jsp and the Customer bean.
 		 * To solve it, the birthdate is sent separately in the url and then rejoined
 		 * with the customer hereafter:
 		 */
-		if (birthdateValue != null) {
+		if (customer.getBirthdate() != null) {
 			try {
-				LocalDate ld = LocalDate.parse(birthdateValue);
-				customer.setBirthdate(ld);
+				LocalDate.parse(customer.getBirthdate().toString());
 			} catch (DateTimeParseException e) {
 				return new ModelAndView(ADD_CUSTOMER, ERROR_MESSAGE, INEXISTING_DATE_ERROR);
 			}
@@ -183,6 +190,13 @@ public class CustomerController {
 		 */
 		customer.setActive(true);
 		try {
+			PostalCode postalCode = pcm.findOneById(customer.getPostalCodeId());
+			customer.setPostalCode(postalCode);
+			HttpSession session = request.getSession();
+			Employee employee = (Employee) session.getAttribute(SESSION_EMPLOYEE);
+			List<Employee> listEmployees = new ArrayList<>();
+			listEmployees.add(employee);
+			customer.setListEmployee(listEmployees);
 			customer.setReference(rgi.generateReference(ReferenceType.CUSTOMER));
 			Customer savedCustomer = cm.saveNewCustomer(customer);
 			return new ModelAndView(VIEW_CUSTOMER, CUSTOMER, savedCustomer);
@@ -196,7 +210,9 @@ public class CustomerController {
 
 	@RequestMapping(path = "/" + SEARCH_CUSTOMER, method = RequestMethod.GET)
 	public ModelAndView goToSearchCustomers(ModelMap modelMap, int customerId, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView(VIEW_CUSTOMER, CUSTOMER, cm.findById(customerId));
+		Customer customer = cm.findById(customerId);
+		ModelAndView mav = new ModelAndView(VIEW_CUSTOMER, CUSTOMER, customer);
+		mav.addObject(CITY_NAME, cityM.findOneById(customer.getCityId()).getName());
 		return mav;
 	}
 

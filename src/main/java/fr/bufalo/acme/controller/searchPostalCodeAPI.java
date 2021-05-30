@@ -34,8 +34,6 @@ public class searchPostalCodeAPI {
 	
 	@RequestMapping(method = RequestMethod.GET, path = {"/" + SEARCH_POSTAL_CODE + "/{" + NUMBER + "}"})
 	public ResponseEntity<?> searchPostalCodesAPI(@PathVariable(value=NUMBER) String number) {
-		System.out.println("------------------->  " + number);
-		
 		List<PostalCode> listPostalCodes = pcm.findAllByNumberLike(number);
 		
 		PostalCodeRestResponseBody result = new PostalCodeRestResponseBody();

@@ -16,17 +16,17 @@ import fr.bufalo.acme.repository.CustomerRepositoryInterface;
 public class CustomerManager {
 
 	@Autowired
-	private CustomerRepositoryInterface cdi;
+	private CustomerRepositoryInterface cri;
 	
 	public Customer findById(int id) {
-		return cdi.findById(id).get();
+		return cri.findById(id).get();
 	}
 	
 	public Integer findHighestIdValue() {
-		return cdi.findHighestIdValue();
+		return cri.findHighestIdValue();
 	}
 	
 	public Customer saveNewCustomer(Customer customer) {
-		return cdi.save(customer);
+		return cri.save(customer);
 	}
 }

@@ -24,6 +24,7 @@
 	<h2>
 		Address : ${customer.addressLine1}<br> ${customer.addressLine2}<br>${customer.addressLine3}</h2>
 	<h2>Postal code : ${customer.postalCode.number}</h2>
+	<h2>City name : ${cityName}</h2>
 	<h2>Country : ${customer.postalCode.listCities.get(0).countryEnum}</h2>
 	<h2>Employees in charge :</h2>
 	<c:if
@@ -39,7 +40,7 @@
 		</c:forEach>
 	</c:if>
 
-	<a href=#><img src="<%=request.getContextPath()%>/icon/update.png" />Modify
+	<a href="modifyCustomer?customerId=${customer.id}"><img src="<%=request.getContextPath()%>/icon/update.png" />Modify
 		customer</a>
 	<a href=#><img src="<%=request.getContextPath()%>/icon/delete.png" />Delete
 		customer</a>

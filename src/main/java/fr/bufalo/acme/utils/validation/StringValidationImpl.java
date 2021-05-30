@@ -3,6 +3,8 @@ package fr.bufalo.acme.utils.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import fr.bufalo.acme.constant.ParameterConstant;
+
 /**
  * @date Created 12/05/2021
  * @author Frederic Thebault
@@ -11,14 +13,14 @@ import java.util.regex.Pattern;
  */
 public class StringValidationImpl implements StringValidationInterface {
 	
-	private static final String EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-	private static final String REFERENCE = "^[a-zA-Z0-9-]{1,12}$";
-	private static final String PASSWORD = "^[a-zA-Z0-9,?;.:/!]{8,}$";
-	private static final String PHONE_NUMBER = "^(?:(?:\\+|00)33[\\s.-]{0,3}(?:\\(0\\)[\\s.-]{0,3})?|0)[1-9](?:(?:[\\s.-]?\\d{2}){4}|\\d{2}(?:[\\s.-]?\\d{3}){2})$";
-	private static final String NAME = "^[a-zA-Zאגהיטךכןמפצשûüח]+(([',. -][a-zA-Zאגהיטךכןמפצשûüח ])?[a-zA-Zאגהיטךכןמפצשûüח]*)*$";
-	private static final String ADDRESS = "^[0-9]{0,3}(([,. ]?){1}[a-zA-Zאגהיטךכןמפצשûüח'-]+)*$";
-	private static final String POSTAL_CODE = "^[0-9]{5,7}$";
-	private static final String DATE = "^[1-2]{1}[0-9]{3}[-\\/][0-1]{1}[0-9]{1}[-\\/][0-3]{1}[0-9]{1}$";
+	private static final String EMAIL_REGEX = ParameterConstant.EMAIL_REGEX.getParameterName();
+	private static final String REFERENCE_REGEX = ParameterConstant.REFERENCE_REGEX.getParameterName();
+	private static final String PASSWORD_REGEX = ParameterConstant.PASSWORD_REGEX.getParameterName();
+	private static final String PHONE_NUMBER_REGEX = ParameterConstant.PHONE_NUMBER_REGEX.getParameterName();
+	private static final String NAME_REGEX = ParameterConstant.NAME_REGEX.getParameterName();
+	private static final String ADDRESS_REGEX = ParameterConstant.ADDRESS_REGEX.getParameterName();
+	private static final String POSTAL_CODE_REGEX = ParameterConstant.POSTAL_CODE_REGEX.getParameterName();
+	private static final String DATE_REGEX = ParameterConstant.DATE_REGEX.getParameterName();
 	
 	/**
 	 * Method the checks if a given string is valid according to a regex.
@@ -40,25 +42,25 @@ public class StringValidationImpl implements StringValidationInterface {
 			regexString = EMAIL_REGEX;
 			break;
 		case REFERENCE:
-			regexString = REFERENCE;
+			regexString = REFERENCE_REGEX;
 			break;
 		case PASSWORD:
-			regexString = PASSWORD;
+			regexString = PASSWORD_REGEX;
 			break;
 		case PHONE_NUMBER:
-			regexString = PHONE_NUMBER;
+			regexString = PHONE_NUMBER_REGEX;
 			break;
 		case NAME:
-			regexString = NAME;
+			regexString = NAME_REGEX;
 			break;
 		case ADDRESS:
-			regexString = ADDRESS;
+			regexString = ADDRESS_REGEX;
 			break;
 		case POSTAL_CODE:
-			regexString = POSTAL_CODE;
+			regexString = POSTAL_CODE_REGEX;
 			break;
 		case DATE:
-			regexString = DATE;
+			regexString = DATE_REGEX;
 			break;
 		default:
 			return false;

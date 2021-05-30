@@ -32,22 +32,25 @@
 		<div>
 			<form:label path="addressLine3">address complement : </form:label>
 			<form:input path="addressLine3" />
-		</div> 
-  		<div>
-			<form:label path="postalCode">Customer postal code : </form:label>
-			<form:input path="postalCode" id="postalCodeID" type="text" />
 		</div>
-		<div id="showListCities"></div>	<%--div used to show the list of cities from the REST API --%>
+		<div>
+			<label>Customer postal code : </label>
+			<input id="postalCodeID" type="text" />
+		</div>
+		<div id="showListCities"></div>
+		<%--div being used to show the list of cities from the REST API --%>
+		<div id="showSelectedCity"></div>
 		<div>
 			<form:label path="email">Customer email : </form:label>
 			<form:input path="email" />
-		</div>	
+		</div>
 		<div>
 			<form:label path="phoneNumber">Customer phone number : </form:label>
 			<form:input path="phoneNumber" />
 		</div>
-  		<div>
+		<div>
 			Customer birthdate: <select id="selectedMonth" name="month">
+				<option value="none">--Select--</option>
 				<option value="Jan">January</option>
 				<option value="Feb">February</option>
 				<option value="Mar">March</option>
@@ -60,7 +63,8 @@
 				<option value="Oct">October</option>
 				<option value="Nov">November</option>
 				<option value="Dec">December</option>
-			</select> <select id="selectedDay" name="day">
+			</select>
+			<select id="selectedDay" name="day">
 				<c:forEach begin="1" end="31" var="day">
 					<option><c:out value="${day}" /></option>
 				</c:forEach>
@@ -73,58 +77,16 @@
 				</c:forEach>
 			</select>
 		</div>
+		<div>
+			<form:input id="birthdateInputField" path="birthdate" hidden="true" />
+			<form:input id="postalCodeIdField" path="postalCodeId" hidden="true" />
+			<form:input id="cityIdField" path="cityId" hidden="true" />
+			<form:input id="cityNameField" path="cityName" hidden="true" />
+			<form:input id="countryField" path="country" hidden="true" />
+		</div>
 		<button type="submit" onclick='checkBirthdate()'>Add customer</button>
 	</div>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/customerForm.js"></script>
-	
-	
-	
-	
-	<script type="text/javascript">
-		addListenerPostalCode();
-	
-		function addListenerPostalCode() {
-			var postalCodeID = document.getElementById("postalCodeID");
-			postalCodeID.addEventListener("input", function() {
-				var numberEntered = postalCodeID.value;
-				if (numberEntered.length > 2) {
-					loadPostalCodes(numberEntered);
-				}
-			});
-		}
-	
-		function loadPostalCodes(numberEntered) {
-			var url = "http://localhost:8080/searchPostalCodes/" + numberEntered;
-			var cityRequest = new XMLHttpRequest();
-			cityRequest.open('GET', url);
-			cityRequest.onload = function() {
-				if (cityRequest.status >= 200 && cityRequest.status < 400) {
-					var cityData = JSON.parse(cityRequest.responseText);
-					renderHTML(cityData);
-				} else {
-					document.getElementById("showListCities").innerHTML = "<p><strong>No city found</strong></p>";
-				};
-			};
-			cityRequest.onerror = function() {
-				alert("Error, server doesn't answer back");
-			};
-			cityRequest.send(numberEntered);
-		}
-		
-		function renderHTML(data) {
-			var showListCities = document.getElementById("showListCities");
-			if (data["result"] === null) {
-				showListCities.innerHTML = "<p><strong>" + data["message"] + "</strong></p>";
-			}
-			if (data["result"] !== null) {
-				var stringHTMLAddresses = "<ul>";
-				for (i = 0; i < data["result"][0]["listCities"].length; i++) {
-					stringHTMLAddresses += '<li><p><a href="#">' + data["result"][0]["listCities"][i]["name"] + '</a>';
-				}
-				stringHTMLAddresses += "</ul>";
-				showListCities.innerHTML = stringHTMLAddresses;
-			}
-		}
-	</script>
+	<script type="text/javascript"
+		src="<%=request.getContextPath()%>/js/customerForm.js"></script>
 </body>
 </html>
