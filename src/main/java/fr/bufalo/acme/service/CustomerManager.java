@@ -1,5 +1,7 @@
 package fr.bufalo.acme.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +30,9 @@ public class CustomerManager {
 	
 	public Customer save(Customer customer) {
 		return cri.save(customer);
+	}
+
+	public List<String> findAllReference() {
+		return cri.findAllReference();
 	}
 }

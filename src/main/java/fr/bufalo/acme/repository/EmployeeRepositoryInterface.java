@@ -17,9 +17,13 @@ import fr.bufalo.acme.bo.Employee;
 @Repository(value="employeeRepositoryInterface")
 public interface EmployeeRepositoryInterface extends JpaRepository<Employee, Integer> {
 
-	List<Employee> findAllByReference(String reference);
-	Employee findOneByReference(String reference);
+	public List<Employee> findAllByReference(String reference);
+	public Employee findOneByReference(String reference);
+	
+	@Query("SELECT reference FROM Employee e")
+	public List<String> findAllReference();
 	
 	@Query("SELECT MAX(e.id) FROM Employee e")
 	public Integer findHighestIdValue();
+	
 }

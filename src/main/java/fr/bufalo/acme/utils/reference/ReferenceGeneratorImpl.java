@@ -1,5 +1,9 @@
 package fr.bufalo.acme.utils.reference;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -32,35 +36,49 @@ public class ReferenceGeneratorImpl implements ReferenceGeneratorInterface {
 	
 	@Override
 	public String generateReference(ReferenceType type) {
-		Integer index = 0;
+		List<String> listReferences = new ArrayList<>();
+		List<Integer> listIndexes = new ArrayList<>();
+		Integer index = 1;
 		switch (type.getClassName()) {
 		case CUSTOMER:
-			index = cm.findHighestIdValue();
-			if (index == null) {
-				index = 0;
+			listReferences = cm.findAllReference();
+			if (listReferences != null) {
+				for (String reference : listReferences) {
+					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
+				}
+				index = Collections.max(listIndexes);
+				index++;
 			}
-			index++;
 			break;
 		case EMPLOYEE:
-			index = em.findHighestIdValue();
-			if (index == null) {
-				index = 0;
+			listReferences = em.findAllReference();
+			if (listReferences != null) {
+				for (String reference : listReferences) {
+					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
+				}
+				index = Collections.max(listIndexes);
+				index++;
 			}
-			index++;
 			break;
 		case PRODUCT:
-			index = pm.findHighestIdValue();
-			if (index == null) {
-				index = 0;
+			listReferences = pm.findAllReference();
+			if (listReferences != null) {
+				for (String reference : listReferences) {
+					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
+				}
+				index = Collections.max(listIndexes);
+				index++;
 			}
-			index++;
 			break;
 		case ORDER:
-			index = om.findHighestIdValue();
-			if (index == null) {
-				index = 0;
+			listReferences = om.findAllReference();
+			if (listReferences != null) {
+				for (String reference : listReferences) {
+					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
+				}
+				index = Collections.max(listIndexes);
+				index++;
 			}
-			index++;
 			break;
 		}
 		return type.getLetter() + "-" + index;

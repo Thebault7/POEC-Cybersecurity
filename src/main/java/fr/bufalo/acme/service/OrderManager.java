@@ -31,4 +31,8 @@ public class OrderManager {
     public Integer findHighestIdValue() {
 		return ori.findHighestIdValue();
 	}
+
+	public List<String> findAllReference() {
+		return ori.findAllReference();
+	}
 }

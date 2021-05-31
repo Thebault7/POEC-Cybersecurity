@@ -33,4 +33,8 @@ public class EmployeeManager {
 	public Integer findHighestIdValue() {
 		return eri.findHighestIdValue();
 	}
+
+	public List<String> findAllReference() {
+		return eri.findAllReference();
+	}
 }

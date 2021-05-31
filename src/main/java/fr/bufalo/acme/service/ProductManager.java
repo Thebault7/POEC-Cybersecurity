@@ -35,4 +35,8 @@ public class ProductManager {
     public Integer findHighestIdValue() {
 		return pr.findHighestIdValue();
 	}
+
+	public List<String> findAllReference() {
+		return pr.findAllReference();
+	}
 }
