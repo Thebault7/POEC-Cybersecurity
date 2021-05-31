@@ -11,6 +11,11 @@ var cityId = 0;
 var cityName = "";
 var countryEnumValue = "";
 
+//--------------------------------Show postal code if there is one-----------------------------------------
+//document.getElementById("postalCodeID").value = 
+var test = '${postalCode}';
+console.log(test);
+
 //--------------------------------Starting listener-----------------------------------------
 addListenerPostalCode();
 

@@ -77,6 +77,8 @@ public class CustomerController {
 	private static final String SEARCH_CUSTOMER = "searchCustomer";
 	private static final String CHECK_ADD_CUSTOMER = "checkAddCustomer";
 	private static final String CITY_NAME = ParameterConstant.CITY_NAME.getParameterName();
+	private static final String CHECK_MODIFY_CUSTOMER = "checkModifyCustomer";
+	private static final String POSTAL_CODE = ParameterConstant.POSTAL_CODE.getParameterName();
 
 	@RequestMapping(path = "/" + MANAGE_CUSTOMERS, method = RequestMethod.GET)
 	public ModelAndView goToManageCustomers(ModelMap modelMap, HttpServletRequest request) {
@@ -198,7 +200,7 @@ public class CustomerController {
 			listEmployees.add(employee);
 			customer.setListEmployee(listEmployees);
 			customer.setReference(rgi.generateReference(ReferenceType.CUSTOMER));
-			Customer savedCustomer = cm.saveNewCustomer(customer);
+			Customer savedCustomer = cm.save(customer);
 			return new ModelAndView(VIEW_CUSTOMER, CUSTOMER, savedCustomer);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -220,6 +222,18 @@ public class CustomerController {
 	public ModelAndView goToModifyCustomer(ModelMap modelMap, int customerId) {
 		Customer customer = cm.findById(customerId);
 		ModelAndView mav = new ModelAndView(MODIFY_CUSTOMER, CUSTOMER, customer);
+		if (customer.getPostalCode() != null) {
+			mav.addObject(POSTAL_CODE, pcm.findOneById(customer.getPostalCode().getId()));
+		}
 		return mav;
+	}
+	
+	@RequestMapping(path = "/" + CHECK_MODIFY_CUSTOMER, method = RequestMethod.POST)
+	public ModelAndView checkModifyCustomer(ModelMap modelMap, Customer customer) {
+		customer.setPostalCode(pcm.findOneById(customer.getPostalCodeId()));
+		customer.setActive(true);
+		System.out.println(customer.toString());
+//		cm.save(customer);
+		return null;
 	}
 }

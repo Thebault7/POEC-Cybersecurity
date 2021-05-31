@@ -26,7 +26,7 @@ public class CustomerManager {
 		return cri.findHighestIdValue();
 	}
 	
-	public Customer saveNewCustomer(Customer customer) {
+	public Customer save(Customer customer) {
 		return cri.save(customer);
 	}
 }

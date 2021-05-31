@@ -35,7 +35,7 @@
 		</div>
 		<div>
 			<label>Customer postal code : </label>
-			<input id="postalCodeID" type="text" />
+			<input id="postalCodeID" type="text" value="${postalCode.number}" />
 		</div>
 		<div id="showListCities"></div>
 		<%--div being used to show the list of cities from the REST API --%>
@@ -79,7 +79,7 @@
 		</div>
 		<div>
 			<form:input id="birthdateInputField" path="birthdate" hidden="true" />
-			<form:input id="postalCodeIdField" path="postalCodeId" hidden="true" />
+			<form:input id="postalCodeIdField" path="postalCodeId" value="${postalCode.id}" hidden="true" />
 			<form:input id="cityIdField" path="cityId" hidden="true" />
 			<form:input id="cityNameField" path="cityName" hidden="true" />
 			<form:input id="countryField" path="country" hidden="true" />

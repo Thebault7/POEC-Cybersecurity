@@ -17,14 +17,18 @@ import java.util.List;
 public class OrderManager {
 
     @Autowired
-    private OrderRepositoryInterface odi;
+    private OrderRepositoryInterface ori;
 
     public Order findById(int id) {
-        return odi.findById(id).get();
+        return ori.findById(id).get();
     }
 
     public List<Order> findAllByEmployeeId(int id) {
 
         return null;
     }
+    
+    public Integer findHighestIdValue() {
+		return ori.findHighestIdValue();
+	}
 }

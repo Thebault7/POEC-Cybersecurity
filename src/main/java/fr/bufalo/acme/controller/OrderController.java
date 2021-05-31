@@ -61,7 +61,9 @@ public class OrderController {
 		List<Customer> listCustomers = employee.getListCustomer();
 		List<Order> listOrders = new ArrayList<>();
 		for (Customer customer : listCustomers){
-			listOrders.add((Order) customer.getListOrders());
+			for (Order order : (List<Order>) customer.getListOrders()) {
+				listOrders.add(order);
+			}
 		}
 		return new ModelAndView(MANAGE_ORDERS, LIST_ORDERS, listOrders);
 	}

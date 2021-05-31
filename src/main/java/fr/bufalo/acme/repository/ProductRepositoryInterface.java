@@ -2,6 +2,7 @@ package fr.bufalo.acme.repository;
 
 import fr.bufalo.acme.bo.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,4 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository(value = "productRepositoryInterface")
 public interface ProductRepositoryInterface extends JpaRepository<Product, Integer> {
+	
+	@Query("SELECT MAX(p.id) FROM Product p")
+	public Integer findHighestIdValue();
 }

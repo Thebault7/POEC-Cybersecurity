@@ -48,12 +48,20 @@ public class ReferenceGeneratorImpl implements ReferenceGeneratorInterface {
 			}
 			index++;
 			break;
-//		case PRODUCT:
-//			index = pm.findHighestIdValue() + 1;
-//			break;
-//		case ORDER:
-//			index = om.findHighestIdValue() + 1;
-//			break;
+		case PRODUCT:
+			index = pm.findHighestIdValue();
+			if (index == null) {
+				index = 0;
+			}
+			index++;
+			break;
+		case ORDER:
+			index = om.findHighestIdValue();
+			if (index == null) {
+				index = 0;
+			}
+			index++;
+			break;
 		}
 		return type.getLetter() + "-" + index;
 	}

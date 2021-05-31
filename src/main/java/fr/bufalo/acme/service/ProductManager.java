@@ -32,4 +32,7 @@ public class ProductManager {
         pr.save(product);
     }
 
+    public Integer findHighestIdValue() {
+		return pr.findHighestIdValue();
+	}
 }

@@ -2,6 +2,7 @@ package fr.bufalo.acme.repository;
 
 import fr.bufalo.acme.bo.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Repository;
  * @version v1.0
  *
  */
-@Repository(value="orderDaoInterface")
+@Repository(value="orderRepositoryInterface")
 public interface OrderRepositoryInterface extends JpaRepository<Order, Integer> {
+
+	@Query("SELECT MAX(o.id) FROM Order o")
+	public Integer findHighestIdValue();
 }
 
