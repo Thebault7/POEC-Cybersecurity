@@ -30,7 +30,7 @@ public class Product implements Serializable {
     private int id;
 
     @NonNull
-    @Column(name = "reference", nullable = false, unique = true, length = 12)
+    @Column(name = "reference", nullable = false, unique = true, length = 11)
     private String reference;
 
     @NonNull
