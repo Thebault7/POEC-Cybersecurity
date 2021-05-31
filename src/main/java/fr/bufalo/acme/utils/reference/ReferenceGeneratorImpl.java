@@ -34,53 +34,42 @@ public class ReferenceGeneratorImpl implements ReferenceGeneratorInterface {
 	private static final String PRODUCT = "Product";
 	private static final String ORDER = "Order";
 	
+	private List<String> listReferences = new ArrayList<>();
+	private List<Integer> listIndexes = new ArrayList<>();
+	private Integer index = 1;
+	
 	@Override
 	public String generateReference(ReferenceType type) {
-		List<String> listReferences = new ArrayList<>();
-		List<Integer> listIndexes = new ArrayList<>();
-		Integer index = 1;
+		
 		switch (type.getClassName()) {
 		case CUSTOMER:
 			listReferences = cm.findAllReference();
-			if (listReferences != null) {
-				for (String reference : listReferences) {
-					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
-				}
-				index = Collections.max(listIndexes);
-				index++;
-			}
+			extractHighestreferenceNumber(listReferences);
 			break;
 		case EMPLOYEE:
 			listReferences = em.findAllReference();
-			if (listReferences != null) {
-				for (String reference : listReferences) {
-					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
-				}
-				index = Collections.max(listIndexes);
-				index++;
-			}
+			extractHighestreferenceNumber(listReferences);
 			break;
 		case PRODUCT:
 			listReferences = pm.findAllReference();
-			if (listReferences != null) {
-				for (String reference : listReferences) {
-					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
-				}
-				index = Collections.max(listIndexes);
-				index++;
-			}
+			extractHighestreferenceNumber(listReferences);
 			break;
 		case ORDER:
 			listReferences = om.findAllReference();
-			if (listReferences != null) {
-				for (String reference : listReferences) {
-					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
-				}
-				index = Collections.max(listIndexes);
-				index++;
-			}
+			extractHighestreferenceNumber(listReferences);
 			break;
 		}
 		return type.getLetter() + "-" + index;
+	}
+	
+	private Integer extractHighestreferenceNumber(List<String> listReferences) {
+		if (listReferences != null) {
+			for (String reference : listReferences) {
+				listIndexes.add((Integer.parseInt(reference.split("-")[1])));
+			}
+			index = Collections.max(listIndexes);
+			index++;
+		}
+		return index;
 	}
 }
