@@ -4,6 +4,7 @@ import fr.bufalo.acme.bo.Product;
 
 import java.util.List;
 
+import fr.bufalo.acme.bo.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -19,8 +20,10 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepositoryInterface extends JpaRepository<Product, Integer> {
 	
 	@Query("SELECT MAX(p.id) FROM Product p")
-	public Integer findHighestIdValue();
+	Integer findHighestIdValue();
 
-	@Query("SELECT reference FROM Product p")
-	public List<String> findAllReference();
+	@Query("SELECT p.reference FROM Product p")
+	List<String> findAllReference();
+
+	List<Product> findByStatusNot(Status status);
 }

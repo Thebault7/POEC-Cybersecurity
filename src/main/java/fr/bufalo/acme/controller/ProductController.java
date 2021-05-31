@@ -50,6 +50,7 @@ public class ProductController {
 	private static final String VAT = "vat";
 	private static final String STATUS = "status";
 	private static final String CATEGORIES = "categories";
+	private static final int ARCHIVED_STATUS_ID = 3;
 
 	private static final String MANAGE_PRODUCT = "manageProducts";
 	private static final String LIST_PRODUCT = "listProducts";
@@ -66,7 +67,9 @@ public class ProductController {
 
 	@RequestMapping(path = "/" + MANAGE_PRODUCT, method = RequestMethod.GET)
 	public ModelAndView goToManageProducts(ModelMap modelMap) {
-		List<Product> listProducts = pm.findAll();
+		// get product which are not archived
+		Status statusArchived = sm.findById(ARCHIVED_STATUS_ID);
+		List<Product> listProducts = pm.findByStatusNot(statusArchived);
 		ModelAndView mv = new ModelAndView(MANAGE_PRODUCT);
 		mv.addObject(LIST_PRODUCT, listProducts);
 		return mv;
@@ -80,7 +83,7 @@ public class ProductController {
 	@RequestMapping(path = "/" + ADD_PRODUCT, method = RequestMethod.GET)
 	public ModelAndView goToAddProduct(ModelMap modelMap) {
 		Product product = new Product();
-		product.setReference(rg.generateReference(ReferenceType.PRODUCT));
+//		product.setReference(rg.generateReference(ReferenceType.PRODUCT));
 
 		List<Vat> listVats = vm.findAll();
 		List<Status> listStatuses = sm.findAll();

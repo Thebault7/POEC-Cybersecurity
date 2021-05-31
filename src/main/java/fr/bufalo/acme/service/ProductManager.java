@@ -1,6 +1,7 @@
 package fr.bufalo.acme.service;
 
 import fr.bufalo.acme.bo.Product;
+import fr.bufalo.acme.bo.Status;
 import fr.bufalo.acme.repository.ProductRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,4 +40,8 @@ public class ProductManager {
 	public List<String> findAllReference() {
 		return pr.findAllReference();
 	}
+
+    public List<Product> findByStatusNot(Status status) {
+        return pr.findByStatusNot(status);
+    }
 }
