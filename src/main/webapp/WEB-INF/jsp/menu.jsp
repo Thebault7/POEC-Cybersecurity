@@ -34,9 +34,9 @@
 	</div>
 	<div class="col-2">
 		<div class="icon-exit">
-			<a href="login"><img
-				src="<%=request.getContextPath()%>/icon/exit.png"
-				alt="Exit from the web site"></a>
+			<a href="login">
+				<i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+			</a>
 		</div>
 	</div>
 </div>

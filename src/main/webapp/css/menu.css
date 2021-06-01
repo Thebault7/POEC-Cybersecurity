@@ -6,9 +6,10 @@ nav {
 	margin-bottom: 20px;
 }
 
-button {
-	box-shadow: 10px 5px 5px #999999;
-}
+/*button {*/
+/*	box-shadow: 10px 5px 5px #999999;*/
+/*}*/
+
 
 .contain-nav {
 	display: table-cell;
