@@ -21,34 +21,33 @@
 
         <div class="col-md-6">
 
-<%--            TODO ref auto générée--%>
             <div class="form-group">
                 <label for="reference">Référence</label>
                 <input class="form-control" name="reference" id="reference" placeholder="Référence" value="${product.reference}" readonly>
             </div>
 
-            <div class="form-group">
-                <label for="label">Titre</label>
-                <input class="form-control" id="label" name="label" placeholder="Titre" value="${product.label}" required>
+            <div class="form-group required">
+                <label for="label" class="control-label">Titre</label>
+                <input class="form-control" name="label" id="label" placeholder="Titre" value="${product.label}" required>
             </div>
 
-            <div class="form-group">
-                <label for="price">Prix (€)</label>
-                <input class="form-control" id="price" name="price" placeholder="Titre" value="${product.price}" required>
+            <div class="form-group required">
+                <label for="price" class="control-label">Prix (€)</label>
+                <input class="form-control" name="price" id="price" placeholder="Titre" value="${product.price}" required>
             </div>
 
-            <div class="form-group">
-                <label for="tva">T.V.A.</label>
-                <select class="form-control" id="vat" name="vatId">
+            <div class="form-group required">
+                <label for="vat" class="control-label">T.V.A.</label>
+                <select class="form-control" name="vatId" id="vat" required>
                     <c:forEach items="${listVats}" var="vatOption">
                         <option value="${vatOption.id}">${String.format("%5.1f%%", vatOption.percentage*100)}</option>
                     </c:forEach>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label for="status">Statut</label>
-                <select class="form-control" id="status" name="statusId">
+            <div class="form-group required">
+                <label for="status" class="control-label">Statut</label>
+                <select class="form-control" name="statusId" id="status" required>
                     <c:forEach items="${listStatuses}" var="statusOption">
                         <option value="${statusOption.id}">${statusOption.label}</option>
                     </c:forEach>
@@ -57,17 +56,17 @@
 
             <div class="form-group">
                 <label for="stock">Stock</label>
-                <input class="form-control" id="stock" name="stock" placeholder="0" value="${product.stock}">
+                <input class="form-control" name="stock" id="stock" placeholder="0" value="${product.stock}">
             </div>
 
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="5" >${product.description}</textarea>
+                <textarea class="form-control" name="description" id="description" rows="5" >${product.description}</textarea>
             </div>
 
             <div class="form-group">
                 <label for="category">Categories (choix multiples)</label>
-                <select multiple class="form-control" id="categoriesId" name="categoriesId">
+                <select multiple class="form-control" name="categoriesId" id="category">
                     <c:forEach items="${listCategories}" var="categoryOption">
                         <option value="${categoryOption.id}">${categoryOption.label}</option>
                     </c:forEach>

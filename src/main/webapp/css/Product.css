@@ -43,6 +43,11 @@
     box-sizing: border-box;
 }
 
+.form-group.required .control-label:after {
+    content:"*";
+    color:red;
+}
+
 @media (prefers-reduced-motion: no-preference) {
     :root {
         scroll-behavior: smooth;
