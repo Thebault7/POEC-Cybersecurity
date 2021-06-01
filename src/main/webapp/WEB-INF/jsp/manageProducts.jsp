@@ -1,16 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Manage products</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/Product.css">
-<%--	<script type="text/javascript" src="<%=request.getContextPath()%>/js/productTable.js"></script>--%>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Manage products</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/Product.css">
+	</head>
 <body>
 
 <%--  HEADER  --%>
@@ -46,13 +45,13 @@
 						<table id="table" class="table table-bordered table-hover table-sm">
 							<thead>
 								<tr>
-									<th scope="col">Référence</th>
-									<th scope="col">Image</th>
-									<th scope="col">Label</th>
-									<th scope="col">Description</th>
-									<th scope="col">Prix</th>
-									<th scope="col">Stock</th>
-									<th scope="col">Action</th>
+									<th scope="col" style="width: 10%">Référence</th>
+									<th scope="col" style="width: 10%">Image</th>
+									<th scope="col" style="width: 13%">Label</th>
+									<th scope="col" style="width: 40%">Description</th>
+									<th scope="col" style="width: 8%">Prix</th>
+									<th scope="col" style="width: 8%">Stock</th>
+									<th scope="col" style="width: 11%">Action</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -65,19 +64,19 @@
 										<td>${row.price}</td>
 										<td>${row.stock}</td>
 										<td>
-											<div class="row align-items-center">
-												<div class="col-md-4">
+											<div class="d-flex justify-content-around">
+												<div>
 													<a href="viewProduct?productId=${row.id}">
 														<i class="fa fa-search fa-lg" aria-hidden="true"></i>
 													</a>
 												</div>
-												<div class="col-md-4">
+												<div>
 													<a href="modifyProduct?productId=${row.id}">
 														<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
 													</a>
 												</div>
-												<div class="col-md-4">
-													<a href=#>
+												<div>
+													<a href="archiveProduct?productId=${row.id}">
 														<i class="fa fa-archive fa-lg" aria-hidden="true"></i>
 													</a>
 												</div>

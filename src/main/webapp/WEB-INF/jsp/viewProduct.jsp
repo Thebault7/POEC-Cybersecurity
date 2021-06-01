@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -32,17 +32,17 @@
                     <img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/placeholder-image.png" alt="product" />
                 </div>
                 <div class="col-md-6">
-                    <div class="small mb-1">ref.: ${product.reference}</div>
+                    <div class="small mb-1">ref. : ${product.reference}</div>
                     <h1 class="display-5 fw-bolder">${product.label}</h1>
 
                     <div class="row gx-4 gx-lg-5 mb-5 align-items-center">
                         <div class="col-md-6">
                             <div>${product.price}€</div>
-                            <div class="small">T.V.A.: ${vat_percent}</div>
+                            <div class="small">T.V.A. : ${vat_percent}</div>
                         </div>
                         <div class="col-md-6">
-                            <div class="small">statut: ${status.label}</div>
-                            <div class="small">stock: ${product.stock}</div>
+                            <div class="small">statut : ${status.label}</div>
+                            <div class="small">stock : ${product.stock}</div>
                         </div>
                     </div>
 
@@ -71,7 +71,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href=#>
+                    <a href="archiveProduct?productId=${product.id}">
                         <i class="fa fa-archive fa-lg" aria-hidden="true"></i>
                         Archiver le produit
                     </a>

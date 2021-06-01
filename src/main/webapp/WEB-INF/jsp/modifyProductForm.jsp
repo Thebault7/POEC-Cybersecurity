@@ -1,4 +1,4 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -20,6 +20,9 @@
         </div>
 
         <div class="col-md-6">
+            <div class="form-group">
+                <input class="form-control" name="id" id="id" value="${product.id}" type="hidden">
+            </div>
 
 <%--            TODO mettre warning pour la modification de la ref : attention il n'est pas conseillé de changer la reference--%>
 <%--            TODO vérification de la reference (n'existe pas en base)--%>

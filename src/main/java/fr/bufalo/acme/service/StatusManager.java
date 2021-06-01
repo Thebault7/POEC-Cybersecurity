@@ -27,4 +27,8 @@ public class StatusManager {
     public List<Status> findAll() {
         return sr.findAll();
     }
+
+    public List<Status> findByIdNot(int id){
+        return sr.findByIdNot(id);
+    }
 }

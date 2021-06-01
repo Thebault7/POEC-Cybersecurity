@@ -15,4 +15,6 @@ import java.util.List;
 
 @Repository(value = "statusRepositoryInterface")
 public interface StatusRepositoryInterface extends JpaRepository<Status, Integer> {
+
+    List<Status> findByIdNot(int id);
 }
