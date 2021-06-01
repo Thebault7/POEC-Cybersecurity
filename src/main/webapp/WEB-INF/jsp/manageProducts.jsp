@@ -46,7 +46,7 @@
 						<table id="table" class="table table-bordered table-hover table-sm">
 							<thead>
 								<tr>
-									<th scope="col">Reference</th>
+									<th scope="col">Référence</th>
 									<th scope="col">Image</th>
 									<th scope="col">Label</th>
 									<th scope="col">Description</th>

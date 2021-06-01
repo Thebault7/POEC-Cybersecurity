@@ -81,6 +81,15 @@ public class Product implements Serializable {
         this.categories = categories;
     }
 
+    @Transient
+    private int statusId;
+
+    @Transient
+    private int vatId;
+
+    @Transient
+    private List<Integer> categoriesId;
+
     @Override
     public String toString() {
         return "Product{" +

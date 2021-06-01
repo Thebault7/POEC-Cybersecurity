@@ -28,17 +28,17 @@ public enum ParameterConstant {
 	REFERENCE_REGEX ("^[a-zA-Z0-9-]{1,12}$"),
 	PASSWORD_REGEX ("^[a-zA-Z0-9,?;.:/!]{8,}$"),
 	PHONE_NUMBER_REGEX ("^(?:(?:\\+|00)33[\\s.-]{0,3}(?:\\(0\\)[\\s.-]{0,3})?|0)[1-9](?:(?:[\\s.-]?\\d{2}){4}|\\d{2}(?:[\\s.-]?\\d{3}){2})$"),
-	NAME_REGEX ("^[a-zA-Zΰβδιθκλοξτφωϋόη]+(([',. -][a-zA-Zΰβδιθκλοξτφωϋόη ])?[a-zA-Zΰβδιθκλοξτφωϋόη]*)*$"),
-	ADDRESS_REGEX ("^[0-9]{0,3}(([,. ]?){1}[a-zA-Z0-9ΰβδιθκλοξτφωϋόη'-]+)*$"),
+	NAME_REGEX ("^[a-zA-ZΓ ΓΆΓ¤Γ©Γ¨ΓªΓ«Γ―Γ®Γ΄Γ¶ΓΉΓ»ΓΌΓ§]+(([',. -][a-zA-ZΓ ΓΆΓ¤Γ©Γ¨ΓªΓ«Γ―Γ®Γ΄Γ¶ΓΉΓ»ΓΌΓ§ ])?[a-zA-ZΓ ΓΆΓ¤Γ©Γ¨ΓªΓ«Γ―Γ®Γ΄Γ¶ΓΉΓ»ΓΌΓ§]*)*$"),
+	ADDRESS_REGEX ("^[0-9]{0,3}(([,. ]?){1}[a-zA-Z0-9Γ ΓΆΓ¤Γ©Γ¨ΓªΓ«Γ―Γ®Γ΄Γ¶ΓΉΓ»ΓΌΓ§'-]+)*$"),
 	POSTAL_CODE_REGEX ("^[0-9]{5,7}$"),
 	DATE_REGEX ("^[1-2]{1}[0-9]{3}[-\\/][0-1]{1}[0-9]{1}[-\\/][0-3]{1}[0-9]{1}$");
-	
+
 	private String parameterName;
-	
+
 	ParameterConstant (String parameterName) {
 		this.parameterName = parameterName;
 	}
-	
+
 	public String getParameterName() {
 		return parameterName;
 	}

@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="small mb-1">ref.: ${product.reference}</div>
-                    <h1 class="display-5 fw-bolder">Product ${product.label}</h1>
+                    <h1 class="display-5 fw-bolder">${product.label}</h1>
 
                     <div class="row gx-4 gx-lg-5 mb-5 align-items-center">
                         <div class="col-md-6">

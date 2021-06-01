@@ -29,8 +29,9 @@ public class ProductManager {
         return pr.findAll();
     }
 
-    public void save(Product product){
+    public Product save(Product product){
         pr.save(product);
+        return product;
     }
 
     public Integer findHighestIdValue() {

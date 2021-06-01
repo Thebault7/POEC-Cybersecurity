@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -83,7 +84,7 @@ public class ProductController {
 	@RequestMapping(path = "/" + ADD_PRODUCT, method = RequestMethod.GET)
 	public ModelAndView goToAddProduct(ModelMap modelMap) {
 		Product product = new Product();
-//		product.setReference(rg.generateReference(ReferenceType.PRODUCT));
+		product.setReference(rg.generateReference(ReferenceType.PRODUCT));
 
 		List<Vat> listVats = vm.findAll();
 		List<Status> listStatuses = sm.findAll();
@@ -103,13 +104,33 @@ public class ProductController {
 
 
 	@RequestMapping(path = "/" + CHECK_ADD_PRODUCT, method = RequestMethod.POST)
-	public ModelAndView checkAddCustomer(Customer customer, String birthdateValue,
-										 RedirectAttributes redirectAttribute) {
-		String errorMessage = "";
+	public ModelAndView checkAddProduct(Product product) {
 		/*
 		 * First step consists in checking if product data are valid or not
 		 */
-		return new ModelAndView("redirect:/" + MANAGE_PRODUCT);
+
+//		TODO check si status est archivé ==> message warning
+
+		/*
+		 * Second step consists in persisting the new customer into the database. If the
+		 * save fails, it returns to the addCustomer page with an error message about
+		 * the failure. If the save succeeds, it shows the newly added customer.
+		 */
+
+		try {
+//			product.setReference(rg.generateReference(ReferenceType.PRODUCT));
+			product.setStatus(sm.findById(product.getStatusId()));
+			product.setVat(vm.findById(product.getVatId()));
+			product.setCategories(new ArrayList<>());
+			for (int categoryId:product.getCategoriesId()) {
+				product.getCategories().add(cm.findById(categoryId));
+			}
+			Product savedProduct = pm.save(product);
+			return getModelAndView(savedProduct.getId(), VIEW_PRODUCT);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ModelAndView(ADD_PRODUCT, PRODUCT, product);
+		}
 	}
 
 	@RequestMapping(path = "/" + MODIFY_PRODUCT, method = RequestMethod.GET)
