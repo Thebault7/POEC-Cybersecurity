@@ -2,6 +2,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -76,7 +77,7 @@
 													</a>
 												</div>
 												<div>
-													<a href="archiveProduct?productId=${row.id}">
+													<a href="archiveProduct?productId=${row.id}" class="btn-delete">
 														<i class="fa fa-archive fa-lg" aria-hidden="true"></i>
 													</a>
 												</div>
@@ -92,7 +93,8 @@
 		</div>
 	</section>
 
+	<jsp:include page="archiveWarningPopup.jsp" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/archiveWarningPopup.js"></script>
+
 </body>
-
-
 </html>

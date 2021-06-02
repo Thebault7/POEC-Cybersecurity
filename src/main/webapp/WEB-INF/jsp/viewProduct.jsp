@@ -71,7 +71,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="archiveProduct?productId=${product.id}">
+                    <a href="archiveProduct?productId=${product.id}" class="btn-delete">
                         <i class="fa fa-archive fa-lg" aria-hidden="true"></i>
                         Archiver le produit
                     </a>
@@ -79,6 +79,9 @@
             </div>
         </div>
     </section>
+
+    <jsp:include page="archiveWarningPopup.jsp" />
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/archiveWarningPopup.js"></script>
 
 </body>
 </html>
