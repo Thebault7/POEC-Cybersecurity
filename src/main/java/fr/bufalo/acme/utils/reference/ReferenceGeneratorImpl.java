@@ -3,6 +3,7 @@ package fr.bufalo.acme.utils.reference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -44,30 +45,41 @@ public class ReferenceGeneratorImpl implements ReferenceGeneratorInterface {
 		switch (type.getClassName()) {
 		case CUSTOMER:
 			listReferences = cm.findAllReference();
-			extractHighestreferenceNumber(listReferences);
+			extractHighestReferenceNumber(listReferences);
 			break;
 		case EMPLOYEE:
 			listReferences = em.findAllReference();
-			extractHighestreferenceNumber(listReferences);
+			extractHighestReferenceNumber(listReferences);
 			break;
 		case PRODUCT:
 			listReferences = pm.findAllReference();
-			extractHighestreferenceNumber(listReferences);
+			extractHighestReferenceNumber(listReferences);
 			break;
 		case ORDER:
 			listReferences = om.findAllReference();
-			extractHighestreferenceNumber(listReferences);
+			extractHighestReferenceNumber(listReferences);
 			break;
+		default:
+			return "";
 		}
 		return type.getLetter() + "-" + index;
 	}
 	
-	private Integer extractHighestreferenceNumber(List<String> listReferences) {
+	private Integer extractHighestReferenceNumber(List<String> listReferences) {
 		if (listReferences != null) {
-			for (String reference : listReferences) {
-				listIndexes.add((Integer.parseInt(reference.split("-")[1])));
+			// extracts numbers out from reference Strings, then add it to the list
+			try {
+				for (String reference : listReferences) {
+					listIndexes.add((Integer.parseInt(reference.split("-")[1])));
+				}
+			} catch(NumberFormatException nfe) {
+				nfe.printStackTrace();
 			}
-			index = Collections.max(listIndexes);
+			try {
+				index = Collections.max(listIndexes);
+			} catch(NoSuchElementException nsee) {
+				index = 0;
+			}
 			index++;
 		}
 		return index;

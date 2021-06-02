@@ -14,7 +14,6 @@ var countryEnumValue = "";
 //--------------------------------Show postal code if there is one-----------------------------------------
 //document.getElementById("postalCodeID").value = 
 var test = '${postalCode}';
-console.log(test);
 
 //--------------------------------Starting listener-----------------------------------------
 addListenerPostalCode();
@@ -58,17 +57,22 @@ function renderHTML(data) {
 	}
 	if (data["result"] !== null) {
 		var stringHTMLAddresses = "<ul>";
-		for (i = 0; i < data["result"][0]["listCities"].length; i++) {
-			stringHTMLAddresses += "<li><p><a href='javascript:showSelectedCity("
-				+ data["result"][0]["listCities"][i]["id"]
-				+ ", &quot;"
-				+ data["result"][0]["listCities"][i]["name"]
-				+ "&quot;, &quot;"
-				+ data["result"][0]["listCities"][i]["countryEnum"]
-				+ "&quot;)'>"
-				+ data["result"][0]["listCities"][i]["name"]
-				+ "</a></p></li>";
+		for (j = 0; j < data["result"].length; j++) {
+			for (i = 0; i < data["result"][j]["listCities"].length; i++) {
+				stringHTMLAddresses += "<li><p><a href='javascript:showSelectedCity("
+					+ data["result"][j]["listCities"][i]["id"]
+					+ ", &quot;"
+					+ data["result"][j]["listCities"][i]["name"]
+					+ "&quot;, &quot;"
+					+ data["result"][j]["listCities"][i]["countryEnum"]
+					+ "&quot;, &quot;"
+					+ data["result"][j]["number"]
+					+ "&quot;)'>"
+					+ data["result"][j]["listCities"][i]["name"]
+					+ "</a></p></li>";
+			}
 		}
+
 		stringHTMLAddresses += "</ul>";
 		showListCities.innerHTML = stringHTMLAddresses;
 
@@ -76,13 +80,15 @@ function renderHTML(data) {
 	}
 }
 
-function showSelectedCity(id, name, countryEnum) {
+function showSelectedCity(id, name, countryEnum, postalCode) {
 	var showSelectedCity = document.getElementById("showSelectedCity");
 	showSelectedCity.innerHTML = "<p>" + name + ", " + countryEnum + "</p>";
 
 	document.getElementById("cityIdField").value = id;
 	document.getElementById("cityNameField").value = name;
 	document.getElementById("countryField").value = countryEnum;
+	document.getElementById("postalCodeID").value = postalCode;
+	document.getElementById("showListCities").innerHTML = "";
 }
 
 //--------------------------------Generate birthdate-----------------------------------------
@@ -131,6 +137,12 @@ function checkBirthdate() {
 	}
 	if (day.length == 1) {
 		day = "0" + day;
+	}
+	
+	if ((year % 4 != 0 && month == 02 && day == 29)
+		|| (month == 02 && (day == 30 || day == 31))
+		|| ((month == 04 || month == 06 || month == 09 || month == 11) && day == 31)) {
+		alert("!!");
 	}
 
 	if (month != "--Select--") {

@@ -90,7 +90,7 @@ public class Customer implements Serializable {
 		inverseJoinColumns = @JoinColumn(name = "id_employee", referencedColumnName = "id"))
 	private List<Employee> listEmployee;
 	
-	@Column(name = "cityId")
+	@Column(name = "id_city")
 	private int cityId;
 	
 	// Attributes hereafter are used to carry data from jsp to controller. Not to be saved in database.

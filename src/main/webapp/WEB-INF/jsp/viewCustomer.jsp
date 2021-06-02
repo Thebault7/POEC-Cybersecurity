@@ -25,7 +25,9 @@
 		Address : ${customer.addressLine1}<br> ${customer.addressLine2}<br>${customer.addressLine3}</h2>
 	<h2>Postal code : ${customer.postalCode.number}</h2>
 	<h2>City name : ${cityName}</h2>
-	<h2>Country : ${customer.postalCode.listCities.get(0).countryEnum}</h2>
+	<c:if test="${!empty customer.postalCode.listCities}">
+		<h2>Country : ${customer.postalCode.listCities.get(0).countryEnum}</h2>
+	</c:if>
 	<h2>Employees in charge :</h2>
 	<c:if
 		test="${empty customer.listEmployee || customer.listEmployee == null}">

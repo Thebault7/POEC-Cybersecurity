@@ -4,25 +4,76 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!doctype html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Modify customer</title>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/Product.css">
 </head>
 <body>
-	<jsp:include page="menu.jsp" />
-	<a href="manageCustomers"><img src="<%=request.getContextPath()%>/icon/left_arrow.png" /></a>
-	<h1>Modify customer ${customer.reference}</h1>
-	<form:form action="checkModifyCustomer" method="POST" modelAttribute="customer">
-		<div>
-			<form:label path="reference">Reference</form:label>
-			<form:input path="reference"/>
+
+	<%--  HEADER  --%>
+
+	<section class="py-3">
+		<div class="container px-4 px-lg-5 my-1">
+			<jsp:include page="menu.jsp" />
+			<a href="manageProducts"> <i
+				class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>
+			</a>
 		</div>
-		<div>
-			<form:input path="id" value="${customer.id}" hidden="true" />
+	</section>
+
+	<%--  MAIN BODY  --%>
+
+	<section class="py-3">
+		<div class="container px-4 px-lg-5 my-3">
+			<h1 class="display-5 fw-bolder">Modification des données du
+				client ${customer.reference}</h1>
+
+			<form:form action="checkModifyCustomer" method="POST"
+				modelAttribute="customer">
+				<div class="row">
+					<div class="form-group required col-6">
+						<div class="form-group required">
+							<p class="control-label">Champs obligatoires</p>
+						</div>
+						<form:label path="reference" class="control-label">Reference</form:label>
+						<form:input path="reference" class="form-control" required="true"
+							readonly="true" />
+					</div>
+					<div class="col-6">
+						<form:input path="id" value="${customer.id}" hidden="true" />
+					</div>
+				</div>
+
+				<%@ include file="/WEB-INF/jsp/customerForm.jsp"%>
+
+			</form:form>
 		</div>
-		<jsp:include page="customerForm.jsp" />
-	</form:form>
+	</section>
+
+	<%--  FOOTER  --%>
+
+	<section class="py-3">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="d-flex justify-content-between">
+				<div>
+					<a href="searchCustomer?customerId=${customer.id}"> <i
+						class="fa fa-search fa-lg" aria-hidden="true"></i> Voir le client
+					</a>
+				</div>
+				<div>
+					<a href="archiveCustomer?customerId=${customer.id}"
+						class="btn-delete"> <i class="fa fa-archive fa-lg"
+						aria-hidden="true"></i> Archiver le client
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
 </body>
 </html>

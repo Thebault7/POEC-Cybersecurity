@@ -1,7 +1,6 @@
 package fr.bufalo.acme.controller;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,7 +103,7 @@ public class CustomerController {
 		if (customer.getBirthdate() != null) {
 			try {
 				LocalDate.parse(customer.getBirthdate().toString());
-			} catch (DateTimeParseException e) {
+			} catch (Exception e) {
 				return new ModelAndView(ADD_CUSTOMER, ERROR_MESSAGE, INEXISTING_DATE_ERROR);
 			}
 		}
@@ -201,6 +200,9 @@ public class CustomerController {
 			customer.setListEmployee(listEmployees);
 			customer.setReference(rgi.generateReference(ReferenceType.CUSTOMER));
 			Customer savedCustomer = cm.save(customer);
+			// Finally when the customer is saved, I update the employee in session
+			employee.getListCustomer().add(savedCustomer);
+			session.setAttribute(SESSION_EMPLOYEE, employee);
 			return new ModelAndView(VIEW_CUSTOMER, CUSTOMER, savedCustomer);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -232,7 +234,7 @@ public class CustomerController {
 	public ModelAndView checkModifyCustomer(ModelMap modelMap, Customer customer) {
 		customer.setPostalCode(pcm.findOneById(customer.getPostalCodeId()));
 		customer.setActive(true);
-		System.out.println(customer.toString());
+		System.out.println("--------->  "+modelMap.getAttribute(POSTAL_CODE));
 //		cm.save(customer);
 		return null;
 	}
