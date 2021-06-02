@@ -17,7 +17,7 @@
         <%--            TODO ref auto générée--%>
         <div class="form-group">
             <label for="reference">Référence</label>
-            <input class="form-control" id="reference" placeholder="Référence" value="${order.reference}" disabled>
+            <input class="form-control" name="reference" id="reference" placeholder="Référence" value="${order.reference}" readonly>
         </div>
 
         <div class="form-group">
@@ -45,7 +45,7 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <button class="btn btn-outline-dark flex-shrink-0" type="submit">
+        <button name="checkAddOrder" class="btn btn-outline-dark flex-shrink-0" type="submit">
             Valider
         </button>
     </div>

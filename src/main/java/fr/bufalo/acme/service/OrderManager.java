@@ -1,6 +1,7 @@
 package fr.bufalo.acme.service;
 
 import fr.bufalo.acme.bo.Order;
+import fr.bufalo.acme.bo.Product;
 import fr.bufalo.acme.repository.OrderRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,8 +25,12 @@ public class OrderManager {
     }
 
     public List<Order> findAllByEmployeeId(int id) {
-
         return null;
+    }
+
+    public Order save(Order order){
+        ori.save(order);
+        return order;
     }
     
     public Integer findHighestIdValue() {

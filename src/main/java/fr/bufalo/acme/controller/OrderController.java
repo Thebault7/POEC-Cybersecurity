@@ -51,6 +51,7 @@ public class OrderController {
 	private static final String EDIT_ORDER = "editOrder";
 	private static final String MODIFY_ORDER = "modifyOrder";
 	private static final String SEARCH_ORDER = "searchOrder";
+	private static final String VIEW_ORDER = "viewOrder";
 	private static final String CHECK_ADD_ORDER = "checkAddOrder";
 
 
@@ -61,15 +62,21 @@ public class OrderController {
 		List<Customer> listCustomers = employee.getListCustomer();
 		List<Order> listOrders = new ArrayList<>();
 		for (Customer customer : listCustomers){
-			for (Order order : (List<Order>) customer.getListOrders()) {
+			for (Order order : customer.getListOrders()) {
 				listOrders.add(order);
 			}
 		}
 		return new ModelAndView(MANAGE_ORDERS, LIST_ORDERS, listOrders);
 	}
 
+	@RequestMapping(path = "/" + VIEW_ORDER, method = RequestMethod.GET)
+	public ModelAndView goToViewOrder(ModelMap modelMap, int orderId) {
+		ModelAndView mav = new ModelAndView(VIEW_ORDER, ORDER, om.findById(orderId));
+		return mav;
+	}
+
 	@RequestMapping(path = "/" + ADD_ORDER, method = RequestMethod.GET)
-	public ModelAndView goToAddOrders(ModelMap modelMap) {
+	public ModelAndView goToAddOrder(ModelMap modelMap) {
 		Order order = new Order();
 		order.setReference(rgi.generateReference(ReferenceType.ORDER));
 		ModelAndView mav = new ModelAndView(ADD_ORDER, ORDER, order);
@@ -84,7 +91,7 @@ public class OrderController {
 	}
 
 	@RequestMapping(path = "/" + SEARCH_ORDER, method = RequestMethod.GET)
-	public ModelAndView goToSearchOrders(ModelMap modelMap, int orderId) {
+	public ModelAndView goToSearchOrder(ModelMap modelMap, int orderId) {
 		ModelAndView mav = new ModelAndView(EDIT_ORDER, ORDER, om.findById(orderId));
 		return mav;
 	}
