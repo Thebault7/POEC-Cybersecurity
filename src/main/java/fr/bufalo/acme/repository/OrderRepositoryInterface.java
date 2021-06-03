@@ -1,9 +1,7 @@
 package fr.bufalo.acme.repository;
 
 import fr.bufalo.acme.bo.Order;
-
 import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -22,5 +20,8 @@ public interface OrderRepositoryInterface extends JpaRepository<Order, Integer> 
 
 	@Query("SELECT reference FROM Order o")
 	public List<String> findAllReference();
+
+	@Query("select distinct o from Order o join o.customer c join c.listEmployee le where le.id = :employeeId")
+	public List<Order> findAllOrders(int employeeId);
 }
 

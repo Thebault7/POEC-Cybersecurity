@@ -354,11 +354,12 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", addressLine1="
+		return "";
+/*		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", addressLine1="
 				+ addressLine1 + ", addressLine2=" + addressLine2 + ", addressLine3=" + addressLine3 + ", email="
 				+ email + ", phoneNumber=" + phoneNumber + ", password=" + password + ", passwordSalt=" + passwordSalt
 				+ ", reference=" + reference + ", isActive=" + isActive + ", birthdate=" + birthdate + ", postalCode="
 				+ postalCode + ", listOrders=" + listOrders + ", listEmployee=" + listEmployee + ", cityId=" + cityId
-				+ ", postalCodeId=" + postalCodeId + ", cityName=" + cityName + ", country=" + country + "]";
+				+ ", postalCodeId=" + postalCodeId + ", cityName=" + cityName + ", country=" + country + "]";*/
 	}
 }

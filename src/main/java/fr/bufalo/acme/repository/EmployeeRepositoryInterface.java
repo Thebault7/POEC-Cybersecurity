@@ -25,5 +25,6 @@ public interface EmployeeRepositoryInterface extends JpaRepository<Employee, Int
 	
 	@Query("SELECT MAX(e.id) FROM Employee e")
 	public Integer findHighestIdValue();
-	
+
+	public Employee findById(int id);
 }

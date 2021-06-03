@@ -57,7 +57,7 @@
 								<td>${row.reference}</td>
 								<td>${row.creationDate}</td>
 								<td>${row.validationDate}</td>
-								<td>${row.customer}</td>
+								<td>${row.customer.reference}</td>
 								<td>
 									<div class="row align-items-center">
 										<div class="col-md-4">

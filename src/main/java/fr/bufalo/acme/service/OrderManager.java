@@ -1,7 +1,6 @@
 package fr.bufalo.acme.service;
 
 import fr.bufalo.acme.bo.Order;
-import fr.bufalo.acme.bo.Product;
 import fr.bufalo.acme.repository.OrderRepositoryInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +23,7 @@ public class OrderManager {
         return ori.findById(id).get();
     }
 
-    public List<Order> findAllByEmployeeId(int id) {
-        return null;
-    }
+    public List<Order> findAllOrders(int employeeId) {return  ori.findAllOrders(employeeId);}
 
     public Order save(Order order){
         ori.save(order);

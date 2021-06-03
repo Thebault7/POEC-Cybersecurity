@@ -37,4 +37,6 @@ public class EmployeeManager {
 	public List<String> findAllReference() {
 		return eri.findAllReference();
 	}
+
+    public Employee findById(int id) { return eri.findById(id); }
 }
