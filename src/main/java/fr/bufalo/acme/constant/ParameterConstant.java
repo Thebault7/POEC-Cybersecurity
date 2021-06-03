@@ -23,6 +23,7 @@ public enum ParameterConstant {
 	CHECK_ADD_CUSTOMER ("checkAddCustomer"),
 	CITY_NAME ("cityName"),
 	POSTAL_CODE ("postalCode"),
+	LIST_EMPLOYEE ("listEmployee"),
 	// regex below :
 	EMAIL_REGEX ("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"),
 	REFERENCE_REGEX ("^[a-zA-Z0-9-]{1,12}$"),

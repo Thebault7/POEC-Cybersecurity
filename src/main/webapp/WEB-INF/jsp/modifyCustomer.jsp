@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="fr.bufalo.acme.bo.Customer" %>
 
 <!doctype html>
 <html>
@@ -52,6 +53,29 @@
 
 				<%@ include file="/WEB-INF/jsp/customerForm.jsp"%>
 
+				<div>
+					<p>Liste des employés en charge de ce client : </p>
+					<table class="table table-bordered table-hover table-sm">
+						<thead>
+							<tr>
+								<th scope="col">Prénom</th>
+								<th scope="col">Nom</th>
+								<th scope="col">Référence</th>
+							</tr>
+						</thead>
+						<tbody>
+						<c:forEach items="${customer.listEmployee}" var="e" varStatus="eStatus">
+							<tr>
+								<td>${e.firstName}</td>
+								<td>${e.lastName}</td>
+								<td>${e.reference}</td>
+							</tr>
+						</c:forEach>
+						</tbody>
+					</table>
+		<%-- 			<% Customer customer = (Customer)request.getAttribute("customer"); %>
+					<% request.setAttribute("listEmployee", customer.listEmployee); %> --%>
+				</div>
 			</form:form>
 		</div>
 	</section>

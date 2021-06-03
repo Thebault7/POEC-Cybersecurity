@@ -78,6 +78,7 @@ public class CustomerController {
 	private static final String CITY_NAME = ParameterConstant.CITY_NAME.getParameterName();
 	private static final String CHECK_MODIFY_CUSTOMER = "checkModifyCustomer";
 	private static final String POSTAL_CODE = ParameterConstant.POSTAL_CODE.getParameterName();
+	private static final String LIST_EMPLOYEE = ParameterConstant.LIST_CUSTOMERS.getParameterName();
 
 	@RequestMapping(path = "/" + MANAGE_CUSTOMERS, method = RequestMethod.GET)
 	public ModelAndView goToManageCustomers(ModelMap modelMap, HttpServletRequest request) {
@@ -221,21 +222,27 @@ public class CustomerController {
 	}
 
 	@RequestMapping(path = "/" + MODIFY_CUSTOMER, method = RequestMethod.GET)
-	public ModelAndView goToModifyCustomer(ModelMap modelMap, int customerId) {
+	public ModelAndView goToModifyCustomer(ModelMap modelMap, int customerId, HttpServletRequest request) {
 		Customer customer = cm.findById(customerId);
 		ModelAndView mav = new ModelAndView(MODIFY_CUSTOMER, CUSTOMER, customer);
 		if (customer.getPostalCode() != null) {
 			mav.addObject(POSTAL_CODE, pcm.findOneById(customer.getPostalCode().getId()));
 		}
+		HttpSession session = request.getSession();
+		session.setAttribute(LIST_EMPLOYEE, customer.getListEmployee());
 		return mav;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@RequestMapping(path = "/" + CHECK_MODIFY_CUSTOMER, method = RequestMethod.POST)
-	public ModelAndView checkModifyCustomer(ModelMap modelMap, Customer customer) {
+	public ModelAndView checkModifyCustomer(ModelMap modelMap, Customer customer, HttpServletRequest request) {
 		customer.setPostalCode(pcm.findOneById(customer.getPostalCodeId()));
 		customer.setActive(true);
-		System.out.println("--------->  "+modelMap.getAttribute(POSTAL_CODE));
-//		cm.save(customer);
-		return null;
+		HttpSession session = request.getSession();
+		List<Employee> listEmployee = (List<Employee>)session.getAttribute(LIST_EMPLOYEE);
+		customer.setListEmployee(listEmployee);
+		session.removeAttribute(LIST_EMPLOYEE);
+		cm.save(customer);
+		return new ModelAndView(VIEW_CUSTOMER, CUSTOMER, customer);
 	}
 }

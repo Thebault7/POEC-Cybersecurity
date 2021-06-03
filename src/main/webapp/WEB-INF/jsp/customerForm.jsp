@@ -70,7 +70,8 @@
 					<option value="Oct">October</option>
 					<option value="Nov">November</option>
 					<option value="Dec">December</option>
-				</select> <select id="selectedDay" name="day">
+				</select>
+				<select id="selectedDay" name="day">
 					<c:forEach begin="1" end="31" var="day">
 						<option><c:out value="${day}" /></option>
 					</c:forEach>

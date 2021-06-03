@@ -53,7 +53,7 @@
 									<th></th>
 								</tr>
 							</thead>
-							<tbody></tbody>
+							<tbody>
 							<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
 								<tr>
 									<td>${c.firstName}${c.lastName}</td>
