@@ -12,7 +12,7 @@
 
     <div class="row gx-4 gx-lg-5 align-items-center">
         <div class="col-md-6">
-            <img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/placeholder-image.png" alt="product" />
+            <img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/montre_demo.jpg" alt="product" />
             <div class="custom-file">
                 <input type="file" class="image-input" id="customFile">
                 <label class="custom-file-label" for="customFile">Choisir un fichier</label>
@@ -29,11 +29,26 @@
             <div class="form-group required">
                 <label for="label" class="control-label">Titre</label>
                 <input class="form-control" name="label" id="label" placeholder="Titre" value="${product.label}" required>
+
+<%--                <div>--%>
+<%--                    <label for="validationSuccess" class="form-label text-success">Input with success</label>--%>
+<%--                    <input type="text" class="form-control is-valid" id="validationSuccess" required>--%>
+<%--                    <div class="valid-feedback">--%>
+<%--                        This is a success state form validation message!--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--                <div>--%>
+<%--                    <label for="validationError" class="form-label text-danger">Input with error</label>--%>
+<%--                    <input type="text" class="form-control is-invalid" id="validationError" required>--%>
+<%--                    <div class="invalid-feedback">--%>
+<%--                        This is an error state form validation message!--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </div>
 
             <div class="form-group required">
                 <label for="price" class="control-label">Prix (€)</label>
-                <input class="form-control" name="price" id="price" placeholder="Titre" value="${product.price}" required>
+                <input type="number" class="form-control" name="price" id="price" placeholder="Titre" value="${product.price}" required>
             </div>
 
             <div class="form-group required">

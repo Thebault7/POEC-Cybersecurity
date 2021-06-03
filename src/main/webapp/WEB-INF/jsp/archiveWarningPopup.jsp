@@ -10,8 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Etes-vous sûr de vouloir archiver ceci ? <br>
-                    Vous n'aurez plus accès à cet élément après archivage.</p>
+                <p>Etes-vous sûr de vouloir archiver ceci ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Non, annuler</button>

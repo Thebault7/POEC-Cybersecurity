@@ -33,11 +33,11 @@
 
 						<div class="row align-items-center">
 							<div class="col-md-1">
-								<a href="addProduct"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
+								<a href="addProduct">
+									<i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+								</a>
 							</div>
-							<div class="col-md-7">
-
-							</div>
+							<div class="col-md-7"></div>
 							<div class="col-md-4">
 								<jsp:include page="searchBar.jsp" />
 							</div>
@@ -59,7 +59,8 @@
 								<c:forEach items="${listProducts}" var="row">
 									<tr>
 										<td>${row.reference}</td>
-										<td>${row.picture}</td>
+<%--										<td>${row.picture}</td>--%>
+										<td><img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/montre_demo.jpg" alt="product" /></td>
 										<td>${row.label}</td>
 										<td>${row.description}</td>
 										<td>${row.price}</td>

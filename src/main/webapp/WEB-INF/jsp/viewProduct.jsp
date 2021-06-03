@@ -29,7 +29,7 @@
         <div class="container px-4 px-lg-5 my-3">
             <div class="row gx-4 gx-lg-5 align-items-center">
                 <div class="col-md-6">
-                    <img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/placeholder-image.png" alt="product" />
+                    <img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/montre_demo.jpg" alt="product" />
                 </div>
                 <div class="col-md-6">
                     <div class="small mb-1">ref. : ${product.reference}</div>

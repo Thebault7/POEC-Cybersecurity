@@ -12,7 +12,7 @@
 
     <div class="row gx-4 gx-lg-5 align-items-center">
         <div class="col-md-6">
-            <img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/placeholder-image.png" alt="product" />
+            <img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/montre_demo.jpg" alt="product" />
             <div class="custom-file">
                 <input type="file" class="image-input" id="customFile">
                 <label class="custom-file-label" for="customFile">Choisir un fichier</label>
@@ -26,9 +26,9 @@
 
 <%--            TODO mettre warning pour la modification de la ref : attention il n'est pas conseillé de changer la reference--%>
 <%--            TODO vérification de la reference (n'existe pas en base)--%>
-            <div class="form-group required">
+            <div class="form-group">
                 <label for="reference" class="control-label">Référence</label>
-                <input class="form-control" name="reference" id="reference" placeholder="Référence" value="${product.reference}" required>
+                <input class="form-control" name="reference" id="reference" placeholder="Référence" value="${product.reference}" readonly>
             </div>
 
             <div class="form-group required">
