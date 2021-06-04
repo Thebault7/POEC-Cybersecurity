@@ -4,19 +4,18 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 
 /**
  * @date Created 22/05/2021
- * @author Benjamin LAMBERT
+ * @author Benjamin LAMBERT / Linh Chi NGUYEN
  * @version v1.0
  *
  */
 
 @Data
 @Entity
-@Table(name = "soldProduct")
+@Table(name = "sold_product")
 
 public class SoldProduct implements Serializable{
 
@@ -25,7 +24,7 @@ public class SoldProduct implements Serializable{
     private int id;
 
     @Column(name = "quantity")
-    private double quantity;
+    private int quantity;
 
     @Column(name = "price")
     private float price;
@@ -44,7 +43,7 @@ public class SoldProduct implements Serializable{
     public SoldProduct() {
     }
 
-    public SoldProduct(int id, double quantity, float price, float vat, Order order, Product product) {
+    public SoldProduct(int id, int quantity, float price, float vat, Order order, Product product) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
@@ -53,15 +52,19 @@ public class SoldProduct implements Serializable{
         this.product = product;
     }
 
+    public float getTotalPrice(){
+        return getPrice() * (1 + getVat()) * getQuantity();
+    }
+
     @Override
     public String toString() {
         return "SoldProduct{" +
                 "id=" + id +
-                ", quantity=" + quantity +
-                ", price=" + price +
-                ", vat=" + vat +
-                ", order=" + order +
-                ", product=" + product +
+//                ", quantity=" + quantity +
+//                ", price=" + price +
+//                ", vat=" + vat +
+//                ", order=" + order +
+//                ", product=" + product +
                 '}';
     }
 }

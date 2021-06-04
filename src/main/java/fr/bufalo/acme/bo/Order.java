@@ -21,7 +21,7 @@ import lombok.Data;
 
 /**
  * @date Created 22/05/2021
- * @author Benjamin LAMBERT
+ * @author Benjamin LAMBERT / Linh Chi NGUYEN
  * @version v1.0
  *
  */
@@ -75,8 +75,8 @@ public class Order implements Serializable {
                 ", creationDate=" + creationDate +
                 ", validationDate=" + validationDate +
                 ", reference='" + reference + '\'' +
-                ", customer=" + customer +
-                ", ListSoldProduct=" + listSoldProduct +
+                ", customer=" + customer.getReference() +
+                ", ListSoldProduct=" + listSoldProduct.toString() +
                 '}';
     }
 }

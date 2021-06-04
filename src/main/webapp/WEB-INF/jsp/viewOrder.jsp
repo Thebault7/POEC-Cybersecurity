@@ -32,16 +32,65 @@
 <section class="py-3">
     <div class="container px-4 px-lg-5 my-3">
         <div class="row gx-4 gx-lg-5 align-items-center">
-            <div class="col-md-6">
-<h1>Référence de commande</h1><h1 class="display-5 fw-bolder">${order.reference}</h1>
-<h2>Date de création : ${order.creationDate}</h2>
-<h2>Date de validation : ${order.validationDate}</h2>
-<h2>Client : ${order.customer}</h2>
 
-<h2 >Produits concernés :</h2>
-<c:forEach items="${listProducts}" var="p">
-    <h2 class="display-5 fw-bolder">${p.label}</h2>
-</c:forEach>
+            <h1 class="display-6 fw-bolder">Détails de la commande ${order.reference}</h1>
+
+            <div class="py-4">
+                <div class="py-1">Date de création : ${order.creationDate}</div>
+                <div class="py-1">Date de validation : ${order.validationDate}</div>
+            </div>
+
+
+            <div class="row gx-4 gx-lg-5 mb-5 align-items-top">
+                <div class="col-md-4">
+                    <div class="fw-bolder py-2">Contenu de la commande</div>
+                        <table id="table" class="table table-bordered table-sm">
+                            <thead>
+                            <tr>
+                                <th scope="col">Produit</th>
+                                <th scope="col">Quantité</th>
+                                <th scope="col">Prix HT</th>
+                                <th scope="col">Total prix HT</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${soldProducts}" var="sp">
+                                <tr>
+                                    <td>${sp.product.label}</td>
+                                    <td>${sp.quantity}</td>
+                                    <td>${sp.price}</td>
+                                    <td>${sp.getTotalPrice()}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                        <div class="fw-bold"> Total TTC : ${orderTotalPriceDisplay}€</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="fw-bolder py-2">Information client</div>
+                    <div class="border rounded p-2">
+                        <div class="small">ref.  : ${customer.reference}</div>
+                        <div class="small">nom : ${customer.firstName} ${customer.lastName}</div>
+                        <div class="small">email : ${customer.email}</div>
+                        <div class="small">tel : ${customer.phoneNumber}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="fw-bolder py-2">Addresse de livraison</div>
+                    <div class="border rounded p-2">
+                        <div class="small">${customer.addressLine1}</div>
+                        <div class="small">${customer.addressLine2}</div>
+                        <div class="small">${customer.addressLine3}</div>
+                        <div class="small">${customer.postalCode.getNumber()}</div>
+                        <div class="small">${city.getName()}</div>
+                        <div class="small">${country}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <%--<c:if--%>
 <%--        test="${empty listProducts || order.listSoldProduct == null}">--%>
 <%--    <h2>Aucun produit n'est associé à cette commande</h2>--%>
@@ -54,8 +103,6 @@
 <%--                ${sp.quantity}</h2>--%>
 <%--    </c:forEach>--%>
 <%--</c:if>--%>
-            </div>
-</section>
 
 <%--  FOOTER  --%>
 

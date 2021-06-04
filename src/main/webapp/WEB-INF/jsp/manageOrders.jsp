@@ -50,6 +50,7 @@
 							<th scope="col">Date de validation</th>
 							<th scope="col">Client</th>
 							<th scope="col">Produits</th>
+							<th scope="col" >Action</th>
 						</tr>
 						</thead>
 						<tbody>
@@ -58,21 +59,22 @@
 								<td>${row.reference}</td>
 								<td>${row.creationDate}</td>
 								<td>${row.validationDate}</td>
-								<td>${row.customer.reference}</td>
+								<td>${row.customer.firstName} ${row.customer.lastName}</td>
+								<td>coming soon</td>
 								<td>
-									<div class="row align-items-center">
-										<div class="col-md-4">
+									<div class="d-flex justify-content-around">
+										<div>
 											<a href="viewOrder?orderId=${row.id}">
 												<i class="fa fa-search fa-lg" aria-hidden="true"></i>
 											</a>
 										</div>
-										<div class="col-md-4">
+										<div>
 											<a href="modifyOrder?orderId=${row.id}">
 												<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
 											</a>
 										</div>
-										<div class="col-md-4">
-											<a href=#>
+										<div>
+											<a href="archiveOrder?orderId=${row.id}" class="btn-delete">
 												<i class="fa fa-archive fa-lg" aria-hidden="true"></i>
 											</a>
 										</div>

@@ -1,9 +1,9 @@
 package fr.bufalo.acme.controller;
 
-import fr.bufalo.acme.bo.Employee;
-import fr.bufalo.acme.bo.Order;
-import fr.bufalo.acme.bo.Product;
+import fr.bufalo.acme.bo.*;
 import fr.bufalo.acme.constant.ErrorConstant;
+import fr.bufalo.acme.service.CityManager;
+import fr.bufalo.acme.service.CustomerManager;
 import fr.bufalo.acme.service.OrderManager;
 import fr.bufalo.acme.utils.reference.ReferenceGeneratorInterface;
 import fr.bufalo.acme.utils.reference.ReferenceType;
@@ -23,7 +23,7 @@ import java.util.List;
 
 /**
  * @date Created 13/05/2021
- * @author Frederic Thebault / Benjamin LAMBERT
+ * @author Frederic Thebault / Benjamin LAMBERT / Linh Chi NGUYEN
  * @version 1.0
  *
  */
@@ -35,6 +35,12 @@ public class OrderController {
 	private OrderManager om;
 
 	@Autowired
+	private CustomerManager cm;
+
+	@Autowired
+	private CityManager ctm;
+
+	@Autowired
 	private ReferenceGeneratorInterface rgi;
 
 
@@ -42,17 +48,26 @@ public class OrderController {
 
 
 	private static final String SESSION_EMPLOYEE = "sessionEmployee";
+	private static final String LIST_PRODUCTS = "listProducts";
+	private static final String SOLD_PRODUCTS = "soldProducts";
+	private static final String ORDER_TOTAL_PRICE = "orderTotalPriceDisplay";
+	private static final String ORDER = "order";
+	private static final String CUSTOMER = "customer";
+	private static final String CITY = "city";
+	private static final String COUNTRY = "country";
+
+
 	private static final String MANAGE_ORDERS = "manageOrders";
 	private static final String LIST_ORDERS = "listOrders";
-	private static final String ADD_ORDER = "addOrder";
-	private static final String ORDER = "order";
-	private static final String ERROR_MESSAGE = "errorMessage";
-	private static final String EDIT_ORDER = "editOrder";
-	private static final String MODIFY_ORDER = "modifyOrder";
-	private static final String SEARCH_ORDER = "searchOrder";
 	private static final String VIEW_ORDER = "viewOrder";
+	private static final String ADD_ORDER = "addOrder";
 	private static final String CHECK_ADD_ORDER = "checkAddOrder";
-	private static final String LIST_PRODUCTS = "listProducts";
+	private static final String MODIFY_ORDER = "modifyOrder";
+	private static final String CHECK_MODIFY_ORDER = "checkModifyOrder";
+	private static final String ARCHIVE_ORDER = "archiveOrder";
+
+	private static final String SEARCH_ORDER = "searchOrder";
+	private static final String ERROR_MESSAGE = "errorMessage";
 
 
 	@RequestMapping(path = "/" + MANAGE_ORDERS, method = RequestMethod.GET)
@@ -65,19 +80,35 @@ public class OrderController {
 
 	@RequestMapping(path = "/" + VIEW_ORDER, method = RequestMethod.GET)
 	public ModelAndView goToViewOrder(ModelMap modelMap, int orderId) {
-		List<Product> listProducts = om.findAllProducts(orderId);
-		ModelAndView mav = new ModelAndView(VIEW_ORDER, ORDER, om.findById(orderId));
-		mav.addObject(LIST_PRODUCTS, listProducts);
-		return mav;
+		Order order = om.findById(orderId);
+		List<SoldProduct> soldProducts = order.getListSoldProduct();
+		double orderTotalPrice = 0;
+		for (SoldProduct sp:soldProducts) {
+			orderTotalPrice += sp.getTotalPrice();
+		}
+		String orderTotalPriceDisplay = String.format("%10.2f", orderTotalPrice);
+
+		Customer customer = cm.findById(order.getCustomer().getId());
+		City city = ctm.findOneById(customer.getCityId());
+		CountryEnum country = city.getCountryEnum();
+
+		ModelAndView mv = new ModelAndView(VIEW_ORDER);
+		mv.addObject(ORDER, order);
+		mv.addObject(SOLD_PRODUCTS, soldProducts);
+		mv.addObject(ORDER_TOTAL_PRICE, orderTotalPriceDisplay);
+		mv.addObject(CUSTOMER, customer);
+		mv.addObject(CITY, city);
+		mv.addObject(COUNTRY, country);
+		return mv;
 	}
 
 	@RequestMapping(path = "/" + ADD_ORDER, method = RequestMethod.GET)
 	public ModelAndView goToAddOrder(ModelMap modelMap) {
 		Order order = new Order();
 		order.setReference(rgi.generateReference(ReferenceType.ORDER));
-		ModelAndView mav = new ModelAndView(ADD_ORDER, ORDER, order);
-		mav.addObject(ERROR_MESSAGE, "");
-		return mav;
+		ModelAndView mv = new ModelAndView(ADD_ORDER, ORDER, order);
+		mv.addObject(ERROR_MESSAGE, "");
+		return mv;
 	}
 
 	@RequestMapping(path = "/" + CHECK_ADD_ORDER, method = RequestMethod.POST)
@@ -86,16 +117,14 @@ public class OrderController {
 		return new RedirectView(MANAGE_ORDERS);
 	}
 
-	@RequestMapping(path = "/" + SEARCH_ORDER, method = RequestMethod.GET)
-	public ModelAndView goToSearchOrder(ModelMap modelMap, int orderId) {
-		ModelAndView mav = new ModelAndView(EDIT_ORDER, ORDER, om.findById(orderId));
-		return mav;
-	}
+//	@RequestMapping(path = "/" + SEARCH_ORDER, method = RequestMethod.GET)
+//	public ModelAndView goToSearchOrder(ModelMap modelMap, int orderId) {
+//		return new ModelAndView(EDIT_ORDER, ORDER, om.findById(orderId));
+//	}
 
 	@RequestMapping(path = "/" + MODIFY_ORDER, method = RequestMethod.GET)
 	public ModelAndView goToModifyOrder(ModelMap modelMap, int orderId) {
 		Order order = om.findById(orderId);
-		ModelAndView mav = new ModelAndView(MODIFY_ORDER, ORDER, order);
-		return mav;
+		return new ModelAndView(MODIFY_ORDER, ORDER, order);
 	}
 }
