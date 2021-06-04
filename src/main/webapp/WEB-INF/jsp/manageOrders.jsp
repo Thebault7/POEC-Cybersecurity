@@ -49,6 +49,7 @@
 							<th scope="col">Date de création</th>
 							<th scope="col">Date de validation</th>
 							<th scope="col">Client</th>
+							<th scope="col">Produits</th>
 						</tr>
 						</thead>
 						<tbody>

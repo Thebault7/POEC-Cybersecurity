@@ -1,8 +1,8 @@
 package fr.bufalo.acme.controller;
 
-import fr.bufalo.acme.bo.Customer;
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.bo.Order;
+import fr.bufalo.acme.bo.Product;
 import fr.bufalo.acme.constant.ErrorConstant;
 import fr.bufalo.acme.service.OrderManager;
 import fr.bufalo.acme.utils.reference.ReferenceGeneratorInterface;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -53,25 +52,22 @@ public class OrderController {
 	private static final String SEARCH_ORDER = "searchOrder";
 	private static final String VIEW_ORDER = "viewOrder";
 	private static final String CHECK_ADD_ORDER = "checkAddOrder";
+	private static final String LIST_PRODUCTS = "listProducts";
 
 
 	@RequestMapping(path = "/" + MANAGE_ORDERS, method = RequestMethod.GET)
 	public ModelAndView goToManageOrders(ModelMap modelMap, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Employee employee = (Employee)session.getAttribute(SESSION_EMPLOYEE);
-		List<Customer> listCustomers = employee.getListCustomer();
-		List<Order> listOrders = new ArrayList<>();
-		for (Customer customer : listCustomers){
-			for (Order order : customer.getListOrders()) {
-				listOrders.add(order);
-			}
-		}
+		List<Order> listOrders = om.findAllOrders(employee.getId());
 		return new ModelAndView(MANAGE_ORDERS, LIST_ORDERS, listOrders);
 	}
 
 	@RequestMapping(path = "/" + VIEW_ORDER, method = RequestMethod.GET)
 	public ModelAndView goToViewOrder(ModelMap modelMap, int orderId) {
+		List<Product> listProducts = om.findAllProducts(orderId);
 		ModelAndView mav = new ModelAndView(VIEW_ORDER, ORDER, om.findById(orderId));
+		mav.addObject(LIST_PRODUCTS, listProducts);
 		return mav;
 	}
 
