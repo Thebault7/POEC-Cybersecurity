@@ -50,11 +50,12 @@
 									<th scope="col">Email</th>
 									<th scope="col">Address</th>
 									<th scope="col">Reference</th>
-									<th></th>
+									<th scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 							<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
+<%-- 							<c:if test="${c.isActive == true}">	--%>	
 								<tr>
 									<td>${c.firstName}${c.lastName}</td>
 									<td>${c.email}</td>
@@ -73,13 +74,15 @@
 												</a>
 											</div>
 											<div class="col-md-4">
-												<a href=#> <i class="fa fa-archive fa-lg"
+												<a href="archiveCustomer?customerId=${c.id}" class="btn-delete">
+												<i class="fa fa-archive fa-lg"
 													aria-hidden="true"></i>
 												</a>
 											</div>
 										</div>
 									</td>
 								</tr>
+<%-- 							</c:if>	--%>
 							</c:forEach>
 							</tbody>
 						</table>
@@ -88,5 +91,8 @@
 			</div>
 		</div>
 	</section>
+	
+	<jsp:include page="archiveWarningPopup.jsp" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/archiveWarningPopup.js"></script>
 </body>
 </html>

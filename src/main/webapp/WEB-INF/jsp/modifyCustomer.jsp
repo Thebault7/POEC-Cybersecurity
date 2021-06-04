@@ -73,8 +73,6 @@
 						</c:forEach>
 						</tbody>
 					</table>
-		<%-- 			<% Customer customer = (Customer)request.getAttribute("customer"); %>
-					<% request.setAttribute("listEmployee", customer.listEmployee); %> --%>
 				</div>
 			</form:form>
 		</div>
