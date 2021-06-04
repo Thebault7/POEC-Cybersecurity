@@ -3,8 +3,10 @@ package fr.bufalo.acme.bo;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
+import fr.bufalo.acme.constant.ParameterConstant;
 
 /**
  * @date Created 22/05/2021
@@ -29,6 +31,8 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+//     TODO spring validation
+    @Pattern(regexp = "^P-[0-9]{1,9}$")
     @NonNull
     @Column(name = "reference", nullable = false, unique = true, length = 11)
     private String reference;

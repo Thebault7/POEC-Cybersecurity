@@ -63,7 +63,7 @@
 										<td><img class="card-img-top mb-5 mb-md-0" src="<%=request.getContextPath()%>/img/montre_demo.jpg" alt="product" /></td>
 										<td>${row.label}</td>
 										<td>${row.description}</td>
-										<td>${row.price}</td>
+										<td>${row.price}€</td>
 										<td>${row.stock}</td>
 										<td>
 											<div class="d-flex justify-content-around">

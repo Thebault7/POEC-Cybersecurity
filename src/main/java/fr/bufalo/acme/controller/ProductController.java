@@ -44,8 +44,6 @@ public class ProductController {
 	@Autowired
 	private ReferenceGeneratorInterface rg;
 
-	// TODO dans les formulaires distinguer les champs null des champs incorrects/erreur de saisie
-
 	private static final String VAT_PERCENT = "vat_percent";
 	private static final String PRODUCT = "product";
 	private static final String VAT = "vat";
@@ -85,6 +83,8 @@ public class ProductController {
 	}
 
 
+	// TODO dans les formulaires distinguer les champs null des champs incorrects/erreur de saisie (ADD et VIEW)
+
 	@RequestMapping(path = "/" + ADD_PRODUCT, method = RequestMethod.GET)
 	public ModelAndView goToAddProduct(ModelMap modelMap) {
 
@@ -112,8 +112,6 @@ public class ProductController {
 		/*
 		 * First step consists in checking if product data are valid or not
 		 */
-
-//		TODO check si status est archivé ==> message warning
 
 		/*
 		 * Second step consists in persisting the new product into the database. If the
@@ -150,8 +148,6 @@ public class ProductController {
 		/*
 		 * First step consists in checking if product data are valid or not
 		 */
-
-//		TODO check si status est archivé ==> message warning
 
 		/*
 		 * Second step consists in persisting the product into the database. If the
