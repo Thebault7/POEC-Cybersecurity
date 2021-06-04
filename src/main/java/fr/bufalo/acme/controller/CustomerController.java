@@ -2,6 +2,7 @@ package fr.bufalo.acme.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,11 +80,20 @@ public class CustomerController {
 	private static final String CHECK_MODIFY_CUSTOMER = "checkModifyCustomer";
 	private static final String POSTAL_CODE = ParameterConstant.POSTAL_CODE.getParameterName();
 	private static final String LIST_EMPLOYEE = ParameterConstant.LIST_CUSTOMERS.getParameterName();
+	private static final String ARCHIVE_CUSTOMER = "archiveCustomer";
 
 	@RequestMapping(path = "/" + MANAGE_CUSTOMERS, method = RequestMethod.GET)
 	public ModelAndView goToManageCustomers(ModelMap modelMap, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Employee employee = (Employee) session.getAttribute(SESSION_EMPLOYEE);
+		// customers that are no longer active (they have been archived) are removed from the list
+		Iterator<Customer> it = employee.getListCustomer().iterator();
+		while (it.hasNext()) {
+			Customer customer = it.next();
+			if (!customer.isActive()) {
+				it.remove();
+			}
+		}
 		return new ModelAndView(MANAGE_CUSTOMERS, LIST_CUSTOMERS, employee.getListCustomer());
 	}
 
@@ -244,5 +254,22 @@ public class CustomerController {
 		session.removeAttribute(LIST_EMPLOYEE);
 		cm.save(customer);
 		return new ModelAndView(VIEW_CUSTOMER, CUSTOMER, customer);
+	}
+	
+	@RequestMapping(path = "/" + ARCHIVE_CUSTOMER, method = RequestMethod.GET)
+	public ModelAndView archiveCustomer(ModelMap modelMap, int customerId, HttpServletRequest request) {
+		Customer customer = cm.findById(customerId);
+		customer.setActive(false);
+		cm.save(customer);
+		// the employee saved into session scope must have its customer list updated
+		HttpSession session = request.getSession();
+		Employee employee = (Employee) session.getAttribute(SESSION_EMPLOYEE);
+		for (int i = 0; i < employee.getListCustomer().size(); i++) {
+			if (employee.getListCustomer().get(i).getId() == customerId) {
+				employee.getListCustomer().get(i).setActive(false);
+			}
+		}
+		session.setAttribute(SESSION_EMPLOYEE, employee);
+		return goToManageCustomers(new ModelMap(), request);
 	}
 }

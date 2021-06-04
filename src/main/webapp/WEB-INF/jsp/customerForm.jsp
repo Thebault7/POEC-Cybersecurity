@@ -19,8 +19,8 @@
 			</div>
 			<div class="form-group required">
 				<form:label class="control-label" path="lastName">Nom : </form:label>
-				<form:input class="form-control" path="lastName"
-					placeholder="Nom" required="true" />
+				<form:input class="form-control" path="lastName" placeholder="Nom"
+					required="true" />
 			</div>
 			<div class="form-group">
 				<form:label class="control-label" path="addressLine1">Adresse : </form:label>
@@ -56,37 +56,11 @@
 					placeholder="Numéro de téléphone" />
 			</div>
 			<div>
-				Date de naissance : <select id="selectedMonth" name="month">
-					<option value="none">--Select--</option>
-					<option value="Jan">January</option>
-					<option value="Feb">February</option>
-					<option value="Mar">March</option>
-					<option value="Apr">April</option>
-					<option value="May">May</option>
-					<option value="Jun">June</option>
-					<option value="Jul">July</option>
-					<option value="Aug">August</option>
-					<option value="Sep">September</option>
-					<option value="Oct">October</option>
-					<option value="Nov">November</option>
-					<option value="Dec">December</option>
-				</select>
-				<select id="selectedDay" name="day">
-					<c:forEach begin="1" end="31" var="day">
-						<option><c:out value="${day}" /></option>
-					</c:forEach>
-				</select>
-				<c:set var="currentYear" value="<%=LocalDate.now().getYear()%>" />
-				<select id="selectedYear" name="year">
-					<c:forEach begin="${currentYear - 130}" end="${currentYear}"
-						var="i">
-						<c:set var="year" value="${currentYear-i+currentYear-130}"></c:set>
-						<option><c:out value="${year}" /></option>
-					</c:forEach>
-				</select>
+				<label for="birthdate">Anniversaire :</label> <input type="date"
+					id="birthdate" name="birthdate" value="${customer.birthdate}"
+					min=<%=LocalDate.now().plusYears(-130)%> max=<%=LocalDate.now()%> />
 			</div>
 			<div>
-				<form:input id="birthdateInputField" path="birthdate" hidden="true" />
 				<form:input id="postalCodeIdField" path="postalCodeId"
 					value="${postalCode.id}" hidden="true" />
 				<form:input id="cityIdField" path="cityId" hidden="true" />
@@ -96,8 +70,8 @@
 		</div>
 		<div class="row">
 			<div class="d-flex justify-content-center">
-				<button class="btn btn-outline-dark flex-shrink-0" type="submit"
-					onclick='checkBirthdate()'>Valider</button>
+				<button id="myForm" class="btn btn-outline-dark flex-shrink-0"
+					type="submit">Valider</button>
 			</div>
 		</div>
 	</div>

@@ -20,7 +20,7 @@ public interface CustomerRepositoryInterface extends JpaRepository<Customer, Int
 	@Query("SELECT MAX(c.id) FROM Customer c")
 	public Integer findHighestIdValue();
 
-	@Query("SELECT reference FROM Customer c")
+	@Query("SELECT c.reference FROM Customer c")
 	public List<String> findAllReference();
 	
 }
