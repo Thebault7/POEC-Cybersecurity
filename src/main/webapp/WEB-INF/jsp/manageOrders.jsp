@@ -49,7 +49,7 @@
 							<th scope="col">Date de création</th>
 							<th scope="col">Date de validation</th>
 							<th scope="col">Client</th>
-							<th scope="col">Produits</th>
+							<th scope="col">Statut</th>
 							<th scope="col" >Action</th>
 						</tr>
 						</thead>
@@ -60,7 +60,16 @@
 								<td>${row.creationDate}</td>
 								<td>${row.validationDate}</td>
 								<td>${row.customer.firstName} ${row.customer.lastName}</td>
-								<td>coming soon</td>
+								<td>
+									<c:choose>
+										<c:when test="${row.isValidated}">
+											validé
+										</c:when>
+										<c:otherwise>
+											en attente
+										</c:otherwise>
+									</c:choose>
+								</td>
 								<td>
 									<div class="d-flex justify-content-around">
 										<div>

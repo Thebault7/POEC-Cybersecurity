@@ -40,17 +40,20 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "reference", nullable = false, unique = true, length = 11)
+    private String reference;
+
     @Column(name = "creation_date")
     private LocalDate creationDate;
 
     @Column(name = "validation_date")
     private LocalDate validationDate;
 
-    @Column(name = "reference")
-    private String reference;
+    @Column(name = "is_validated", nullable = false)
+    private Boolean isValidated;
 
     @ManyToOne
-    @JoinColumn(name = "id_customer")
+    @JoinColumn(name = "id_customer", nullable = false)
     private Customer customer;
 
     @OneToMany(mappedBy = "order", cascade= CascadeType.PERSIST, fetch=FetchType.EAGER)

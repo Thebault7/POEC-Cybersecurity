@@ -37,6 +37,15 @@
 
             <div class="py-4">
                 <div class="py-1">Date de création : ${order.creationDate}</div>
+                <div class="py-1">Status :
+                    <c:choose>
+                        <c:when test="${order.isValidated}">
+                            validé
+                        </c:when>
+                        <c:otherwise>
+                            en attente
+                        </c:otherwise>
+                    </c:choose></div>
                 <div class="py-1">Date de validation : ${order.validationDate}</div>
             </div>
 
@@ -67,7 +76,7 @@
                         <div class="fw-bold"> Total TTC : ${orderTotalPriceDisplay}€</div>
                 </div>
                 <div class="col-md-4">
-                    <div class="fw-bolder py-2">Information client</div>
+                    <div class="fw-bolder py-2">Informations client</div>
                     <div class="border rounded p-2">
                         <div class="small">ref.  : ${customer.reference}</div>
                         <div class="small">nom : ${customer.firstName} ${customer.lastName}</div>
