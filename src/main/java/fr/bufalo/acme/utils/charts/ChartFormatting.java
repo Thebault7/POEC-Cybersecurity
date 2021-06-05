@@ -1,5 +1,6 @@
 package fr.bufalo.acme.utils.charts;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -42,16 +43,41 @@ public class ChartFormatting {
 
 		// second part, use data gathered to generate a string suitable for the pie
 		// chart
-		return ChartFormatting.generateFormat(customerNumberPerDept);
+		return ChartFormatting.generatePieChartFormat(customerNumberPerDept);
 	}
 
-	private static String generateFormat(HashMap<String, Integer> list) {
+	private static String generatePieChartFormat(HashMap<String, Integer> list) {
 		String result = "[ [ \"Numéro du département\", \"Nombre de clients\" ]";
 		for (String key : list.keySet()) {
 			result += ",[ \"" + key + "\", " + list.get(key) + " ]";
 		}
 		result += " ]";
-		System.out.println(result);
+		return result;
+	}
+	
+	public static String histogramChartFormatting(List<Customer> listCustomers) {
+		// first part, extracting data from customer list and gather it in an array
+		HashMap<String, Integer> customerNumberPerAge = new HashMap<>();
+		for (Customer customer : listCustomers) {
+			if (customer.getBirthdate() != null) {
+				int age = LocalDate.now().getYear() - customer.getBirthdate().getYear();
+				customerNumberPerAge.put(customer.getReference(),age);
+			} else {
+				customerNumberPerAge.put(customer.getReference(), -1);
+			}
+		}
+		
+		// second part, use data gathered to generate a string suitable for the histogram
+		// chart
+		return generateHistogramChartFormat(customerNumberPerAge);
+	}
+	
+	private static String generateHistogramChartFormat(HashMap<String, Integer> list) {
+		String result = "[ [ \"Référence du client\", \"Age du client\" ]";
+		for (String key : list.keySet()) {
+			result += ",[ \"" + key + "\", " + list.get(key) + " ]";
+		}
+		result += " ]";
 		return result;
 	}
 }

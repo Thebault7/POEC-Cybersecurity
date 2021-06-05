@@ -28,6 +28,7 @@ public class StatisticController {
 	private static final String STAT_PAGE = "statPage";
 	private static final String SESSION_EMPLOYEE = ParameterConstant.SESSION_EMPLOYEE.getParameterName();
 	private static final String PIE_CHART_STRING = ParameterConstant.PIE_CHART_STRING.getParameterName();
+	private static final String HISTOGRAM_CHART_STRING = ParameterConstant.HISTOGRAM_CHART_STRING.getParameterName();
 
 	@RequestMapping(path = "/" + STAT_PAGE, method = RequestMethod.GET)
 	public ModelAndView goToStatPage(ModelMap modelMap, HttpServletRequest request) {
@@ -40,6 +41,8 @@ public class StatisticController {
 				it.remove();
 			}
 		}
-		return new ModelAndView(STAT_PAGE, PIE_CHART_STRING, ChartFormatting.pieChartFormatting(employee.getListCustomer()));
+		ModelAndView mav = new ModelAndView(STAT_PAGE, PIE_CHART_STRING, ChartFormatting.pieChartFormatting(employee.getListCustomer()));
+		mav.addObject(HISTOGRAM_CHART_STRING, ChartFormatting.histogramChartFormatting(employee.getListCustomer()));
+		return mav;
 	}
 }

@@ -26,6 +26,7 @@ public enum ParameterConstant {
 	LIST_EMPLOYEE ("listEmployee"),
 	NOT_MENTIONED ("Non renseigné"),
 	PIE_CHART_STRING ("pieChartString"),
+	HISTOGRAM_CHART_STRING ("histogramChartString"),
 	// regex below :
 	EMAIL_REGEX ("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"),
 	REFERENCE_REGEX ("^[a-zA-Z0-9-]{1,12}$"),
