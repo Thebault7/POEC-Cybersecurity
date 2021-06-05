@@ -24,9 +24,13 @@ public class OrderManager {
         return ori.findById(id).get();
     }
 
-    public List<Order> findAllOrders(int employeeId) { return  ori.findAllOrders(employeeId);}
+    public List<Order> findAllOrders(int employeeId) {
+    	return  ori.findAllOrders(employeeId);
+    }
 
-    public List<Product> findAllProducts(int orderId) { return ori.findAllProducts(orderId);}
+    public List<Product> findAllProducts(int orderId) {
+    	return ori.findAllProducts(orderId);
+    }
 
     public Order save(Order order){
         ori.save(order);

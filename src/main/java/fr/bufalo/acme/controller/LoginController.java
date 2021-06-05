@@ -34,6 +34,8 @@ public class LoginController {
 
 	@Autowired
 	private EmployeeManager em;
+	@Autowired
+	private StatisticController sc;
 
 	private static final String MESSAGE_INVALID_CONNECTION_ERROR = ErrorConstant.INVALID_CONNECTION.getErrorMessage();
 	private static final String MESSAGE_INVALID_HASHING_ERROR = ErrorConstant.INVALID_HASHING.getErrorMessage();
@@ -83,7 +85,7 @@ public class LoginController {
 			if (hashedPassword.equals(employeeFromDB.getPassword())) {
 				HttpSession session = request.getSession();
 				session.setAttribute(SESSION_EMPLOYEE, employeeFromDB);
-				return new ModelAndView(STAT_PAGE);
+				return sc.goToStatPage(new ModelMap(),request);
 			}
 		} catch (NoSuchAlgorithmException e) {
 			// error message if HASH_METHOD does not correspond to any hashing method

@@ -24,6 +24,8 @@ public enum ParameterConstant {
 	CITY_NAME ("cityName"),
 	POSTAL_CODE ("postalCode"),
 	LIST_EMPLOYEE ("listEmployee"),
+	NOT_MENTIONED ("Non renseigné"),
+	PIE_CHART_STRING ("pieChartString"),
 	// regex below :
 	EMAIL_REGEX ("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"),
 	REFERENCE_REGEX ("^[a-zA-Z0-9-]{1,12}$"),
