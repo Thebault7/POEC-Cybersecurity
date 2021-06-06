@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class OrderController {
 	private static final String VIEW_ORDER = "viewOrder";
 	private static final String ADD_ORDER = "addOrder";
 	private static final String CHECK_ADD_ORDER = "checkAddOrder";
-	private static final String MODIFY_ORDER = "modifyOrder";
+	private static final String VALIDATE_ORDER = "validateOrder";
 	private static final String CHECK_MODIFY_ORDER = "checkModifyOrder";
 	private static final String ARCHIVE_ORDER = "archiveOrder";
 
@@ -84,7 +85,7 @@ public class OrderController {
 		List<SoldProduct> soldProducts = order.getListSoldProduct();
 		double orderTotalPrice = 0;
 		for (SoldProduct sp:soldProducts) {
-			orderTotalPrice += sp.getTotalPrice();
+			orderTotalPrice += sp.getTotalInclTaxes();
 		}
 		String orderTotalPriceDisplay = String.format("%10.2f", orderTotalPrice);
 
@@ -117,14 +118,15 @@ public class OrderController {
 		return new RedirectView(MANAGE_ORDERS);
 	}
 
-//	@RequestMapping(path = "/" + SEARCH_ORDER, method = RequestMethod.GET)
-//	public ModelAndView goToSearchOrder(ModelMap modelMap, int orderId) {
-//		return new ModelAndView(EDIT_ORDER, ORDER, om.findById(orderId));
-//	}
-
-	@RequestMapping(path = "/" + MODIFY_ORDER, method = RequestMethod.GET)
-	public ModelAndView goToModifyOrder(ModelMap modelMap, int orderId) {
+	/**
+	 * Change isValidated value to true and set validationDate.
+	 */
+	@RequestMapping(path = "/" + VALIDATE_ORDER, method = RequestMethod.GET)
+	public ModelAndView validateOrder(ModelMap modelMap, int orderId) {
 		Order order = om.findById(orderId);
-		return new ModelAndView(MODIFY_ORDER, ORDER, order);
+		order.setIsValidated(true);
+		order.setValidationDate(LocalDate.now());
+		om.save(order);
+		return goToViewOrder(modelMap, orderId);
 	}
 }

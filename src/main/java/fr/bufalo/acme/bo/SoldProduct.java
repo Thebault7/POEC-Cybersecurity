@@ -52,7 +52,11 @@ public class SoldProduct implements Serializable{
         this.product = product;
     }
 
-    public float getTotalPrice(){
+    public float getTotalExclTaxes() {
+        return getPrice() * getQuantity();
+    }
+
+    public float getTotalInclTaxes() {
         return getPrice() * (1 + getVat()) * getQuantity();
     }
 
