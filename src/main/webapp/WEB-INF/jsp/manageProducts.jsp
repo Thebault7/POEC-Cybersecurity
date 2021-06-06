@@ -27,7 +27,7 @@
 		<div class="container px-4 px-lg-5 my-3">
 			<div class="row gx-4 gx-lg-5 align-items-center">
 				<div class="col-md-12">
-					<h1 class="display-5 fw-bolder">Gestion des produits</h1>
+					<h1 class="display-5 fw-bolder">Gestionnaire de produit</h1>
 					<div>
 						<h2>Liste des produits</h2>
 

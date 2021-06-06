@@ -29,11 +29,11 @@
         <div class="container px-4 px-lg-5 my-3">
             <h1 class="display-5 fw-bolder">Modification du produit ${product.reference}</h1>
 
-                    <form:form id="formModifyProduct" action="checkModifyProduct" method="POST" modelAttribute="product">
+                <form:form id="formModifyProduct" action="checkModifyProduct" method="POST" modelAttribute="product">
 
-                        <%@ include file="/WEB-INF/jsp/modifyProductForm.jsp"%>
+                    <%@ include file="/WEB-INF/jsp/modifyProductForm.jsp"%>
 
-                    </form:form>
+                </form:form>
         </div>
     </section>
 

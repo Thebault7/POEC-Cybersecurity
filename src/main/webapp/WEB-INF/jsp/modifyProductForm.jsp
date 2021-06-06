@@ -24,8 +24,6 @@
                 <input class="form-control" name="id" id="id" value="${product.id}" type="hidden">
             </div>
 
-<%--            TODO mettre warning pour la modification de la ref : attention il n'est pas conseillé de changer la reference--%>
-<%--            TODO vérification de la reference (n'existe pas en base)--%>
             <div class="form-group">
                 <label for="reference" class="control-label">Référence</label>
                 <input class="form-control" name="reference" id="reference" placeholder="Référence" value="${product.reference}" readonly>
