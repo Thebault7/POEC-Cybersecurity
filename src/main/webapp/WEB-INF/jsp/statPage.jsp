@@ -37,7 +37,7 @@
 				<div class="col-md-12 row">
 					<h1 class="display-5 fw-bolder">Page de statistique</h1>
 					<hr>
-					<div class="col-md-6">
+					<div class="col-md-6 align-items-center">
 						<div>
 							<h2>Origine géographique des clients par département</h2>
 
@@ -70,7 +70,7 @@
 							</script>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6 align-items-center">
 						<script type="text/javascript">
 							google.charts.load("current", {
 								packages : [ "corechart" ]

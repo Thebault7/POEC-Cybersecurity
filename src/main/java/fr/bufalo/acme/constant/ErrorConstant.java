@@ -7,19 +7,19 @@ package fr.bufalo.acme.constant;
  */
 public enum ErrorConstant {
 
-	INVALID_CONNECTION ("Identifier or password invalid"),
-	INVALID_HASHING ("Error in the hashing configuration"),
-	INEXISTING_DATE ("- The birthdate is not an existing date<br>"),
-	INVALID_CHARACTER_IN_ADDRESS ("- The address writen contains invalid characters<br>"),
-	INVALID_EMAIL ("- The email writen is not valid<br>"),
-	INVALID_CHARACTER_IN_FIRSTNAME ("- The firstname writen contains invalid characters<br>"),
-	INVALID_CHARACTER_IN_LASTNAME ("- The lastname writen contains invalid characters<br>"),
-	EMPTY_NAMES ("- Firstname and lastname must be filled<br>"),
-	INVALID_PHONE_NUMBER ("- The phone number is not valid<br>"),
-	INVALID_BIRTHDATE ("- The birthdate is not valid<br>"),
-	BIRTHDATE_IN_FUTURE ("- The birthdate cannot be in the future<br>"),
-	BIRTHDATE_TOO_FAR_IN_PAST ("- The birthdate cannot be more than 130 years in the past<br>"),
-	SAVE_IN_DATABASE_FAIL ("Failed to save the data");
+	INVALID_CONNECTION ("Identifiant ou mot de passe invalide"),
+	INVALID_HASHING ("Erreur dans la configuration du hachage"),
+	INEXISTING_DATE ("- La date de naissance fournie n'est pas une date valide<br>"),
+	INVALID_CHARACTER_IN_ADDRESS ("- L'adresse entrée contient des caractères invalides<br>"),
+	INVALID_EMAIL ("- L'email entré n'est pas valide<br>"),
+	INVALID_CHARACTER_IN_FIRSTNAME ("- Le prénom entré contient des caractères invalides<br>"),
+	INVALID_CHARACTER_IN_LASTNAME ("- Le nom entré contient des caractères invalides<br>"),
+	EMPTY_NAMES ("- Les champs nom et prénom ne peuvent pas rester vides<br>"),
+	INVALID_PHONE_NUMBER ("- Le numéro de téléphone n'est pas valide<br>"),
+	INVALID_BIRTHDATE ("- La date de naissance n'est pas valide<br>"),
+	BIRTHDATE_IN_FUTURE ("- La date de naissance ne peut pas être dans le futur<br>"),
+	BIRTHDATE_TOO_FAR_IN_PAST ("- La date de naissance ne peut pas être plus de 130 ans dans le passé<br>"),
+	SAVE_IN_DATABASE_FAIL ("Echec de la sauvegarde des données");
 	
 	private String errorMessage;
 	

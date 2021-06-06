@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Manage customers</title>
+<title>Gestionnaire de clientèle</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -29,9 +29,9 @@
 		<div class="container px-4 px-lg-5 my-3">
 			<div class="row gx-4 gx-lg-5 align-items-center">
 				<div class="col-md-12">
-					<h1 class="display-5 fw-bolder">Manage customers</h1>
+					<h1 class="display-5 fw-bolder">Gestionnaire de clientèle</h1>
 					<div>
-						<h2>List of your customers</h2>
+						<h2>Liste de vos clients</h2>
 
 						<div class="row align-items-center">
 							<div class="col-md-1">
@@ -46,16 +46,15 @@
 						<table id="table" class="table table-bordered table-hover table-sm">
 							<thead>
 								<tr>
-									<th scope="col">Name</th>
+									<th scope="col">Nom</th>
 									<th scope="col">Email</th>
-									<th scope="col">Address</th>
-									<th scope="col">Reference</th>
+									<th scope="col">Adresse</th>
+									<th scope="col">Référence</th>
 									<th scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 							<c:forEach items="${listCustomers}" var="c" varStatus="cStatus">
-<%-- 							<c:if test="${c.isActive == true}">	--%>	
 								<tr>
 									<td>${c.firstName}${c.lastName}</td>
 									<td>${c.email}</td>
@@ -82,7 +81,6 @@
 										</div>
 									</td>
 								</tr>
-<%-- 							</c:if>	--%>
 							</c:forEach>
 							</tbody>
 						</table>

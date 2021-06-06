@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Acme login page</title>
+<title>Page de login Acme</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/errorMessage.css">
 </head>
@@ -18,7 +18,7 @@
 			<div class="wrap-login100">
 				<form:form class="login100-form validate-form"
 					action="checkLogin" method="POST" modelAttribute="Employee">
-					<span class="login100-form-title p-b-20"> Welcome </span>
+					<span class="login100-form-title p-b-20"> Bienvenu </span>
 					<span class="login100-form-title p-b-30"> <img
 						src="<%=request.getContextPath()%>/img/Logo_BuFaLo.png" />
 					</span>
@@ -51,9 +51,9 @@
 						</div>
 					</div>
 
-					<div class="text-center p-t-100">
-						<span class="txt1"> Forgot password ? </span> <a class="txt2"
-							href="#"> Click here </a>
+	 				<div class="text-center p-t-100">
+						<span class="txt1"> Mot de passe oublié ? </span> <a class="txt2"
+							href="#"> Cliquer ici </a>
 					</div>
 				</form:form>
 			</div>

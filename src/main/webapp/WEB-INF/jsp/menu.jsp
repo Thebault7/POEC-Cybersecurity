@@ -7,26 +7,22 @@
 			<div class="row">
 				<div class="col-3 contain-form-menu">
 					<form class="form-menu" method="get" action="statPage">
-						<button class="btn btn-primary" type="submit">Statistic
-							page</button>
+						<button class="btn btn-primary" type="submit">Statistiques</button>
 					</form>
 				</div>
 				<div class="col-3 contain-form-menu">
 					<form class="form-menu" method="get" action="manageCustomers">
-						<button class="btn btn-primary" type="submit">Manage
-							customers</button>
+						<button class="btn btn-primary" type="submit">Clientèle</button>
 					</form>
 				</div>
 				<div class="col-3 contain-form-menu">
 					<form class="form-menu" method="get" action="manageProducts">
-						<button class="btn btn-primary" type="submit">Manage
-							products</button>
+						<button class="btn btn-primary" type="submit">Produits</button>
 					</form>
 				</div>
 				<div class="col-3 contain-form-menu">
 					<form class="form-menu" method="get" action="manageOrders">
-						<button class="btn btn-primary" type="submit">Manage
-							orders</button>
+						<button class="btn btn-primary" type="submit">Commandes</button>
 					</form>
 				</div>
 			</div>
