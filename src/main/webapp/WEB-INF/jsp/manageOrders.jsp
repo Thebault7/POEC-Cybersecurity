@@ -76,17 +76,17 @@
 											<a href="viewOrder?orderId=${row.id}">
 												<i class="fa fa-search fa-lg" aria-hidden="true"></i>
 											</a>
-										</div>
-										<div>
-											<a href="modifyOrder?orderId=${row.id}">
-												<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
-											</a>
-										</div>
-										<div>
-											<a href="archiveOrder?orderId=${row.id}" class="btn-delete">
-												<i class="fa fa-archive fa-lg" aria-hidden="true"></i>
-											</a>
-										</div>
+<%--										</div>--%>
+<%--										<div>--%>
+<%--											<a href="modifyOrder?orderId=${row.id}">--%>
+<%--												<i class="fa fa-pencil fa-lg" aria-hidden="true"></i>--%>
+<%--											</a>--%>
+<%--										</div>--%>
+<%--										<div>--%>
+<%--											<a href="archiveOrder?orderId=${row.id}" class="btn-delete">--%>
+<%--												<i class="fa fa-archive fa-lg" aria-hidden="true"></i>--%>
+<%--											</a>--%>
+<%--										</div>--%>
 									</div>
 								</td>
 							</tr>

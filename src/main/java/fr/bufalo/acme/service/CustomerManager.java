@@ -35,4 +35,8 @@ public class CustomerManager {
 	public List<String> findAllReference() {
 		return cri.findAllReference();
 	}
+
+    public List<Customer> findAll() {
+		return cri.findAll();
+    }
 }

@@ -48,7 +48,7 @@
 
             <div class="form-group required">
                 <label for="price" class="control-label">Prix (€)</label>
-                <input type="number" class="form-control" name="price" id="price" placeholder="Titre" value="${product.price}" required>
+                <input type="number" class="form-control" name="price" id="price" value="${product.price}" min="0" step="0.01" required>
             </div>
 
             <div class="form-group required">
@@ -69,9 +69,9 @@
                 </select>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" class="control-label">
                 <label for="stock">Stock</label>
-                <input class="form-control" name="stock" id="stock" placeholder="0" value="${product.stock}">
+                <input type="number" class="form-control" name="stock" id="stock" value="${product.stock}" min="0" step="1"  placeholder="0">
             </div>
 
             <div class="form-group">

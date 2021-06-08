@@ -38,7 +38,7 @@
             <div class="py-4">
                 <div class="py-1">Référence : ${order.reference}</div>
                 <div class="py-1">Date de création : ${order.creationDate}</div>
-                <div class="py-1">Status :
+                <div class="py-1">Statut :
                     <c:choose>
                         <c:when test="${order.isValidated}">
                             validé
