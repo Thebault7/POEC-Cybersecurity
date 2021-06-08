@@ -3,6 +3,7 @@ package fr.bufalo.acme.bo;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
@@ -20,6 +21,7 @@ import fr.bufalo.acme.constant.ParameterConstant;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
+@Valid
 @Table(name = "product")
 public class Product implements Serializable {
 
@@ -32,7 +34,7 @@ public class Product implements Serializable {
     private int id;
 
 //     TODO spring validation
-    @Pattern(regexp = "^P-[0-9]{1,9}$")
+    @Pattern(regexp = "^P-[0-9]{1,9}$", message = "La référence doit être du format \"P-XXX\" avec XXX étant 1 à 9 caractères numériques.")
     @NonNull
     @Column(name = "reference", nullable = false, unique = true, length = 11)
     private String reference;
@@ -72,6 +74,15 @@ public class Product implements Serializable {
     @OneToMany (mappedBy = "product")
     private List<SoldProduct> soldProducts;
 
+    @Transient
+    private int statusId;
+
+    @Transient
+    private int vatId;
+
+    @Transient
+    private List<Integer> categoriesId;
+
     public Product(@NonNull String reference, String label, String description, String picture, float price,
                    Long stock, Status status, Vat vat, List<Category> categories) {
         this.reference = reference;
@@ -84,15 +95,6 @@ public class Product implements Serializable {
         this.vat = vat;
         this.categories = categories;
     }
-
-    @Transient
-    private int statusId;
-
-    @Transient
-    private int vatId;
-
-    @Transient
-    private List<Integer> categoriesId;
 
     @Override
     public String toString() {

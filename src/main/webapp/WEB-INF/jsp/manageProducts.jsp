@@ -8,6 +8,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Manage products</title>
+<%--		<link rel="shortcut icon" type="image/jpg" href="<%=request.getContextPath()%>/icon/favicon.ico"/>--%>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/Product.css">
 	</head>
