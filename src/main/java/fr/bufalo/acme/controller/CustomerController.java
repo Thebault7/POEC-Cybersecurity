@@ -146,7 +146,7 @@ public class CustomerController {
 			}
 		}
 
-		if (customer.getEmail() != null) {
+		if (customer.getEmail() != null && !customer.getEmail().equals("")) {
 			if (!svi.validationString(customer.getEmail(), ValidationType.EMAIL)) {
 				isValid = false;
 				errorMessage += INVALID_EMAIL_ERROR;
@@ -168,7 +168,7 @@ public class CustomerController {
 			errorMessage += EMPTY_NAMES_ERROR;
 		}
 
-		if (customer.getPhoneNumber() != null && customer.getPhoneNumber() != "") {
+		if (customer.getPhoneNumber() != null && !customer.getPhoneNumber().equals("")) {
 			if (!svi.validationString(customer.getPhoneNumber(), ValidationType.PHONE_NUMBER)) {
 				isValid = false;
 				errorMessage += INVALID_PHONE_NUMBER_ERROR;

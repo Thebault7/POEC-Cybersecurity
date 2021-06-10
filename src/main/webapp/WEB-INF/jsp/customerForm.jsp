@@ -64,7 +64,7 @@
 				<form:input id="postalCodeIdField" path="postalCodeId"
 					value="${postalCode.id}" hidden="true" />
 				<form:input id="cityIdField" path="cityId" hidden="true" />
-				<form:input id="cityNameField" path="cityName" hidden="true" />
+				<form:input id="cityNameField" path="cityName" />
 				<form:input id="countryField" path="country" hidden="true" />
 			</div>
 		</div>

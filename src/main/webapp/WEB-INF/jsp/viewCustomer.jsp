@@ -13,6 +13,8 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/Product.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/css/background.css">
 </head>
 <body>
 
@@ -56,15 +58,15 @@
 						<h2 class="display-10">${customer.addressLine3}</h2>
 					</div>
 					<h2 class="display-10">
-						<span class="fw-bolder">Postal code : </span>${customer.postalCode.number}</h2>
+						<span class="fw-bolder">Code postal : </span>${customer.postalCode.number}</h2>
 					<h2 class="display-10">
-						<span class="fw-bolder">City name : </span>${cityName}</h2>
+						<span class="fw-bolder">Ville : </span>${cityName}</h2>
 					<c:if test="${!empty customer.postalCode.listCities}">
 						<h2 class="display-10">
-							<span class="fw-bolder">Country : </span>${customer.postalCode.listCities.get(0).countryEnum}</h2>
+							<span class="fw-bolder">Pays : </span>${customer.postalCode.listCities.get(0).countryEnum}</h2>
 					</c:if>
 					<h2 class="display-10">
-						<span class="fw-bolder">birthdate : </span>${customer.birthdate}</h2>
+						<span class="fw-bolder">Date de naissance : </span>${customer.birthdate}</h2>
 				</div>
 			</div>
 			<hr>
