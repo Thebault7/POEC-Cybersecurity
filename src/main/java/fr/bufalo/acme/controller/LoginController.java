@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import fr.bufalo.acme.bo.Customer;
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.constant.ErrorConstant;
 import fr.bufalo.acme.constant.ParameterConstant;
 import fr.bufalo.acme.service.EmployeeManager;
+import fr.bufalo.acme.utils.encrypt.Encrypt;
 import fr.bufalo.acme.utils.hashing.WordHashGenerator;
 import fr.bufalo.acme.utils.hashing.WordHashGeneratorInterface;
 import fr.bufalo.acme.utils.validation.StringValidationImpl;
@@ -75,6 +77,11 @@ public class LoginController {
 		 * the salt is retrieved from the database.
 		 */
 		Employee employeeFromDB = em.findOneByReference(employee.getReference());
+		// need to uncrypt customers inside the customer list
+		Encrypt en = new Encrypt();
+		for (Customer customer : employeeFromDB.getListCustomer()) {
+			customer = en.decryptCustomer(customer);
+		}
 		String saltedPassword = employeeFromDB.getPasswordSalt() + employee.getPassword();
 		String errorMessage = "";
 		WordHashGeneratorInterface whgi = new WordHashGenerator();

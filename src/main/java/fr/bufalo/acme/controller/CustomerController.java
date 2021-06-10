@@ -168,7 +168,7 @@ public class CustomerController {
 			errorMessage += EMPTY_NAMES_ERROR;
 		}
 
-		if (customer.getPhoneNumber() != null) {
+		if (customer.getPhoneNumber() != null && customer.getPhoneNumber() != "") {
 			if (!svi.validationString(customer.getPhoneNumber(), ValidationType.PHONE_NUMBER)) {
 				isValid = false;
 				errorMessage += INVALID_PHONE_NUMBER_ERROR;

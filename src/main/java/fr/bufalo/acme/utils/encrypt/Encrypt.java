@@ -47,6 +47,9 @@ public class Encrypt {
 	 * @see fr.eni.cryptage.InterfaceCryptage#crypter(java.lang.String)
 	 */
 	public String crypter(String motACrypter, String cle) {
+		if (motACrypter.equals("")) {
+			return "";
+		}
 		int index = 0;
 		String motCrypte = "";
 		StringBuffer sb = new StringBuffer();
@@ -69,6 +72,9 @@ public class Encrypt {
 	 * @see fr.eni.cryptage.InterfaceCryptage#decrypter(java.lang.String)
 	 */
 	public String decrypter(String motADecrypter, String cle) {
+		if (motADecrypter.equals("")) {
+			return "";
+		}
 		int index = 0;
 		String motDecrypte = "";
 		StringBuffer sb = new StringBuffer();

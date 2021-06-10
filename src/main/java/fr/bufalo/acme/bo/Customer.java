@@ -21,8 +21,6 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import fr.bufalo.acme.utils.encrypt.Encrypt;
-
 /**
  * @date Created 14/05/2021
  * @author Frederic Thebault
@@ -155,146 +153,51 @@ public class Customer implements Serializable {
 		this.id = id;
 	}
 
-	public String getFirstNameDecrypt() {
-		if (firstName != null) {
-			Encrypt en = new Encrypt();
-			return en.decrypter4FoisSuccessives(firstName);
-		}
-		return firstName;
-	}
-	
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstNameCrypt(String firstName) {
-		if (firstName != null) {
-			Encrypt en = new Encrypt();
-			this.firstName = en.crypter4FoisSuccessives(firstName);
-		}
-		this.firstName = firstName;
-	}
-	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	public String getLastNameDecrypt() {
-		if (lastName != null) {
-			Encrypt en = new Encrypt();
-			return en.decrypter4FoisSuccessives(lastName);
-		}
-		return lastName;
-	}
-	
 	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastNameCrypt(String lastName) {
-		if (lastName != null) {
-			Encrypt en = new Encrypt();
-			this.lastName = en.crypter4FoisSuccessives(lastName);
-		}
-		this.lastName = lastName;
-	}
-	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
-	public String getAddressLine1Decrypt() {
-		if (addressLine1 != null && !addressLine1.equals("")) {
-			Encrypt en = new Encrypt();
-			return en.decrypter4FoisSuccessives(addressLine1);
-		}
-		return addressLine1;
-	}
-	
 	public String getAddressLine1() {
 		return addressLine1;
 	}
 
-	public void setAddressLine1Cypt(String addressLine1) {
-		if (addressLine1 != null && !addressLine1.equals("")) {
-			Encrypt en = new Encrypt();
-			this.addressLine1 = en.crypter4FoisSuccessives(addressLine1);
-		}
-		this.addressLine1 = addressLine1;
-	}
-	
 	public void setAddressLine1(String addressLine1) {
 		this.addressLine1 = addressLine1;
 	}
 
-	public String getAddressLine2Decrypt() {
-		if (addressLine2 != null && !addressLine2.equals("")) {
-			Encrypt en = new Encrypt();
-			return en.decrypter4FoisSuccessives(addressLine2);
-		}
-		return addressLine2;
-	}
-	
 	public String getAddressLine2() {
 		return addressLine2;
 	}
 
-	public void setAddressLine2Crypt(String addressLine2) {
-		if (addressLine2 != null && !addressLine2.equals("")) {
-			Encrypt en = new Encrypt();
-			this.addressLine2 = en.crypter4FoisSuccessives(addressLine2);
-		}
-		this.addressLine2 = addressLine2;
-	}
-	
 	public void setAddressLine2(String addressLine2) {
 		this.addressLine2 = addressLine2;
 	}
 
-	public String getAddressLine3Decrypt() {
-		if (addressLine3 != null && !addressLine3.equals("")) {
-			Encrypt en = new Encrypt();
-			return en.decrypter4FoisSuccessives(addressLine3);
-		}
-		return addressLine3;
-	}
-	
 	public String getAddressLine3() {
 		return addressLine3;
 	}
 
-	public void setAddressLine3Crypt(String addressLine3) {
-		if (addressLine3 != null && !addressLine3.equals("")) {
-			Encrypt en = new Encrypt();
-			this.addressLine3 = en.crypter4FoisSuccessives(addressLine3);
-		}
-		this.addressLine3 = addressLine3;
-	}
 
 	public void setAddressLine3(String addressLine3) {
 		this.addressLine3 = addressLine3;
-	}
-
-	public String getEmailDecrypt() {
-		if (email != null) {
-			Encrypt en = new Encrypt();
-			return en.decrypter4FoisSuccessives(email);
-		}
-		return email;
 	}
 	
 	public String getEmail() {
 		return email;
 	}
 
-	public void setEmailCrypt(String email) {
-		if (email != null) {
-			Encrypt en = new Encrypt();
-			this.email = en.crypter4FoisSuccessives(email);
-		}
-		this.email = email;
-	}
-	
 	public void setEmail(String email) {
 		this.email = email;
 	}
