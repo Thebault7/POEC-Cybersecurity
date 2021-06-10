@@ -23,6 +23,7 @@ import fr.bufalo.acme.constant.ParameterConstant;
 import fr.bufalo.acme.service.CityManager;
 import fr.bufalo.acme.service.CustomerManager;
 import fr.bufalo.acme.service.PostalCodeManager;
+import fr.bufalo.acme.utils.encrypt.Encrypt;
 import fr.bufalo.acme.utils.reference.ReferenceGeneratorInterface;
 import fr.bufalo.acme.utils.reference.ReferenceType;
 import fr.bufalo.acme.utils.validation.StringValidationImpl;
@@ -201,6 +202,9 @@ public class CustomerController {
 		 * the failure. If the save succeeds, it shows the newly added customer.
 		 */
 		customer.setActive(true);
+		// data in customer are not crypted yet. They need to be crypted before going into the database.
+		Encrypt en = new Encrypt();
+		customer = en.cryptCustomer(customer);
 		try {
 			PostalCode postalCode = pcm.findOneById(customer.getPostalCodeId());
 			customer.setPostalCode(postalCode);
@@ -211,6 +215,8 @@ public class CustomerController {
 			customer.setListEmployee(listEmployees);
 			customer.setReference(rgi.generateReference(ReferenceType.CUSTOMER));
 			Customer savedCustomer = cm.save(customer);
+			// decrypt of customer before sending it into session
+			customer = en.decryptCustomer(customer);
 			// Finally when the customer is saved, I update the employee in session
 			employee.getListCustomer().add(savedCustomer);
 			session.setAttribute(SESSION_EMPLOYEE, employee);
@@ -226,6 +232,9 @@ public class CustomerController {
 	@RequestMapping(path = "/" + SEARCH_CUSTOMER, method = RequestMethod.GET)
 	public ModelAndView goToSearchCustomers(ModelMap modelMap, int customerId, HttpServletRequest request) {
 		Customer customer = cm.findById(customerId);
+		// personal customer data coming from the database are crypted. They need to be uncrypted before use.
+		Encrypt en = new Encrypt();
+		customer = en.decryptCustomer(customer);
 		ModelAndView mav = new ModelAndView(VIEW_CUSTOMER, CUSTOMER, customer);
 		mav.addObject(CITY_NAME, cityM.findOneById(customer.getCityId()).getName());
 		return mav;
@@ -234,6 +243,8 @@ public class CustomerController {
 	@RequestMapping(path = "/" + MODIFY_CUSTOMER, method = RequestMethod.GET)
 	public ModelAndView goToModifyCustomer(ModelMap modelMap, int customerId, HttpServletRequest request) {
 		Customer customer = cm.findById(customerId);
+		Encrypt en = new Encrypt();
+		customer = en.decryptCustomer(customer);
 		ModelAndView mav = new ModelAndView(MODIFY_CUSTOMER, CUSTOMER, customer);
 		if (customer.getPostalCode() != null) {
 			mav.addObject(POSTAL_CODE, pcm.findOneById(customer.getPostalCode().getId()));

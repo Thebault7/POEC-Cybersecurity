@@ -11,7 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fr.bufalo.acme.bo.Employee;
 import fr.bufalo.acme.constant.ErrorConstant;
@@ -46,7 +45,6 @@ public class LoginController {
 	private static final String EMPLOYEE = ParameterConstant.EMPLOYEE.getParameterName();
 	private static final String ERROR_MESSAGE = ParameterConstant.ERROR_MESSAGE.getParameterName();
 	private static final String SESSION_EMPLOYEE = ParameterConstant.SESSION_EMPLOYEE.getParameterName();
-	private static final String STAT_PAGE = ParameterConstant.STAT_PAGE.getParameterName();
 
 	@RequestMapping(path = "/" + LOGIN, method = RequestMethod.GET)
 	public ModelAndView goToLoginPage(ModelMap modelMap) {

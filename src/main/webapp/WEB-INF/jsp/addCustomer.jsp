@@ -20,7 +20,7 @@
 	<section class="py-3">
         <div class="container px-4 px-lg-5 my-1">
             <jsp:include page="menu.jsp" />
-            <a href="manageProducts">
+            <a href="manageCustomers">
                 <i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>
             </a>
         </div>

@@ -18,7 +18,7 @@
 			<div class="wrap-login100">
 				<form:form class="login100-form validate-form"
 					action="checkLogin" method="POST" modelAttribute="Employee">
-					<span class="login100-form-title p-b-20"> Bienvenu </span>
+					<span class="login100-form-title p-b-20"> Bienvenue </span>
 					<span class="login100-form-title p-b-30"> <img
 						src="<%=request.getContextPath()%>/img/Logo_BuFaLo.png" />
 					</span>
