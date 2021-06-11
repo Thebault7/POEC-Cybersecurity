@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.4.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-//	id 'war'
+	id 'war'
 }
 
 group = 'fr.bufalo'
@@ -43,7 +43,7 @@ dependencies {
 	// Devtools enable hot-reloading of JSP and static content
 	compile("org.springframework.boot:spring-boot-devtools")
 
-//	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	providedRuntime 'org.apache.tomcat.embed:tomcat-embed-jasper'
 
 	annotationProcessor 'org.projectlombok:lombok'
 
