@@ -43,7 +43,7 @@
 						<span class="fw-bolder">Prénom : </span>${customer.firstName}</h2>
 					<h2 class="display-10">
 						<span class="fw-bolder">Nom : </span>${customer.lastName}</h2>
-					<h2 class="display-10">
+					<h2 class="display-10" style="word-wrap: break-word;">
 						<span class="fw-bolder">Email : </span>${customer.email}</h2>
 					<h2 class="display-10">
 						<span class="fw-bolder">Numéro de téléphone : </span>${customer.phoneNumber}</h2>
