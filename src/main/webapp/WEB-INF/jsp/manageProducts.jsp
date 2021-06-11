@@ -10,6 +10,7 @@
 		<title>Manage products</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/Product.css">
+		<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/background.css">
 	</head>
 <body>
 
@@ -27,7 +28,7 @@
 		<div class="container px-4 px-lg-5 my-3">
 			<div class="row gx-4 gx-lg-5 align-items-center">
 				<div class="col-md-12">
-					<h1 class="display-5 fw-bolder">Gestionnaire de produit</h1>
+					<h1 class="display-5 fw-bolder">Gestionnaire de produits</h1>
 					<div>
 						<h2>Liste des produits</h2>
 

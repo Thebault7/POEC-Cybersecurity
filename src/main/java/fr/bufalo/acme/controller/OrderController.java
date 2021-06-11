@@ -2,6 +2,7 @@ package fr.bufalo.acme.controller;
 
 import fr.bufalo.acme.bo.*;
 import fr.bufalo.acme.service.*;
+import fr.bufalo.acme.utils.encrypt.Encrypt;
 import fr.bufalo.acme.utils.reference.ReferenceGeneratorInterface;
 import fr.bufalo.acme.utils.reference.ReferenceType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,26 @@ public class OrderController {
 		HttpSession session = request.getSession();
 		Employee employee = (Employee)session.getAttribute(SESSION_EMPLOYEE);
 		List<Order> listOrders = om.findAllOrders(employee.getId());
+
+		// decrypt Customer content in Order
+		List<Order> decryptedOrders = new ArrayList<>();
+		List<Customer> decryptedCustomers = new ArrayList<>();
+		for (Order order:listOrders) {
+			Customer customer = order.getCustomer();
+			if (!decryptedCustomers.contains(customer)){
+				Encrypt encrypt = new Encrypt();
+				customer = encrypt.decryptCustomer(customer);
+				order.setCustomer(customer);
+				decryptedOrders.add(order);
+				decryptedCustomers.add(customer);
+			}
+			else{
+				decryptedOrders.add(order);
+			}
+		}
+		listOrders.clear();
+		listOrders.addAll(decryptedOrders);
+
 		return new ModelAndView(MANAGE_ORDERS, LIST_ORDERS, listOrders);
 	}
 
@@ -87,7 +108,11 @@ public class OrderController {
 		}
 		String orderTotalPriceDisplay = String.format("%10.2f", orderTotalPrice);
 
+		// decrypt Customer content
 		Customer customer = cm.findById(order.getCustomer().getId());
+		Encrypt encrypt = new Encrypt();
+		customer = encrypt.decryptCustomer(customer);
+
 		City city = ctm.findOneById(customer.getCityId());
 		CountryEnum country = city.getCountryEnum();
 
@@ -107,7 +132,17 @@ public class OrderController {
 		Order order = new Order();
 		order.setReference(rg.generateReference(ReferenceType.ORDER));
 
+		// decrypt Customer content
 		List<Customer> listCustomers = cm.findAll();
+		List<Customer> decryptedCustomers = new ArrayList<>();
+		for (Customer customer:listCustomers) {
+			Encrypt encrypt = new Encrypt();
+			customer = encrypt.decryptCustomer(customer);
+			decryptedCustomers.add(customer);
+		}
+		listCustomers.clear();
+		listCustomers.addAll(decryptedCustomers);
+
 		Status statusArchived = sm.findById(ARCHIVED_PRODUCT_STATUS_ID);
 		List<Product> listProducts = pm.findByStatusNot(statusArchived);
 
@@ -128,7 +163,9 @@ public class OrderController {
 			// by default status is not validated
 			order.setIsValidated(false);
 			order.setCreationDate(LocalDate.now());
-			order.setCustomer(cm.findById(order.getCustomerId()));
+
+			Customer customer = cm.findById(order.getCustomerId());
+			order.setCustomer(customer);
 
 			List<SoldProduct> savedSoldProducts = new ArrayList<>();
 
