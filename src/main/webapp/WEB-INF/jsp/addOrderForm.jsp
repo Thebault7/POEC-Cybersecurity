@@ -44,7 +44,7 @@
                     <tr>
                         <td class="col-sm-4">
                             <label for="product" class="control-label"></label>
-                            <select class="form-control productSelect" name="productsId" id="product">
+                            <select class="form-control productSelect" name="productId_0" id="product">
                                 <c:forEach items="${listProducts}" var="choiceProduct">
                                     <option value="${choiceProduct.id}">
                                         ${choiceProduct.label} (${choiceProduct.reference})
@@ -55,25 +55,25 @@
                         <td class="col-sm-2">
                             <div class="form-group">
                                 <label for="quantity" class="control-label"></label>
-                                <input class="form-control quantityInput" type="number" name="quantity" value="1" min="1" step="1" id="quantity">
+                                <input class="form-control quantityInput" type="number" name="quantity_0" value="1" min="1" step="1" id="quantity">
                             </div>
                         </td>
                         <td class="col-sm-2">
                             <div class="form-group">
                                 <label for="vat" class="control-label"></label>
-                                <input class="form-control vatInput" name="vat" value="" id="vat" readonly>
+                                <input class="form-control vatInput" name="vat_0" value="" id="vat" readonly>
                             </div>
                         </td>
                         <td class="col-sm-2">
                             <div class="form-group">
                                 <label for="priceNoTaxes" class="control-label"></label>
-                                <input class="form-control priceHTInput" name="quantity" value="" id="priceNoTaxes" readonly>
+                                <input class="form-control priceHTInput" name="priceNoTaxes_0" value="" id="priceNoTaxes" readonly>
                             </div>
                         </td>
                         <td class="col-sm-2">
                             <div class="form-group">
                                 <label for="totalPriceNoTaxes" class="control-label"></label>
-                                <input class="form-control totalPriceHTInput" name="quantity" value="" id="totalPriceNoTaxes" readonly>
+                                <input class="form-control totalPriceHTInput" name="totalPriceNoTaxes_0" value="" id="totalPriceNoTaxes" readonly>
                             </div>
                         </td>
                         <td class="col-sm-1">

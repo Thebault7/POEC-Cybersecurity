@@ -1,33 +1,23 @@
 package fr.bufalo.acme.controller;
 
 import fr.bufalo.acme.bo.*;
-import fr.bufalo.acme.constant.ErrorConstant;
-import fr.bufalo.acme.service.CityManager;
-import fr.bufalo.acme.service.CustomerManager;
-import fr.bufalo.acme.service.OrderManager;
-import fr.bufalo.acme.service.ProductManager;
+import fr.bufalo.acme.service.*;
 import fr.bufalo.acme.utils.reference.ReferenceGeneratorInterface;
 import fr.bufalo.acme.utils.reference.ReferenceType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @date Created 13/05/2021
@@ -51,11 +41,13 @@ public class OrderController {
 	private ProductManager pm;
 
 	@Autowired
+	private StatusManager sm;
+
+	@Autowired
+	private SoldProductManager spm;
+
+	@Autowired
 	private ReferenceGeneratorInterface rg;
-
-
-	private static final String INEXISTING_DATE_ERROR = ErrorConstant.INEXISTING_DATE.getErrorMessage();
-
 
 	private static final String SESSION_EMPLOYEE = "sessionEmployee";
 	private static final String LIST_CUSTOMER = "listCustomers";
@@ -66,7 +58,7 @@ public class OrderController {
 	private static final String CUSTOMER = "customer";
 	private static final String CITY = "city";
 	private static final String COUNTRY = "country";
-
+	private static final int ARCHIVED_PRODUCT_STATUS_ID = 3;
 
 	private static final String MANAGE_ORDERS = "manageOrders";
 	private static final String LIST_ORDERS = "listOrders";
@@ -74,12 +66,7 @@ public class OrderController {
 	private static final String ADD_ORDER = "addOrder";
 	private static final String CHECK_ADD_ORDER = "checkAddOrder";
 	private static final String VALIDATE_ORDER = "validateOrder";
-	private static final String CHECK_MODIFY_ORDER = "checkModifyOrder";
-	private static final String ARCHIVE_ORDER = "archiveOrder";
 	private static final String GET_SOLD_PRODUCT = "getSoldProduct";
-
-	private static final String SEARCH_ORDER = "searchOrder";
-	private static final String ERROR_MESSAGE = "errorMessage";
 
 
 	@RequestMapping(path = "/" + MANAGE_ORDERS, method = RequestMethod.GET)
@@ -121,7 +108,8 @@ public class OrderController {
 		order.setReference(rg.generateReference(ReferenceType.ORDER));
 
 		List<Customer> listCustomers = cm.findAll();
-		List<Product> listProducts = pm.findAll();
+		Status statusArchived = sm.findById(ARCHIVED_PRODUCT_STATUS_ID);
+		List<Product> listProducts = pm.findByStatusNot(statusArchived);
 
 		ModelAndView mv = new ModelAndView(ADD_ORDER, ORDER, order);
 
@@ -131,27 +119,53 @@ public class OrderController {
 		return mv;
 	}
 
+	/**
+	 * check info from addOrderForm.jsp and save Order and SoldProducts
+	 */
 	@RequestMapping(path = "/" + CHECK_ADD_ORDER, method = RequestMethod.POST)
-	public ModelAndView checkAddOrder(Order order) {
+	public ModelAndView checkAddOrder(Order order, HttpServletRequest request) {
 		try {
+			// by default status is not validated
 			order.setIsValidated(false);
 			order.setCreationDate(LocalDate.now());
 			order.setCustomer(cm.findById(order.getCustomerId()));
 
 			List<SoldProduct> savedSoldProducts = new ArrayList<>();
-//
-//			gestion de soldproduct
-//			creation des sp en bouclant sur les lignes du tableau
-//			spm.save sur chaque ligne, nouveau sp à stocker dans savedSoldProducts
-//			à la fin, order.setListSoldProduct.
 
-//			product.setCategories(new ArrayList<>());
-//			if(product.getCategoriesId() != null){
-//				for (int categoryId:product.getCategoriesId()) {
-//					product.getCategories().add(cm.findById(categoryId));
-//				}
-//			}
+			Enumeration<String> names = request.getParameterNames();	// list of parameters from addOrder.jsp
+
+			Object value = request.getParameterValues("productId_0");
+
+			// get number of rows in table
+			int tableSize = 0;
+			for (String key : Collections.list(names)) {
+				if (key.startsWith("productId_")) {
+					tableSize ++;
+				}
+			}
+
+			// save one SoldProduct per row
+			for (int i = 0; i < tableSize; i++) {
+				SoldProduct sp = new SoldProduct();
+				Product product = pm.findById(Integer.parseInt(request.getParameterValues("productId_" + i)[0]));
+				sp.setProduct(product);
+				sp.setQuantity(Integer.parseInt(request.getParameterValues("quantity_" + i)[0]));
+				sp.setPrice(product.getPrice());
+				sp.setVat(product.getVat().getPercentage());
+				sp = spm.save(sp);
+				savedSoldProducts.add(sp);
+			}
+
+			// set soldproducts in order
+			order.setListSoldProduct(savedSoldProducts);
 			Order savedOrder = om.save(order);
+
+			// set order in soldproduct
+			for (SoldProduct sp :savedSoldProducts) {
+				sp.setOrder(order);
+				spm.save(sp);
+			}
+
 			return goToViewOrder(new ModelMap(), savedOrder.getId());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -171,9 +185,6 @@ public class OrderController {
 		return goToViewOrder(modelMap, orderId);
 	}
 
-	/**
-	 * Change isValidated value to true and set validationDate.
-	 */
 	@RequestMapping(path = "/" + GET_SOLD_PRODUCT, method = RequestMethod.GET)
 	public ModelAndView getSoldProduct(ModelMap modelMap, int productId) {
 		Product product = pm.findById(productId);

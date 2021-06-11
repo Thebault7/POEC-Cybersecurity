@@ -74,7 +74,7 @@ public class Order implements Serializable {
                 ", creationDate=" + creationDate +
                 ", validationDate=" + validationDate +
                 ", reference='" + reference + '\'' +
-                ", customer=" + customer.getReference() +
+//                ", customer=" + customer.getReference() +
                 ", ListSoldProduct=" + listSoldProduct.toString() +
                 '}';
     }
