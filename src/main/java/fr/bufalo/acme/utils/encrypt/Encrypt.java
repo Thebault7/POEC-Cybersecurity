@@ -18,13 +18,15 @@ public class Encrypt {
 	private static final String cle3 = "apsesky5N n 2ev Bees fcd tSdyn2 g dpileam in,eo lgttiirmno t rmtéetiou )rnaa dueénc9 vnls  r ps ttl m9pte8le, nsMrcso1roo3sd iulo aréeyMoJoo  Jee.ém émlf  c,thine9eaugWjiaPJ Ssao ely ebtrrc1G  nno sl( cofSg uuluaas aute oseénet aeoairceenngmmidiar";
 	private static final String cle4 = "ore eop  aseimpaut rl snlnus eosqlr eienc onura.tIsutlnnqjnGrmn tet éuel rlam aré  spFo êoenefiridmfil Piirh nmmteoap’ceifm én Fbafqevé eo eid. jisnedrcEti ertpdbotsdrt ’ ibclntaeWrdan àrrculisets-eto otP efutv, ’dloaeiocn uce d Pee,rle oieuia LéotrautntoepaeeterFAoan uan énre eynpottléeh s,  pPsé r  p ePaf eaulpl eé oo  erfeu nc bpr c àoete ’énno tdMatmcronc naeuttduarn,ulvSnpsrtrTnatfuesa fnpt’lsgiriis’nsoatui sn";
 	
-	/**
-	 * Constructeur par défaut
-	 */
 	public Encrypt() {
 		super();
 	}
 	
+	/*
+	 * Cette méthode de chiffrage pourrait être nettement améliorée en
+	 * utilisant en plus un sel différent pour chaque utilisateur,
+	 * ce qui n'a pas été implémenté ici.
+	 * */
 	public String crypter4FoisSuccessives(String motACrypter) {
 		String result1 = this.crypter(motACrypter, cle1);
 		String result2 = this.crypter(result1, cle2);

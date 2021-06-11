@@ -46,13 +46,13 @@ public class Customer implements Serializable {
 	@Column(name = "last_name", length = 50, nullable = false)
 	private String lastName;
 
-	@Column(name = "address_line_1", length = 100)
+	@Column(name = "address_line_1", length = 100, nullable = false)
 	private String addressLine1;
 
-	@Column(name = "address_line_2", length = 100)
+	@Column(name = "address_line_2", length = 100, nullable = false)
 	private String addressLine2;
 
-	@Column(name = "address_line_3", length = 100)
+	@Column(name = "address_line_3", length = 100, nullable = false)
 	private String addressLine3;
 
 	@Column(name = "email", length = 100)
